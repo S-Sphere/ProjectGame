@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cufbo0q2qfdd4"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_670gd"]
+[ext_resource type="Texture2D" uid="uid://bs2br5wmhbtcv" path="res://textures/player/catmask-sheet.png" id="1_a1igl"]
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_670gd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(54, 54.5)
+scale = Vector2(1.78571, 1.57813)
+texture = ExtResource("1_a1igl")
+hframes = 26
