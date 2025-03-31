@@ -13,7 +13,7 @@
 5. Criação do projeto no Git (*)
 
 (*) Estes pontos não foram conseguidos
----------------------------------------------------------------------------
+
 ## 18/3/2025 - 25/3/2025
 **Done:**
 1. Criação do Projeto no Godot e integração no git
@@ -21,7 +21,7 @@
 	* Settings Menu:
 		* Display Setting: Resolution e Window Mode
 3. Pesquisa sobre Godot (Player character e enemy AI)
----------------------------------------------------------------------------
+
 ## 25/3/2025 - 01/04/2025
 **Done:**
 1. Continuação de procura de sprites
@@ -30,4 +30,3 @@
 4. Criação básica de um inimigo. (*)
 
 (*) Ainda não colocado no GitHub
----------------------------------------------------------------------------
