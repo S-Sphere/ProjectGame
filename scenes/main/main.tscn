@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://f4j4c8uu7xn3"]
 
-[ext_resource type="Texture2D" uid="uid://bhxacdksvktm1" path="res://textures/background/mainlevbuild.png" id="1_pc1c8"]
+[ext_resource type="Texture2D" uid="uid://bhxacdksvktm1" path="res://assets/sprites/background/mainlevbuild.png" id="1_pc1c8"]
 [ext_resource type="PackedScene" uid="uid://cufbo0q2qfdd4" path="res://scenes/player/player.tscn" id="2_2t4yk"]
 [ext_resource type="PackedScene" uid="uid://cw2bde5uylkv8" path="res://scenes/enemies/enemy.tscn" id="3_2wh2o"]
 
@@ -28,4 +28,3 @@ tile_set = SubResource("TileSet_gfo6e")
 
 [node name="Enemy_1" parent="." instance=ExtResource("3_2wh2o")]
 position = Vector2(316, 171)
-movement_speed = 50.0

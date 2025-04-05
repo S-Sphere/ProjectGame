@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends BaseCharacter
 
 var movement_speed = 100.0
 

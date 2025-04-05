@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhxacdksvktm1"
-path="res://.godot/imported/mainlevbuild.png-2976a11fbbbb382967a601d218db10a0.ctex"
+uid="uid://c2lbkhhj73tjl"
+path="res://.godot/imported/Orc-Idle.png-009a93f883f62b8a6f0dea815f870c6d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/background/mainlevbuild.png"
-dest_files=["res://.godot/imported/mainlevbuild.png-2976a11fbbbb382967a601d218db10a0.ctex"]
+source_file="res://assets/sprites/enemies/Orc-Idle.png"
+dest_files=["res://.godot/imported/Orc-Idle.png-009a93f883f62b8a6f0dea815f870c6d.ctex"]
 
 [params]
 
