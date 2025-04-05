@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://3w8eqoewa7i5"]
+
+[ext_resource type="Script" path="res://scripts/weapons/firebolt.gd" id="1_ouhrv"]
+[ext_resource type="Texture2D" uid="uid://lqwbnwb7r3c7" path="res://assets/sprites/weapons/Firebolt SpriteSheet.png" id="2_vk73m"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5icny"]
+radius = 5.99986
+height = 19.9996
+
+[node name="Firebolt" type="Area2D"]
+script = ExtResource("1_ouhrv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(22, 12)
+texture = ExtResource("2_vk73m")
+hframes = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 18)
+rotation = -1.57734
+shape = SubResource("CapsuleShape2D_5icny")

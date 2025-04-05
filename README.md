@@ -29,4 +29,12 @@
 3. Código básico de movimento para o Jogador
 4. Criação básica de um inimigo. (*)
 
-(*) Ainda não colocado no GitHub
+(*) Já no GitHub
+
+## 01/04/2025 - 08/04/2025
+**Done:**
+1. Alterações no código:
+	* Criação de uma base para o jogador e inimigos
+	* Criação de estados para o inimigo(CHASE, ATTACK, IDLE)
+	* Update no código do movimento do inimigo
+2. Criação de uma arma
