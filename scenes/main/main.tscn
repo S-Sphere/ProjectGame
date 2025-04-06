@@ -25,6 +25,24 @@ tile_map_data = PackedByteArray("AAAAAAAAAAA0ABEAAAAAAAEAAAA0ABIAAAABAAAAAAA1ABE
 tile_set = SubResource("TileSet_gfo6e")
 
 [node name="Player" parent="." instance=ExtResource("2_2t4yk")]
+position = Vector2(78, 102)
 
 [node name="Enemy_1" parent="." instance=ExtResource("3_2wh2o")]
-position = Vector2(316, 171)
+position = Vector2(452, 509)
+
+[node name="Enemy_4" parent="." instance=ExtResource("3_2wh2o")]
+position = Vector2(615, 464)
+
+[node name="Enemy_5" parent="." instance=ExtResource("3_2wh2o")]
+position = Vector2(447, 372)
+
+[node name="Enemy_6" parent="." instance=ExtResource("3_2wh2o")]
+position = Vector2(575, 292)
+
+[node name="Enemy_2" parent="." instance=ExtResource("3_2wh2o")]
+position = Vector2(225, 322)
+
+[node name="Enemy_3" parent="." instance=ExtResource("3_2wh2o")]
+position = Vector2(770, 186)
+
+[node name="UI" type="CanvasLayer" parent="."]

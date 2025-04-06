@@ -1,8 +1,13 @@
 extends BaseCharacter
 
-@export var firebolt_weapon_scene = preload("res://scenes/weapons/firebolt_weapon.tscn")
-@export var movement_speed = 100.0
+var firebolt_weapon_scene = preload("res://scenes/weapons/firebolt_weapon.tscn")
+var upgrade_scene = preload("res://scenes/ui/upgrade_seletion.tscn")
 
+@export var movement_speed = 100.0
+@export var defense = 5
+@export var xp = 0
+@export var level = 1
+var xp_to_next_level = 100
 var weapon_manager
 
 func _ready() -> void:
@@ -28,3 +33,21 @@ func movement():
 	velocity = mov.normalized() * movement_speed
 	
 	move_and_slide()
+
+func gain_experience(amount) -> void:
+	xp += amount
+	if xp >= xp_to_next_level:
+		level_up()
+
+func level_up() -> void:
+	level += 1
+	xp -= xp_to_next_level
+	xp_to_next_level = int(xp_to_next_level) * 1.2
+	show_upgrade_selection() # to shwo updates
+	
+func show_upgrade_selection() -> void:
+	var upgrade_ui = upgrade_scene.instantiate()
+	get_tree().current_scene.get_node("UI").add_child(upgrade_ui)
+
+	get_tree().paused = true
+	upgrade_ui.show_menu()

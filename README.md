@@ -38,3 +38,7 @@
 	* Criação de estados para o inimigo(CHASE, ATTACK, IDLE)
 	* Update no código do movimento do inimigo
 2. Criação de uma arma
+3. Modificações na Personagem e Inimigo
+	* Adição de xp e level up
+	* Adição da morte do inimigo
+4. Base para o sistema de upgrade upós level up

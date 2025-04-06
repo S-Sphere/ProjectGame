@@ -7,6 +7,7 @@ var target = null
 func _physics_process(delta):
 	if target and is_instance_valid(target):
 		var direction = global_position.direction_to(target.global_position)
+		rotation = direction.angle()
 		global_position += direction * speed * delta
 		
 		if global_position.distance_to(target.global_position) < 10.0:
