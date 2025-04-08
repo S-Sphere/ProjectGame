@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://4223j3kpdu4l"]
+
+[ext_resource type="PackedScene" uid="uid://db4ln5yev7qt" path="res://scenes/enemies/base_enemy.tscn" id="1_bum2l"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_type_3.gd" id="2_w0d7f"]
+[ext_resource type="Texture2D" uid="uid://nwllt4363e54" path="res://assets/sprites/enemies/Character_Idle.png" id="3_spwgn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmlrw"]
+radius = 7.0
+height = 34.0
+
+[node name="Enemy_Type3" groups=["enemy"] instance=ExtResource("1_bum2l")]
+script = ExtResource("2_w0d7f")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_spwgn")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CapsuleShape2D_jmlrw")

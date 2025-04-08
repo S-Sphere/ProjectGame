@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c78yfustiggsy"]
+
+[ext_resource type="PackedScene" uid="uid://db4ln5yev7qt" path="res://scenes/enemies/base_enemy.tscn" id="1_nbuyj"]
+[ext_resource type="Texture2D" uid="uid://bga083qgvqyfp" path="res://assets/sprites/enemies/Soldier-Idle.png" id="2_chv2x"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_type_2.gd" id="2_jqhml"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0xnb"]
+radius = 6.0
+height = 20.0
+
+[node name="Enemy_Type2" groups=["enemy"] instance=ExtResource("1_nbuyj")]
+script = ExtResource("2_jqhml")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_chv2x")
+hframes = 6
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_y0xnb")

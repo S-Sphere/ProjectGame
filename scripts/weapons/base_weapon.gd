@@ -2,7 +2,6 @@ extends Node2D
 
 class_name Weapon
 @export var cooldown = 1.0
-@export var damage = 10
 @export var projectile_scene: PackedScene
 @export var attack_origin: Vector2
 
@@ -19,9 +18,9 @@ func _ready() -> void:
 
 func fire() -> void:
 	var projectile = projectile_scene.instantiate()
+	projectile.is_homing = true
 	projectile.global_position = attack_origin
 	
-	# Find all enemies in the scene (make sure enemy nodes are added to the "enemy" group)
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	if enemies.size() > 0:
 		var closest_enemy = enemies[0]

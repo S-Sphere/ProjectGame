@@ -42,3 +42,4 @@
 	* Adição de xp e level up
 	* Adição da morte do inimigo
 4. Base para o sistema de upgrade upós level up
+5. 3 Tipos de inimigos

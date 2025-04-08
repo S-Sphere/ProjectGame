@@ -18,12 +18,12 @@ func _ready() -> void:
 	weapon_manager.add_weapon(projectile_weapon)
 	projectile_weapon.attack_origin = global_position
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	movement()
-	
 	for weapon in weapon_manager.weapons:
 		weapon.attack_origin = global_position
 		
+
 func movement():
 	var x_mov = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up") # up is minus and down is plus

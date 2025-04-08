@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://f4j4c8uu7xn3"]
+[gd_scene load_steps=8 format=4 uid="uid://f4j4c8uu7xn3"]
 
 [ext_resource type="Texture2D" uid="uid://bhxacdksvktm1" path="res://assets/sprites/background/mainlevbuild.png" id="1_pc1c8"]
 [ext_resource type="PackedScene" uid="uid://cufbo0q2qfdd4" path="res://scenes/player/player.tscn" id="2_2t4yk"]
-[ext_resource type="PackedScene" uid="uid://cw2bde5uylkv8" path="res://scenes/enemies/enemy.tscn" id="3_2wh2o"]
+[ext_resource type="PackedScene" uid="uid://8g70u0xtcgkp" path="res://scenes/enemies/enemy_type1.tscn" id="3_e6ri7"]
+[ext_resource type="PackedScene" uid="uid://c78yfustiggsy" path="res://scenes/enemies/enemy_type2.tscn" id="4_35nie"]
+[ext_resource type="PackedScene" uid="uid://4223j3kpdu4l" path="res://scenes/enemies/enemy_type3.tscn" id="5_jjrnc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t78oo"]
 texture = ExtResource("1_pc1c8")
@@ -25,24 +27,24 @@ tile_map_data = PackedByteArray("AAAAAAAAAAA0ABEAAAAAAAEAAAA0ABIAAAABAAAAAAA1ABE
 tile_set = SubResource("TileSet_gfo6e")
 
 [node name="Player" parent="." instance=ExtResource("2_2t4yk")]
-position = Vector2(78, 102)
-
-[node name="Enemy_1" parent="." instance=ExtResource("3_2wh2o")]
-position = Vector2(452, 509)
-
-[node name="Enemy_4" parent="." instance=ExtResource("3_2wh2o")]
-position = Vector2(615, 464)
-
-[node name="Enemy_5" parent="." instance=ExtResource("3_2wh2o")]
-position = Vector2(447, 372)
-
-[node name="Enemy_6" parent="." instance=ExtResource("3_2wh2o")]
-position = Vector2(575, 292)
-
-[node name="Enemy_2" parent="." instance=ExtResource("3_2wh2o")]
-position = Vector2(225, 322)
-
-[node name="Enemy_3" parent="." instance=ExtResource("3_2wh2o")]
-position = Vector2(770, 186)
+position = Vector2(698, 317)
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Enemy_Type1" parent="." instance=ExtResource("3_e6ri7")]
+position = Vector2(300, 116)
+
+[node name="Enemy_Type4" parent="." instance=ExtResource("3_e6ri7")]
+position = Vector2(403, 223)
+
+[node name="Enemy_Type2" parent="." instance=ExtResource("4_35nie")]
+position = Vector2(586, 85)
+
+[node name="Enemy_Type5" parent="." instance=ExtResource("4_35nie")]
+position = Vector2(827, 116)
+
+[node name="Enemy_Type3" parent="." instance=ExtResource("5_jjrnc")]
+position = Vector2(346, 431)
+
+[node name="Enemy_Type6" parent="." instance=ExtResource("5_jjrnc")]
+position = Vector2(518, 461)
