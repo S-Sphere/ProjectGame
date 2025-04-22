@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://7c5letie3nei"]
+
+[ext_resource type="Script" path="res://scripts/upgrades/upgrade.gd" id="1_ku6x8"]
+
+[resource]
+script = ExtResource("1_ku6x8")
+name = "Damage"
+description = "+ 10 dmg"
+type = "damage"
+amount = 10.0

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://clfhwoywtswnv"]
+
+[ext_resource type="Script" path="res://scripts/upgrades/upgrade.gd" id="1_hl1vc"]
+
+[resource]
+script = ExtResource("1_hl1vc")
+name = "Health"
+description = "+10 hp"
+type = "health"
+amount = 10.0

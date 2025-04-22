@@ -1,4 +1,6 @@
 extends BaseCharacter
+# I NEED TO CHANGE THIS:
+# REALLY!!!!! CREATE A GAME MANAGER AT SOME POINT
 
 var firebolt_weapon_scene = preload("res://scenes/weapons/firebolt_weapon.tscn")
 var upgrade_scene = preload("res://scenes/ui/upgrade_seletion.tscn")
@@ -10,10 +12,15 @@ var upgrade_scene = preload("res://scenes/ui/upgrade_seletion.tscn")
 var xp_to_next_level = 100
 var weapon_manager
 
+var all_upgrades := [
+	preload("res://data/upgrades/health_upgrade.tres"),
+	preload("res://data/upgrades/damage_upgrade.tres"),
+	preload("res://data/upgrades/speed_upgrade.tres")
+]
+
 func _ready() -> void:
 	weapon_manager = WeaponManager.new()
 	add_child(weapon_manager)
-	
 	var projectile_weapon = firebolt_weapon_scene.instantiate()
 	weapon_manager.add_weapon(projectile_weapon)
 	projectile_weapon.attack_origin = global_position
@@ -27,11 +34,8 @@ func _physics_process(_delta):
 func movement():
 	var x_mov = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up") # up is minus and down is plus
-	
 	var mov = Vector2(x_mov, y_mov)
-	
 	velocity = mov.normalized() * movement_speed
-	
 	move_and_slide()
 
 func gain_experience(amount) -> void:
@@ -50,4 +54,25 @@ func show_upgrade_selection() -> void:
 	get_tree().current_scene.get_node("UI").add_child(upgrade_ui)
 
 	get_tree().paused = true
-	upgrade_ui.show_menu()
+	upgrade_ui.popup(all_upgrades)
+	upgrade_ui.upgrade_chosen.connect(Callable(self, "_on_upgrade_chosen"))
+
+# 
+func _on_upgrade_chosen(upgrade) -> void:
+	match upgrade.type:
+		"health":
+			max_health += upgrade.amount
+			health     += upgrade.amount
+		"damage":
+			dmg += upgrade.amount
+		"speed":
+			movement_speed *= (1.0 + upgrade.amount)
+		"fire_rate":
+			for w in weapon_manager.weapons:
+				w.cooldown = max(0.1, w.cooldown - upgrade.amount)
+		"weapon":
+			if upgrade.weapon_scene:
+				var w = upgrade.weapon_scene.instantiate()
+				weapon_manager.add_weapon(w)
+		_:
+			push_warning("Unknown upgrade type: %s" % upgrade.type)

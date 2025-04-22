@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://ttu86t20jn2j"]
+
+[ext_resource type="Script" path="res://scripts/upgrades/upgrade.gd" id="1_jt3e2"]
+
+[resource]
+script = ExtResource("1_jt3e2")
+name = "Speed"
+description = "+1 spd"
+type = "speed"
+amount = 1.0

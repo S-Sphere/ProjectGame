@@ -9,7 +9,6 @@ var health: int = max_health
 
 func take_damage(amount: int) -> void:
 	health -= amount
-	print("Enemy ", self.name, " took ", amount, " damage, remaining health: ", health)
 	if health <= 0:
 		die()
 
