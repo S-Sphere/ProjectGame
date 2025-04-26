@@ -53,7 +53,9 @@
 2. Criei alguns upgrades para quando se aumenta de nível (para testar)
 
 ## 22/04/2025 - 29/04/2025
+1. Começei o código para a criação dos mapas com o uso de procedural generation (*)
 
+(*) Não acabado nem funciona nem colocado no git ainda
 
 
 
