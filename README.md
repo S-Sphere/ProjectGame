@@ -45,6 +45,7 @@
 5. 3 Tipos de inimigos
 
 ## 08/04/2025 - 15/04/2025
+**Done:**
 (*) Nada feito
 
 ## 15/04/2025 - 22/04/2025
@@ -53,8 +54,11 @@
 2. Criei alguns upgrades para quando se aumenta de nível (para testar)
 
 ## 22/04/2025 - 29/04/2025
+**Done:**
 1. Começei o código para a criação dos mapas com o uso de procedural generation (*)
 
+**To Do:**
+1. Refatoração e correção do código
 (*) Não acabado nem funciona nem colocado no git ainda
 
 
