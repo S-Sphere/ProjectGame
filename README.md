@@ -67,6 +67,7 @@
 **Done:**
 1. Refiz as scenes que foram corrompidas again (razão desconhecida, aviso de dependências no godot)
 2. Código para spawner de inimigos (versão 1)
+3. Continuação da refatoração do código
 
 **To Do:**
-1. Correção das scenes das armas
+1. Correção das scenes das armas que agora não funcionam
