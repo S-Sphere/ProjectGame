@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://croy1dus2x7ll"]
+
+[ext_resource type="Script" path="res://scripts/map/map_generator.gd" id="1_m7lcy"]
+[ext_resource type="Texture2D" uid="uid://c8fy1fgj3eel8" path="res://assets/sprites/background/Tile.png" id="2_ggx46"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ygfwr"]
+texture = ExtResource("2_ggx46")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_s1mfx"]
+sources/0 = SubResource("TileSetAtlasSource_ygfwr")
+
+[node name="MapGenerator" type="Node2D"]
+script = ExtResource("1_m7lcy")
+map_width = 450
+map_height = 450
+
+[node name="TileMapLayer_floor" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_s1mfx")
+
+[node name="TileMapLayer2_wall" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_s1mfx")
+
+[node name="Obstacles" type="Node2D" parent="."]

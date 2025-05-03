@@ -15,10 +15,14 @@ run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://game/GameManager.gd"
+
 [display]
 
 window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_height=600
 window/stretch/mode="viewport"
 
 [editor]
@@ -72,3 +76,4 @@ move_right={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true

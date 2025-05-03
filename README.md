@@ -56,15 +56,17 @@
 ## 22/04/2025 - 29/04/2025
 **Done:**
 1. Começei o código para a criação dos mapas com o uso de procedural generation (*)
+2. Refiz as scenes que foram corrompidas (razão desconhecida, aviso de dependências no godot)
 
 **To Do:**
 1. Refatoração e correção do código
 (*) Não acabado nem funciona nem colocado no git ainda
 
 
+## 29/04/2025 - 06/05/2025
+**Done:**
+1. Refiz as scenes que foram corrompidas again (razão desconhecida, aviso de dependências no godot)
+2. Código para spawner de inimigos (versão 1)
 
-
-
-
-
-
+**To Do:**
+1. Correção das scenes das armas

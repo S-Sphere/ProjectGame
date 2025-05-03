@@ -1,4 +1,4 @@
-extends Area2D
+extends Weapon
 
 @export var speed: float = 400.0
 @export var dmg: int = 10
@@ -15,14 +15,14 @@ func _physics_process(delta: float) -> void:
 			var move_dir = global_position.direction_to(target.global_position)
 			rotation = move_dir.angle()
 			global_position += move_dir * speed * delta
-		else:
-			queue_free()
+		#else:
+			#queue_free()
 	else:
 		if direction != Vector2.ZERO:
 			rotation = direction.angle()
 			global_position += direction * speed * delta
-		else:
-			queue_free()
+		#else:
+			#queue_free()
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy") and body.has_method("take_damage"):

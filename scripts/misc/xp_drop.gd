@@ -8,6 +8,5 @@ func _ready():
 
 func _on_body_entered(body) -> void:
 	if body.is_in_group("player"):
-		if body.has_method("gain_experience"):
-			body.gain_experience(xp_value)
+		GameManager.gain_experience(xp_value)
 		queue_free()

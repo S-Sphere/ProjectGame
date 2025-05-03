@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://jwj3x21p56vo"]
+
+[ext_resource type="Script" path="res://scripts/upgrades/upgrade.gd" id="1_nq7nf"]
+[ext_resource type="PackedScene" uid="uid://dgleisdeyfgy0" path="res://scenes/weapons/player_firebolt.tscn" id="2_rc005"]
+
+[resource]
+script = ExtResource("1_nq7nf")
+name = "Firebolt"
+description = "weapon"
+type = "weapon"
+amounts = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+weapon_scene = ExtResource("2_rc005")
+max_level = 5

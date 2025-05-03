@@ -1,34 +1,31 @@
 extends BaseCharacter
 # I NEED TO CHANGE THIS:
-# REALLY!!!!! CREATE A GAME MANAGER AT SOME POINT
+# REALLY!!!!! CREATE A GAME MANAGER AT SOME POINT -> done
 
-var firebolt_weapon_scene = preload("res://scenes/weapons/firebolt_weapon.tscn")
-var upgrade_scene = preload("res://scenes/ui/upgrade_seletion.tscn")
+#var firebolt_weapon_scene = preload("res://scenes/weapons/firebolt_weapon.tscn")
+# for the initial weapon
+@export var starting_upgrade: Upgrade
 
 @export var movement_speed = 100.0
 @export var defense = 5
-@export var xp = 0
-@export var level = 1
-var xp_to_next_level = 100
 var weapon_manager
 
-var all_upgrades := [
-	preload("res://data/upgrades/health_upgrade.tres"),
-	preload("res://data/upgrades/damage_upgrade.tres"),
-	preload("res://data/upgrades/speed_upgrade.tres")
-]
-
 func _ready() -> void:
+	GameManager.register_player(self)
+	
 	weapon_manager = WeaponManager.new()
 	add_child(weapon_manager)
-	var projectile_weapon = firebolt_weapon_scene.instantiate()
-	weapon_manager.add_weapon(projectile_weapon)
-	projectile_weapon.attack_origin = global_position
+	
+	GameManager.upgrade_levels.clear()
+	GameManager.upgrade_levels[starting_upgrade.type + starting_upgrade.weapon_scene.resource_path] = 0
+	GameManager._apply_upgrade(starting_upgrade, 1)
+	#var projectile_weapon = firebolt_weapon_scene.instantiate()
+	#weapon_manager.add_weapon(projectile_weapon)
+	#projectile_weapon.attack_origin = global_position
 	
 func _physics_process(_delta):
 	movement()
-	for weapon in weapon_manager.weapons:
-		weapon.attack_origin = global_position
+	weapon_manager.update_origins(global_position)
 		
 
 func movement():
@@ -38,41 +35,5 @@ func movement():
 	velocity = mov.normalized() * movement_speed
 	move_and_slide()
 
-func gain_experience(amount) -> void:
-	xp += amount
-	if xp >= xp_to_next_level:
-		level_up()
-
-func level_up() -> void:
-	level += 1
-	xp -= xp_to_next_level
-	xp_to_next_level = int(xp_to_next_level) * 1.2
-	show_upgrade_selection() # to shwo updates
-	
-func show_upgrade_selection() -> void:
-	var upgrade_ui = upgrade_scene.instantiate()
-	get_tree().current_scene.get_node("UI").add_child(upgrade_ui)
-
-	get_tree().paused = true
-	upgrade_ui.popup(all_upgrades)
-	upgrade_ui.upgrade_chosen.connect(Callable(self, "_on_upgrade_chosen"))
-
-# 
-func _on_upgrade_chosen(upgrade) -> void:
-	match upgrade.type:
-		"health":
-			max_health += upgrade.amount
-			health     += upgrade.amount
-		"damage":
-			dmg += upgrade.amount
-		"speed":
-			movement_speed *= (1.0 + upgrade.amount)
-		"fire_rate":
-			for w in weapon_manager.weapons:
-				w.cooldown = max(0.1, w.cooldown - upgrade.amount)
-		"weapon":
-			if upgrade.weapon_scene:
-				var w = upgrade.weapon_scene.instantiate()
-				weapon_manager.add_weapon(w)
-		_:
-			push_warning("Unknown upgrade type: %s" % upgrade.type)
+func _on_enemy_defeated(xp_amount) -> void:
+	GameManager.gain_experience(xp_amount)
