@@ -6,7 +6,8 @@ extends Node
 	preload("res://data/upgrades/health_upgrade.tres"),
 	preload("res://data/upgrades/damage_upgrade.tres"),
 	preload("res://data/upgrades/speed_upgrade.tres"),
-	preload("res://data/upgrades/radial_weapon.tres")
+	preload("res://data/upgrades/radial_weapon.tres"),
+	preload("res://data/upgrades/firebolt_weapon.tres")
 ]
 
 var xp = 0
@@ -31,6 +32,18 @@ func level_up() -> void:
 	show_upgrade_selection() # to shwo updates
 	
 func show_upgrade_selection() -> void:
+	var choices = []
+	for upg in all_upgrades:
+		var key = upg.type
+		if upg.weapon_scene:
+			key += upg.weapon_scene.resource_path
+		var lvl = upgrade_levels.get(key,0)
+		if lvl < upg.max_level:
+			choices.append(upg)
+	if choices.is_empty():
+		get_tree().paused = false
+		return
+	
 	var upgrade_ui = upgrade_scene.instantiate()
 	get_tree().current_scene.get_node("UI").add_child(upgrade_ui)
 	get_tree().paused = true

@@ -68,6 +68,8 @@
 1. Refiz as scenes que foram corrompidas again (razão desconhecida, aviso de dependências no godot)
 2. Código para spawner de inimigos (versão 1)
 3. Continuação da refatoração do código
+4. Correção das scenes das armas que pararam de funcionar
+5. Mudanças no sistema de upgrades (não acabado e incorreto)
 
 **To Do:**
-1. Correção das scenes das armas que agora não funcionam
+

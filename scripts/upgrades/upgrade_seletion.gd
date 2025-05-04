@@ -1,3 +1,4 @@
+#upgrade_selection
 extends Control
 class_name UpgradeSelection
 
@@ -22,22 +23,21 @@ func _ready():
 func popup(upgrades) -> void:
 	_all_upgrades = upgrades.duplicate()
 	_all_upgrades.shuffle()
-	_choices = _all_upgrades.slice(0, option_count)
+	_choices = _all_upgrades.slice(0, min(option_count, _all_upgrades.size()))
 	for i in range(option_count):
 		var up = _choices[i]
 		var btn = _buttons[i]
-		
 		btn.text = up.name
-		
 		if up.icon:
 			btn.icon = up.icon
 		else:
 			btn.icon = null
-		
 		if up.description != "":
 			btn.tooltip_text  = up.description
 		else:
 			btn.tooltip_text  = null
+	for j in range(_choices.size(), option_count):
+		_buttons[j].visible = false
 	visible = true
 func _on_button_pressed(btn: Button) -> void:
 	var idx = _buttons.find(btn)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnx5gf0c5e425"]
 
 [ext_resource type="Script" path="res://scripts/weapons/player_firebolt_radial.gd" id="1_pya43"]
-[ext_resource type="PackedScene" uid="uid://3w8eqoewa7i5" path="res://scenes/weapons/firebolt_projectile.tscn" id="2_aehn5"]
+[ext_resource type="PackedScene" uid="uid://dgleisdeyfgy0" path="res://scenes/weapons/firebolt_projectile.tscn" id="2_aehn5"]
 
 [node name="Firebolt" type="Node2D"]
 script = ExtResource("1_pya43")

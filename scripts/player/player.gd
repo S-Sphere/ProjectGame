@@ -1,3 +1,4 @@
+#player.gd
 extends BaseCharacter
 # I NEED TO CHANGE THIS:
 # REALLY!!!!! CREATE A GAME MANAGER AT SOME POINT -> done
