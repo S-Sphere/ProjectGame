@@ -75,7 +75,7 @@
 	* Health bar
 
 
-### Overall TODO list
+## Overall TODO list
 **Code or Godot stuff:**
 1. Implement the gold system and drop rate (same as EXP drop)
 2. Make adjustments to gold/EXP drop rates so it doesn't always drop
