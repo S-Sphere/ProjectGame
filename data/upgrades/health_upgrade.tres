@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_hl1vc")
 name = "Health"
-description = "+10 hp"
+description = "+100 hp"
 type = "health"
-amount = 10.0
+amounts = Array[float]([100.0, 200.0])
+max_level = 2

@@ -70,6 +70,9 @@
 3. Continuação da refatoração do código
 4. Correção das scenes das armas que pararam de funcionar
 5. Mudanças no sistema de upgrades (não acabado e incorreto)
+6. Criação de GUI elementos
+	* Exp bar
+	* Health bar
 
 **To Do:**
 

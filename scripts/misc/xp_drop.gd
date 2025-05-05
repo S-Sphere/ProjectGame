@@ -1,3 +1,4 @@
+# xpDrop
 extends Area2D
 
 @export var xp_value = 100 # to be changed of course

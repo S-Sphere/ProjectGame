@@ -1,6 +1,9 @@
 # GameManger.gd
 extends Node
 
+# signal for the xp bar
+signal xp_changed(current_xp, xp_cap)
+
 @export var upgrade_scene: PackedScene = preload("res://scenes/ui/upgrade_seletion.tscn")
 @export var all_upgrades: Array[Resource] = [
 	preload("res://data/upgrades/health_upgrade.tres"),
@@ -22,12 +25,14 @@ func register_player(player) -> void:
 
 func gain_experience(amount) -> void:
 	xp += amount
+	emit_signal("xp_changed", xp, xp_to_next_level) #for the bar
 	if xp >= xp_to_next_level:
 		level_up()
 	
 func level_up() -> void:
 	level += 1
 	xp -= xp_to_next_level
+	emit_signal("xp_changed", xp, xp_to_next_level) #for the bar
 	xp_to_next_level = int(xp_to_next_level) * 1.2
 	show_upgrade_selection() # to shwo updates
 	
