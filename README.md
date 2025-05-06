@@ -86,6 +86,7 @@
 7. Either fix or remove resolution settings
 8. Add music settings
 9. Implement the necessary code so the player can use gold to purchase upgrades between runs
+10. Save file system
 
 **Sprites and animation stuff:**
 1. Replace all player/enemy sprites with final versions and make the animations
