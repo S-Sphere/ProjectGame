@@ -75,6 +75,13 @@
 	* Health bar
 
 
+## 06/05/2025 - 135/2025
+**Done:**
+1. Continuação da criação do mapa com procedural generation (*)
+
+(*) Não está no git porque de momento faz o jogo parar.
+
+
 ## Overall TODO list
 **Code or Godot stuff:**
 1. Implement the gold system and drop rate (same as EXP drop)
