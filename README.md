@@ -75,7 +75,7 @@
 	* Health bar
 
 
-## 06/05/2025 - 135/2025
+## 06/05/2025 - 13/05/2025
 **Done:**
 1. Continuação da criação do mapa com procedural generation (*)
 
