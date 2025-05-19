@@ -81,6 +81,11 @@
 
 (*) Não está no git porque de momento faz o jogo parar.
 
+## 13/05/2025 - 20/05/2025
+**Done:**
+1. Alterações no sistema de upgrade
+2. Criação de uma nova arma
+
 
 ## Overall TODO list
 **Code or Godot stuff:**
