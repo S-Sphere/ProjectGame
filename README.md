@@ -85,12 +85,17 @@
 **Done:**
 1. Alterações no sistema de upgrade
 2. Criação de uma nova arma
+3. Implementação do sistema de gold e drop rate (*)
+4. Implementação de sistema de health drop (some code done(for drop rate) not finished) (*)
+5. Começo do sistema para compra de upgrades entre runs (*)
+6. Primeira tentativa para dados persistentes (por agora apenas gold) (*)
+
+(*) Ainda não testado devido ainda não ter acabado a alteração ao sistema de upgrades de armas
+(*) Não colocado no git porque de momento não funciona
 
 
 ## Overall TODO list
 **Code or Godot stuff:**
-1. Implement the gold system and drop rate (same as EXP drop)
-2. Make adjustments to gold/EXP drop rates so it doesn't always drop
 3. Implement at least 1 boss and one more enemy type (one that steals player gold)
 4. Add kills, gold, and the upgrades the player currently has on the run to the screen
 5. Add at least one more upgrade and fix/change the existing ones
