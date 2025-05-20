@@ -1,5 +1,5 @@
 #player_firebolt.gd
-extends Area2D
+extends Weapon
 
 @export var speed: float = 400.0
 @export var dmg: int = 10

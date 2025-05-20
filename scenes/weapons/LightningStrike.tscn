@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqlpy2n78y8me"]
+
+[ext_resource type="Texture2D" uid="uid://lk7gk4yunndw" path="res://assets/sprites/weapons/Sprite-sheet.png" id="1_1s56s"]
+[ext_resource type="Script" uid="uid://dkvda2hae1rsf" path="res://scripts/weapons/lightning_strike.gd" id="1_o8lv3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1s56s"]
+height = 24.0
+
+[node name="LightningStrike" type="Area2D"]
+script = ExtResource("1_o8lv3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(18, 63.5)
+scale = Vector2(0.375, 0.503906)
+texture = ExtResource("1_1s56s")
+hframes = 5
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 111)
+shape = SubResource("CapsuleShape2D_1s56s")

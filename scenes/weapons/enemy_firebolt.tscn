@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dt0ev3t6ry1mh"]
 
-[ext_resource type="Script" path="res://scripts/weapons/enemy_firebolt.gd" id="1_e3j3k"]
+[ext_resource type="Script" uid="uid://dk1lr16xn1ttv" path="res://scripts/weapons/enemy_firebolt.gd" id="1_e3j3k"]
 [ext_resource type="Texture2D" uid="uid://lqwbnwb7r3c7" path="res://assets/sprites/weapons/Firebolt SpriteSheet.png" id="2_f4w8p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5icny"]

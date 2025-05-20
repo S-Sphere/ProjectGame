@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0s4e8hs7n080"]
+
+[ext_resource type="Script" uid="uid://b15sc8pk3p4gk" path="res://scripts/main_menu/shop_menu.gd" id="1_4rch4"]
+
+[node name="ShopMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4rch4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Upgrade Shop"
+horizontal_alignment = 1
+
+[node name="Speed" type="Button" parent="."]
+layout_mode = 2
+offset_left = 265.0
+offset_top = 206.0
+offset_right = 399.0
+offset_bottom = 315.0
+text = "Speed Upgrade"
+
+[node name="Defense" type="Button" parent="."]
+layout_mode = 2
+offset_left = 555.0
+offset_top = 206.0
+offset_right = 697.0
+offset_bottom = 316.0
+text = "Defense Upgrade"
+
+[node name="Health" type="Button" parent="."]
+layout_mode = 2
+offset_left = 841.0
+offset_top = 208.0
+offset_right = 971.0
+offset_bottom = 316.0
+text = "Health Upgrade
+"
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1121.0
+offset_top = 468.0
+offset_right = 1232.0
+offset_bottom = 570.0
+text = "CLOSE"
+
+[node name="CoinsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 106.0
+offset_right = 646.0
+offset_bottom = 152.0
+text = "COINS "

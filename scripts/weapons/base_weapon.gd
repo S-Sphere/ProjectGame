@@ -8,6 +8,7 @@ class_name Weapon
 var _fire_timer
 
 func _ready() -> void:
+	add_to_group("origin_weapon") # para o attack_origin
 	_fire_timer = Timer.new()
 	_fire_timer.wait_time = cooldown
 	_fire_timer.one_shot = false

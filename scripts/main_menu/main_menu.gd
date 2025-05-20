@@ -6,9 +6,12 @@ extends Control
 @onready var exit_button = $MarginContainer/HBoxContainer/VBoxContainer/Exit_Button as Button
 @onready var settings_menu = $settings_menu as SettingsMenu
 @onready var margin_container = $MarginContainer as MarginContainer
-
+@onready var shop_button = $MarginContainer/HBoxContainer/VBoxContainer/Shop_Button as Button
 # to start preloading a test scene
 @onready var start_level = preload("res://scenes/main/main.tscn") as PackedScene
+@onready var shop_scene = preload("res://scenes/main_menu/ShopMenu.tscn") as PackedScene
+
+
 
 func _ready():
 	handle_signals()
@@ -28,9 +31,14 @@ func on_settings_pressed() -> void:
 func on_exit_settings_menu() -> void:
 	margin_container.visible = true
 	settings_menu.visible = false
+
+func on_shop_pressed() -> void:
+	var shop = shop_scene.instantiate()
+	add_child(shop)
 	
 func handle_signals() -> void:
 	start_button.button_down.connect(on_start_pressed)
 	exit_button.button_down.connect(on_exit_pressed)
 	settings_button.button_down.connect(on_settings_pressed)
 	settings_menu.exit_settings_menu.connect(on_exit_settings_menu)
+	shop_button.button_down.connect(on_shop_pressed)

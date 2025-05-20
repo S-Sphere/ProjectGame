@@ -6,8 +6,8 @@ class_name Upgrade
 @export var description: String
 @export var icon: Texture2D
 
-@export var type: String # wheter is healht, dmg, weapon ...
-@export var amounts: Array[float]
+@export var stat: String
+@export var values: Array[float]
 
 
 # if weapon
@@ -15,7 +15,7 @@ class_name Upgrade
 @export var max_level: int = 2
 
 func amount_for(level: int) -> float:
-	if amounts.is_empty():
+	if values.is_empty():
 		return 0.0
-	var idx = clamp(level - 1, 0, amounts.size() - 1)
-	return amounts[idx]
+	var idx = clamp(level - 1, 0, values.size() - 1)
+	return values[idx]

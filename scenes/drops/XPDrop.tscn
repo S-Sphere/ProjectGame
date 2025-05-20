@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhmtkna5ydka8"]
 
 [ext_resource type="Texture2D" uid="uid://cqdwed8xm2ks2" path="res://assets/sprites/misc/spr_coin_roj.png" id="1_tlwx4"]
-[ext_resource type="Script" path="res://scripts/misc/xp_drop.gd" id="1_y7fkb"]
+[ext_resource type="Script" uid="uid://bn4xwuwdng2wf" path="res://scripts/misc/xp_drop.gd" id="1_y7fkb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wuhl7"]
 radius = 5.0
