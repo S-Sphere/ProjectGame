@@ -93,7 +93,15 @@
 (*) Ainda não testado devido ainda não ter acabado a alteração ao sistema de upgrades de armas
 (*) Não colocado no git porque de momento não funciona
 
+## 20/05/2025 - 27/05/2025
+**Done:**
+1. Continuação das coisas da semana passada
 
+## 27/05/2025 - 03/06/2025
+**Done:**
+1. Alterações nos Ménus
+
+   
 ## Overall TODO list
 **Code or Godot stuff:**
 3. Implement at least 1 boss and one more enemy type (one that steals player gold)
