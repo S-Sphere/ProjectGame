@@ -95,11 +95,12 @@
 
 ## 20/05/2025 - 27/05/2025
 **Done:**
-1. Continuação das coisas da semana passada
+1. Continuação das coisas da semana passada(pouco)
 
 ## 27/05/2025 - 03/06/2025
 **Done:**
-1. Alterações nos Ménus
+1. Alterações nos Menus
+2. Alterações nas armas
 
    
 ## Overall TODO list
