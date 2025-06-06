@@ -12,7 +12,7 @@ class_name Upgrade
 
 # if weapon
 @export var weapon_scene: PackedScene
-@export var max_level: int = 2
+@export var max_level: int = 3
 
 func amount_for(level: int) -> float:
 	if values.is_empty():

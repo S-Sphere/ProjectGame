@@ -91,7 +91,6 @@ func _apply_upgrade(upgrade, lvl) -> void:
 	match upgrade.stat:
 		"health":
 			player.max_health += amount
-			#player.health     += amount
 		"damage":
 			player.dmg += amount
 		"speed":
@@ -101,9 +100,15 @@ func _apply_upgrade(upgrade, lvl) -> void:
 				w.cooldown = max(0.1, w.cooldown - amount)
 		"weapon":
 			if upgrade.weapon_scene:
-				if lvl == 1 and upgrade.weapon_scene:
-					var w = upgrade.weapon_scene.instantiate()
-					player.weapon_manager.add_weapon(w)
+				var scene_path = upgrade.weapon_scene.resource_path
+				if lvl == 1:
+					var new_weapon = upgrade.weapon_scene.instantiate()
+					player.weapon_manager.add_weapon(new_weapon)
+				else:
+					for w in player.weapon_manager.weapons():
+						if w.get_scene_file_path() == scene_path:
+							w.level = lvl
+							break
 		_:
 			push_warning("Unknown upgrade type: %s" % upgrade.stat)
 	get_tree().paused = false
