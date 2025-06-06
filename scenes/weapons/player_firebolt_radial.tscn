@@ -5,10 +5,4 @@
 
 [node name="Firebolt" type="Node2D"]
 script = ExtResource("1_pya43")
-number_projectiles = null
-speed = null
-dmg = null
-cooldown = null
 projectile_scene = ExtResource("2_aehn5")
-attack_origin = null
-range = null

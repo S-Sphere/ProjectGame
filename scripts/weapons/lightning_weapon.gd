@@ -2,21 +2,22 @@
 extends Node2D
 class_name LightningWeapon
 
-@export var min_interval: float = 1.0
-@export var max_interval: float = 3.0
-@export var radius: float       = 500.0
-@export var lightning_scene: PackedScene
-
+@export var min_interval 	: float = 1.0
+@export var max_interval 	: float = 3.0
+@export var radius 		 	: float = 500.0
+@export var lightning_scene : PackedScene
+@export var attack_origin	: Vector2
 var _timer: Timer
 
 func _ready() -> void:
 	randomize()
+	add_to_group("origin_weapon")
 	_timer = Timer.new()
 	_timer.one_shot = true
 	add_child(_timer)
 	_timer.timeout.connect(_on_timer_timeout)
 	_schedule_next_strike()
-	print("⚡️ LightningWeapon ready at ", global_position, " radius=", radius)
+	print("⚡️ LightningWeapon ready at ", attack_origin, " radius=", radius)
 
 func _schedule_next_strike() -> void:
 	_timer.start(randf_range(min_interval, max_interval))
@@ -27,7 +28,7 @@ func _on_timer_timeout() -> void:
 	_schedule_next_strike()
 
 func _fire_strike() -> void:
-	var center = global_position
+	var center = attack_origin
 	var candidates := []
 	for e in get_tree().get_nodes_in_group("enemy"):
 		if e.global_position.distance_to(center) <= radius:

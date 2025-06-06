@@ -102,7 +102,12 @@
 1. Alterações nos Menus
 2. Alterações nas armas
 
-   
+## 03/06/2025 - 10/06/2025
+**Done:**
+1. Modificações do comportamento das armas por nível
+2. Correção de bugs no sistema de gold
+3. Simplificação e refaturação de código
+
 ## Overall TODO list
 **Code or Godot stuff:**
 3. Implement at least 1 boss and one more enemy type (one that steals player gold)

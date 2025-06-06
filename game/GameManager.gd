@@ -4,6 +4,7 @@ extends Node
 # Signals ======================================================================
 signal xp_changed(current_xp, xp_cap)
 signal coins_changed(current_coins)
+signal run_coins_changed(current_run_coins)
 signal health_changed(current_health, max_health)
 
 # Exports ======================================================================
@@ -23,7 +24,7 @@ var level = 1
 var xp_to_next_level = 100
 var player = null
 var coins = 0
-
+var run_coins
 # track upgrades
 var upgrade_levels = {}
 
@@ -32,6 +33,7 @@ func _ready() -> void:
 
 func register_player(player) -> void:
 	self.player = player
+	reset_run_coins()
 
 func heal_player(amount) -> void:
 	if player:
@@ -105,7 +107,7 @@ func _apply_upgrade(upgrade, lvl) -> void:
 					var new_weapon = upgrade.weapon_scene.instantiate()
 					player.weapon_manager.add_weapon(new_weapon)
 				else:
-					for w in player.weapon_manager.weapons():
+					for w in player.weapon_manager.weapons:
 						if w.get_scene_file_path() == scene_path:
 							w.level = lvl
 							break
@@ -117,6 +119,9 @@ func _apply_upgrade(upgrade, lvl) -> void:
 # coin methods -> persistent -> possibly going to a separate file
 func gain_coins(amount) -> void:
 	coins += amount
+	if player != null and amount > 0:
+		run_coins += amount
+		emit_signal("run_coins_changed", run_coins)
 	emit_signal("coins_changed", coins)
 	save_persistent_coins()
 
@@ -132,3 +137,7 @@ func load_persistent_coins() -> void:
 		coins = file.get_32()
 		file.close()
 	emit_signal("coins_changed", coins)
+
+func reset_run_coins() -> void:
+	run_coins = 0
+	emit_signal("run_coins_changed", run_coins)

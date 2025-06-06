@@ -49,9 +49,7 @@ func fire() -> void:
 func _sort_by_distance(a,b) -> int:
 	var da = attack_origin.distance_to(a.global_position)
 	var db = attack_origin.distance_to(b.global_position)
-	if da < db: return -1
-	elif da > db: return 1
-	else : return 0
+	return da < db
 	
 
 func _spawn_projectile_toward(enemy, is_double_shot, increase_damage):
