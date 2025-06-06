@@ -5,7 +5,8 @@
 
 [node name="Firebolt" type="Node2D"]
 script = ExtResource("1_pya43")
-number_projectiles = null
+projectiles_per_level = 2
+max_projectiles = 8
 speed = null
 dmg = null
 cooldown = null

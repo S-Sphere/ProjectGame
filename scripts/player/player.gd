@@ -18,7 +18,7 @@ func _ready() -> void:
 	add_child(weapon_manager)
 	
 	GameManager.upgrade_levels.clear()
-	GameManager.upgrade_levels[starting_upgrade.stat + starting_upgrade.weapon_scene.resource_path] = 0
+        GameManager.upgrade_levels[starting_upgrade.stat + starting_upgrade.weapon_scene.resource_path] = 1
 	GameManager._apply_upgrade(starting_upgrade, 1)
 	#var projectile_weapon = firebolt_weapon_scene.instantiate()
 	#weapon_manager.add_weapon(projectile_weapon)

@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("1_8aye1")
-name = "Weapon 2"
-description = "New weapon"
+name = "Radial Firebolt"
+description = "Radial firebolt weapon"
 stat = "weapon"
 values = Array[float]([])
 weapon_scene = ExtResource("2_7gfjo")
-max_level = 2
+max_level = 4
