@@ -24,7 +24,7 @@ func _build_floor() -> void:
 			tm.set_cell(Vector2i(x, y), 0)
 
 func _build_walls() -> void:
-	var tm = $Tile/TileMapLayer2_wall
+	var tm = $TileMap/TileMapLayer2_wall
 	tm.clear()
 	
 	for x in range(int(-map_width/2) - border_thickness, int(map_width/2) + border_thickness):
