@@ -43,6 +43,6 @@ func _scatter_obstacles() -> void:
 		var y = rng.randi_range(-map_height/2 + border_thickness, map_height/2 - border_thickness)
 		var scene = obstacle_scenes[rng.randi_range(0, obstacle_scenes.size() - 1)]
 		var obs = scene.instantiate() as Node2D
-		var world_pos = $TileMapLayer_floor.map_to_local(Vector2(x,y)) + $TileMapLayer_floor.cell_size * 0.5
+		var world_pos = $TileMapLayer_floor.map_to_local(Vector2i(x,y)) + $TileMapLayer_floor.cell_size * 0.5
 		obs.position = world_pos
 		parent.add_child(obs)

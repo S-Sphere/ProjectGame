@@ -23,6 +23,7 @@ sources/0 = SubResource("TileSetAtlasSource_t78oo")
 [node name="Main" type="Node2D"]
 
 [node name="MapGenerator" parent="." instance=ExtResource("1_sodfi")]
+obstacle_scenes = [null]
 
 [node name="Background" type="TileMapLayer" parent="."]
 visible = false
@@ -30,7 +31,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAA0ABEAAAAAAAEAAAA0ABIAAAABAAAAAAA1ABE
 tile_set = SubResource("TileSet_gfo6e")
 
 [node name="Player" parent="." instance=ExtResource("2_2t4yk")]
-position = Vector2(675, 240)
+position = Vector2(259, 181)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
