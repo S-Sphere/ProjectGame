@@ -16,7 +16,7 @@ func _ready() -> void:
 	_scatter_obstacles()
 
 func _build_floor() -> void:
-	var tm = $TileMapLayer_floor
+	var tm = $TileMap/TileMapLayer_floor
 	tm.clear()
 	
 	for x in range(int(-map_width/2), int(map_width/2)):
@@ -24,7 +24,7 @@ func _build_floor() -> void:
 			tm.set_cell(Vector2i(x, y), 0)
 
 func _build_walls() -> void:
-	var tm = $TileMapLayer2_wall
+	var tm = $Tile/TileMapLayer2_wall
 	tm.clear()
 	
 	for x in range(int(-map_width/2) - border_thickness, int(map_width/2) + border_thickness):
@@ -43,6 +43,6 @@ func _scatter_obstacles() -> void:
 		var y = rng.randi_range(-map_height/2 + border_thickness, map_height/2 - border_thickness)
 		var scene = obstacle_scenes[rng.randi_range(0, obstacle_scenes.size() - 1)]
 		var obs = scene.instantiate() as Node2D
-		var world_pos = $TileMapLayer_floor.map_to_local(Vector2i(x,y)) + $TileMapLayer_floor.cell_size * 0.5
+		var world_pos = $TileMap/TileMapLayer_floor.map_to_local(Vector2i(x,y)) + $TileMap/TileMapLayer_floor.tile_set.tile_size * 0.5
 		obs.position = world_pos
 		parent.add_child(obs)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://f4j4c8uu7xn3"]
+[gd_scene load_steps=9 format=4 uid="uid://f4j4c8uu7xn3"]
 
 [ext_resource type="Texture2D" uid="uid://bhxacdksvktm1" path="res://assets/sprites/background/mainlevbuild.png" id="1_pc1c8"]
 [ext_resource type="PackedScene" uid="uid://croy1dus2x7ll" path="res://scenes/map/map_generator.tscn" id="1_sodfi"]
 [ext_resource type="PackedScene" uid="uid://cufbo0q2qfdd4" path="res://scenes/player/player.tscn" id="2_2t4yk"]
+[ext_resource type="PackedScene" uid="uid://dnhi4kblr1i1w" path="res://scenes/map/Obstacle_1.tscn" id="2_ow5a4"]
 [ext_resource type="PackedScene" uid="uid://bp8y43w4mbjnj" path="res://scenes/enemies/EnemySpawner.tscn" id="4_ob1my"]
 [ext_resource type="PackedScene" uid="uid://d6xnnjiq4aap" path="res://scenes/ui/hud.tscn" id="5_1wt1j"]
 
@@ -23,7 +24,7 @@ sources/0 = SubResource("TileSetAtlasSource_t78oo")
 [node name="Main" type="Node2D"]
 
 [node name="MapGenerator" parent="." instance=ExtResource("1_sodfi")]
-obstacle_scenes = [null]
+obstacle_scenes = [ExtResource("2_ow5a4")]
 
 [node name="Background" type="TileMapLayer" parent="."]
 visible = false
