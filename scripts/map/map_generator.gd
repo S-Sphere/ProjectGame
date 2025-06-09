@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var map_width = 80
-@export var map_height = 60
+@export var map_width = 1920
+@export var map_height = 1080
 @export var border_thickness = 1
 
 @export var obstacle_scenes = []
@@ -19,8 +19,8 @@ func _build_floor() -> void:
 	var tm = $TileMapLayer_floor
 	tm.clear()
 	
-	for x in range(int(-map_width/2), map_width):
-		for y in range(int(-map_height/2), map_height):
+	for x in range(int(-map_width/2), int(map_width/2)):
+		for y in range(int(-map_height/2), int(map_height/2)):
 			tm.set_cell(Vector2i(x, y), 0)
 
 func _build_walls() -> void:
@@ -43,6 +43,6 @@ func _scatter_obstacles() -> void:
 		var y = rng.randi_range(-map_height/2 + border_thickness, map_height/2 - border_thickness)
 		var scene = obstacle_scenes[rng.randi_range(0, obstacle_scenes.size() - 1)]
 		var obs = scene.instantiate() as Node2D
-		var world_pos = $TileMapLayer_floor.map_to_world(Vector2(x,y)) + $TileMapLayer_floor.cell_size * 0.5
+		var world_pos = $TileMapLayer_floor.map_to_local(Vector2(x,y)) + $TileMapLayer_floor.cell_size * 0.5
 		obs.position = world_pos
 		parent.add_child(obs)
