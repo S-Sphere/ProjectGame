@@ -18,10 +18,10 @@ script = ExtResource("1_m7lcy")
 map_width = 450
 map_height = 450
 
-[node name="TileMap" type="Node2D" parent="."]
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
 
 [node name="TileMapLayer_floor" type="TileMapLayer" parent="TileMap"]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_s1mfx")
 
 [node name="TileMapLayer2_wall" type="TileMapLayer" parent="TileMap"]
