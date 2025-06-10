@@ -6,10 +6,11 @@ signal xp_changed(current_xp, xp_cap)
 signal coins_changed(current_coins)
 signal run_coins_changed(current_run_coins)
 signal health_changed(current_health, max_health)
-
+signal kills_changed(current_kills)
 # Exports ======================================================================
 @export var max_run_level = 10
 @export var upgrade_scene: PackedScene = preload("res://scenes/ui/upgrade_seletion.tscn")
+@export var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
 @export var all_upgrades: Array[Resource] = [
 	preload("res://data/upgrades/health_upgrade.tres"),
 	preload("res://data/upgrades/damage_upgrade.tres"),
@@ -18,13 +19,16 @@ signal health_changed(current_health, max_health)
 	preload("res://data/upgrades/firebolt_weapon.tres"),
 	preload("res://data/upgrades/lightning_weapon.tres")
 ]
-
+# Variables =============================================
 var xp = 0
 var level = 1
 var xp_to_next_level = 100
 var player = null
 var coins = 0
 var run_coins
+# run stats
+var kills = 0
+var start_time = 0
 # track upgrades
 var upgrade_levels = {}
 
@@ -33,7 +37,7 @@ func _ready() -> void:
 
 func register_player(player) -> void:
 	self.player = player
-	reset_run_coins()
+	start_run()
 
 func heal_player(amount) -> void:
 	if player:
@@ -141,3 +145,45 @@ func load_persistent_coins() -> void:
 func reset_run_coins() -> void:
 	run_coins = 0
 	emit_signal("run_coins_changed", run_coins)
+
+func start_run() -> void:
+	reset_run_coins()
+	kills = 0
+	start_time = Time.get_ticks_msec()
+	xp = 0
+	level = 0
+	xp_to_next_level = 100
+	emit_signal("xp_changed", xp, xp_to_next_level)
+
+func incr_kills(amount = 1) -> void:
+	kills += amount
+	emit_signal("kills_changed, kills")
+
+func end_run() -> void:
+	var ui = get_tree().current_scene.get_node("UI")
+	if ui == null:
+		return
+	
+	var upgrade_texts = []
+	for key in upgrade_levels.keys():
+		var lvl = upgrade_levels[key]
+		var name = key
+		for upg in all_upgrades:
+			var k = upg.stat
+			if upg.weapon_scene:
+				k += upg.weapon_scene.resource_path
+			if k == key:
+				name = upg.name
+				break
+		upgrade_texts.append("%s Lv %d" % [name, lvl])
+	var stats = {
+		"coins": run_coins,
+		"level": level,
+		"kills": kills,
+		"time": int((Time.get_ticks_msec() - start_time) / 1000.0),
+		"upgrades": upgrade_texts
+	}
+	var end_screen = end_screen_scene.instantiate()
+	ui.add_child(end_screen)
+	get_tree().paused = true
+	end_screen.show_stats(stats)

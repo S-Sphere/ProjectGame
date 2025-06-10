@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://ep5t2t467m7c"]
+
+[ext_resource type="Script" uid="uid://bljw1c17s3ims" path="res://scripts/main_menu/end_screen.gd" id="1_4ttpn"]
+
+[node name="EndScreen" type="CanvasLayer"]
+process_priority = 3
+script = ExtResource("1_4ttpn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="CoinsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Coins: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level Reached: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KillsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Kills: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Time: 0s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradesLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Upgrades:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="RetryButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Retry"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Main Menu"

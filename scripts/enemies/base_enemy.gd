@@ -20,6 +20,7 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	drop_loot()
+	GameManager.incr_kills()
 	queue_free()
 	
 func drop_loot() -> void:

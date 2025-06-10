@@ -38,3 +38,7 @@ func movement():
 
 func _on_enemy_defeated(xp_amount) -> void:
 	GameManager.gain_experience(xp_amount)
+
+func die() -> void:
+	GameManager.end_run()
+	super.die()
