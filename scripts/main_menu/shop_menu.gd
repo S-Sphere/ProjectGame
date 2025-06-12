@@ -44,19 +44,23 @@ func _purchase_and_apply(stat):
 	var stats = SaveManager.data.get("player_stats", {})
 	match stat:
 		"health":
-			GameManager.player.max_health += HEALTH_INCR
+			if GameManager.player != null:
+				GameManager.player.max_health += HEALTH_INCR
+				GameManager.player.health = GameManager.player.max_health
 			stats["health"] = stats.get("health", 0) + HEALTH_INCR
 		"speed":
-			GameManager.player.speed += SPEED_INCR
+			if GameManager.player != null:
+				GameManager.player.speed += SPEED_INCR
 			stats["speed"] = stats.get("speed", 0) + SPEED_INCR
 		"defense":
-			GameManager.player.defense += DEFENSE_INCR
+			if GameManager.player != null:
+				GameManager.player.defense += DEFENSE_INCR
 			stats["defense"] = stats.get("defense", 0) + DEFENSE_INCR
 		_:
 			push_warning("Unknown purchase type: %s" % stat)
 	
 	SaveManager.data["player_stats"] = stats
-	SaveManager.save()
+	SaveManager.save_json()
 	
 func _on_close_pressed():
 	queue_free()
