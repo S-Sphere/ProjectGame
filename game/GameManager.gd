@@ -33,10 +33,20 @@ var start_time = 0
 var upgrade_levels = {}
 
 func _ready() -> void:
-	load_persistent_coins()
+	SaveManager.load_json()
+	coins = int(SaveManager.data.get("coins", 0))
+	emit_signal("coins_changed", coins)
 
 func register_player(player) -> void:
 	self.player = player
+	var stats = SaveManager.data.get("player_stats", {})
+	if stats.has("health"):
+		player.max_health += stats["health"]
+		player.health = player.max_health
+	if stats.has("speed"):
+		player.set("movement_speed", player.get("movement_speed", 0) + stats["speed"])
+	if stats.has("defense"):
+		player.defense += stats["defense"]
 	start_run()
 
 func heal_player(amount) -> void:
@@ -127,20 +137,8 @@ func gain_coins(amount) -> void:
 		run_coins += amount
 		emit_signal("run_coins_changed", run_coins)
 	emit_signal("coins_changed", coins)
-	save_persistent_coins()
-
-func save_persistent_coins() -> void:
-	var file = FileAccess.open("user://coins.save", FileAccess.ModeFlags.WRITE)
-	if file:
-		file.store_32(coins)
-		file.close()
-
-func load_persistent_coins() -> void:
-	var file = FileAccess.open("user://coins.save", FileAccess.ModeFlags.READ)
-	if file:
-		coins = file.get_32()
-		file.close()
-	emit_signal("coins_changed", coins)
+	SaveManager.data["coins"] = coins
+	SaveManager.save_json()
 
 func reset_run_coins() -> void:
 	run_coins = 0
