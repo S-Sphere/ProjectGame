@@ -17,7 +17,8 @@ func show_stats(data: Dictionary) -> void:
 	coins_label.text = "Coins: %d" % data.get("coins", 0)
 	level_label.text = "Level Reached: %d" % data.get("level", 1)
 	kills_label.text = "Kills: %d" % data.get("kills", 0)
-	time_label.text = "Time Survived: %ds" % data.get("time", 0)
+	var t = int(data.get("time", 0))
+	time_label.text = "Time Survived: %ds" % GameManager.format_time(t)
 	var upg = data.get("upgrades", [])
 	if upg.size() > 0:
 		upgrades_label.text = "Upgrades:\n" + ", ".join(upg)

@@ -108,6 +108,14 @@
 2. Correção de bugs no sistema de gold
 3. Simplificação e refaturação de código
 
+## 10/06/2025 - 17/06/2025
+**Done:**
+1. Correção de bugs
+2. Alterações na lógica do jogo
+3. Novo upgrade
+4.  
+
+
 ## Overall TODO list
 **Code or Godot stuff:**
 1. Implement at least 1 boss and one more enemy type (one that steals player gold)

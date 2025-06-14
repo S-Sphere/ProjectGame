@@ -8,7 +8,7 @@ signal run_coins_changed(current_run_coins)
 signal health_changed(current_health, max_health)
 signal kills_changed(current_kills)
 # Exports ======================================================================
-@export var max_run_level = 10
+# @export var max_run_level = 10
 @export var upgrade_scene: PackedScene = preload("res://scenes/ui/upgrade_seletion.tscn")
 @export var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
 @export var all_upgrades: Array[Resource] = [
@@ -30,6 +30,16 @@ var run_coins
 # run stats
 var kills = 0
 var start_time = 0
+func get_run_time() -> int:
+	return int((Time.get_ticks_msec() - start_time) / 1000.0)
+
+func format_time(secs) -> String:
+	if secs < 60:
+		return "%ds" % secs
+	return "%d:%02d" % [secs / 60, secs % 60]
+
+func get_run_time_string() -> String:
+	return format_time(get_run_time())
 # track upgrades
 var upgrade_levels = {}
 
@@ -58,8 +68,6 @@ func heal_player(amount) -> void:
 		emit_signal("health_changed", player.health, player.max_health)
 
 func gain_experience(amount) -> void:
-	if level >= max_run_level:
-		return
 	xp += amount
 	emit_signal("xp_changed", xp, xp_to_next_level) #for the bar
 	if xp >= xp_to_next_level:
@@ -88,7 +96,7 @@ func show_upgrade_selection() -> void:
 	var upgrade_ui = upgrade_scene.instantiate()
 	get_tree().current_scene.get_node("UI").add_child(upgrade_ui)
 	get_tree().paused = true
-	upgrade_ui.popup(all_upgrades)
+	upgrade_ui.popup(choices)
 	upgrade_ui.upgrade_chosen.connect(Callable(self, "_on_upgrade_chosen"))
 
 func _on_upgrade_chosen(chosen) -> void:

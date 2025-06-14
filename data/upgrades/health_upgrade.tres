@@ -7,5 +7,5 @@ script = ExtResource("1_hl1vc")
 name = "Health"
 description = "+100 hp"
 stat = ""
-values = Array[float]([])
+values = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 max_level = 2
