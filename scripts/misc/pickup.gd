@@ -4,6 +4,7 @@ extends Area2D
 @export var value 		: int
 
 func _ready() -> void:
+	add_to_group("pickup")
 	connect("body_entered", Callable(self, "_on_body_entered"))
 
 func _on_body_entered(body) -> void:

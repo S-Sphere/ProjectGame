@@ -6,6 +6,7 @@
 size = Vector2(31.5, 32)
 
 [node name="Obstacle1" type="StaticBody2D"]
+collision_layer = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_x2507")

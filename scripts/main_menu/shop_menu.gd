@@ -5,10 +5,12 @@ const COST = 1
 const HEALTH_INCR = 100
 const SPEED_INCR = 10
 const DEFENSE_INCR = 2
+const MAGNET_INCR = 50
 
 @onready var speed_btn = $GridContainer/Speed
 @onready var defense_btn = $GridContainer/Defense
 @onready var health_btn = $GridContainer/Health
+@onready var magnet_btn = $GridContainer/Magnet
 @onready var close_btn = $Close
 @onready var coins_label = $VBoxContainer/CoinsLabel
 
@@ -16,6 +18,7 @@ func _ready() -> void:
 	health_btn.pressed.connect(_on_health_pressed)
 	speed_btn.pressed.connect(_on_speed_pressed)
 	defense_btn.pressed.connect(_on_defense_pressed)
+	magnet_btn.pressed.connect(_on_magnet_pressed)
 	close_btn.pressed.connect(_on_close_pressed)
 	
 	GameManager.connect("coins_changed", Callable(self, "_on_coins_changed"))
@@ -26,6 +29,7 @@ func _on_coins_changed(current_coins) -> void:
 	health_btn.disabled = current_coins < COST
 	speed_btn.disabled = current_coins < COST
 	defense_btn.disabled = current_coins < COST
+	magnet_btn.disabled = current_coins < COST
 	
 func _on_health_pressed():
 	_purchase_and_apply("health")
@@ -35,7 +39,10 @@ func _on_speed_pressed():
 	
 func _on_defense_pressed():
 	_purchase_and_apply("defense")
-	
+
+func _on_magnet_pressed() -> void:
+	_purchase_and_apply("magnet")
+
 func _purchase_and_apply(stat):
 	if GameManager.coins < COST:
 		return
@@ -56,6 +63,10 @@ func _purchase_and_apply(stat):
 			if GameManager.player != null:
 				GameManager.player.defense += DEFENSE_INCR
 			stats["defense"] = stats.get("defense", 0) + DEFENSE_INCR
+		"magnet":
+			if GameManager.player != null:
+				GameManager.player.magnet_range += MAGNET_INCR
+			stats["magnet"] = stats.get("magnet", 0) + MAGNET_INCR
 		_:
 			push_warning("Unknown purchase type: %s" % stat)
 	

@@ -60,6 +60,11 @@ layout_mode = 2
 text = "Health Upgrade
 "
 
+[node name="Magnet" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Magnet Upgrade
+"
+
 [node name="Close" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1121.0

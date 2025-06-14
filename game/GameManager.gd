@@ -15,6 +15,7 @@ signal kills_changed(current_kills)
 	preload("res://data/upgrades/health_upgrade.tres"),
 	preload("res://data/upgrades/damage_upgrade.tres"),
 	preload("res://data/upgrades/speed_upgrade.tres"),
+	preload("res://data/upgrades/magnet_upgrade.tres"),
 	preload("res://data/upgrades/radial_weapon.tres"),
 	preload("res://data/upgrades/firebolt_weapon.tres"),
 	preload("res://data/upgrades/lightning_weapon.tres")
@@ -47,6 +48,8 @@ func register_player(player) -> void:
 		player.set("movement_speed", player.get("movement_speed", 0) + stats["speed"])
 	if stats.has("defense"):
 		player.defense += stats["defense"]
+	if stats.has("magnet"):
+		player.magnet_range += stats["magnet"]
 	start_run()
 
 func heal_player(amount) -> void:
@@ -111,6 +114,8 @@ func _apply_upgrade(upgrade, lvl) -> void:
 			player.dmg += amount
 		"speed":
 			player.movement_speed *= (1.0 + amount)
+		"magnet":
+			player.magnet_range += amount
 		"fire_rate":
 			for w in player.weapon_manager.weapons:
 				w.cooldown = max(0.1, w.cooldown - amount)
