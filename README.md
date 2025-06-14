@@ -110,14 +110,11 @@
 
 ## Overall TODO list
 **Code or Godot stuff:**
-3. Implement at least 1 boss and one more enemy type (one that steals player gold)
-4. Add kills, gold, and the upgrades the player currently has on the run to the screen
-5. Add at least one more upgrade and fix/change the existing ones
-6. Make/finish the map implementation so the "obstacles" spawn in different places
-7. Either fix or remove resolution settings
-8. Add music settings
-9. Implement the necessary code so the player can use gold to purchase upgrades between runs
-10. Save file system
+1. Implement at least 1 boss and one more enemy type (one that steals player gold)
+2. Add kills, gold, and the upgrades the player currently has on the run to the screen
+3. Add at least one more upgrade and fix/change the existing ones
+4. Either fix or remove resolution settings
+5. Add music settings
 
 **Sprites and animation stuff:**
 1. Replace all player/enemy sprites with final versions and make the animations
