@@ -11,6 +11,8 @@ signal kills_changed(current_kills)
 # @export var max_run_level = 10
 @export var upgrade_scene: PackedScene = preload("res://scenes/ui/upgrade_seletion.tscn")
 @export var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
+@export var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
+
 @export var all_upgrades: Array[Resource] = [
 	preload("res://data/upgrades/health_upgrade.tres"),
 	preload("res://data/upgrades/damage_upgrade.tres"),
@@ -26,7 +28,7 @@ var level = 1
 var xp_to_next_level = 100
 var player = null
 var coins = 0
-var run_coins
+var run_coins = 0
 # run stats
 var kills = 0
 var start_time = 0
@@ -40,6 +42,27 @@ func format_time(secs) -> String:
 
 func get_run_time_string() -> String:
 	return format_time(get_run_time())
+	
+func get_run_stats():
+	var upgrade_texts = []
+	for key in upgrade_levels.keys():
+		var lvl = upgrade_levels[key]
+		var name = key
+		for upg in all_upgrades:
+			var k = upg.stat
+			if upg.weapon_scene:
+				k += upg.weapon_scene.resource_path
+			if k == key:
+				name = upg.name
+				break
+		upgrade_texts.append("%s Lv %d" % [name, lvl])
+		return {
+			"coins": run_coins,
+			"level": level,
+			"kills": kills,
+			"time": int((Time.get_ticks_msec() - start_time) / 1000.0),
+			"upgrades": upgrade_texts
+		}
 # track upgrades
 var upgrade_levels = {}
 
@@ -55,7 +78,7 @@ func register_player(player) -> void:
 		player.max_health += stats["health"]
 		player.health = player.max_health
 	if stats.has("speed"):
-		player.set("movement_speed", player.get("movement_speed", 0) + stats["speed"])
+		player.movement_speed += stats["speed"]
 	if stats.has("defense"):
 		player.defense += stats["defense"]
 	if stats.has("magnet"):
@@ -142,16 +165,16 @@ func _apply_upgrade(upgrade, lvl) -> void:
 			push_warning("Unknown upgrade type: %s" % upgrade.stat)
 	get_tree().paused = false
 
-
 # coin methods -> persistent -> possibly going to a separate file
 func gain_coins(amount) -> void:
-	coins += amount
 	if player != null and amount > 0:
 		run_coins += amount
 		emit_signal("run_coins_changed", run_coins)
-	emit_signal("coins_changed", coins)
-	SaveManager.data["coins"] = coins
-	SaveManager.save_json()
+	else:
+		coins += amount
+		emit_signal("coins_changed", coins)
+		SaveManager.data["coins"]
+		SaveManager.save_json()
 
 func reset_run_coins() -> void:
 	run_coins = 0
@@ -175,26 +198,25 @@ func end_run() -> void:
 	if ui == null:
 		return
 	
-	var upgrade_texts = []
-	for key in upgrade_levels.keys():
-		var lvl = upgrade_levels[key]
-		var name = key
-		for upg in all_upgrades:
-			var k = upg.stat
-			if upg.weapon_scene:
-				k += upg.weapon_scene.resource_path
-			if k == key:
-				name = upg.name
-				break
-		upgrade_texts.append("%s Lv %d" % [name, lvl])
-	var stats = {
-		"coins": run_coins,
-		"level": level,
-		"kills": kills,
-		"time": int((Time.get_ticks_msec() - start_time) / 1000.0),
-		"upgrades": upgrade_texts
-	}
+	var stats = get_run_stats()
+	coins += run_coins
+	emit_signal("coins_changed", coins)
+	SaveManager.data["coins"] = coins
+	SaveManager.save_json()
 	var end_screen = end_screen_scene.instantiate()
 	ui.add_child(end_screen)
 	get_tree().paused = true
 	end_screen.show_stats(stats)
+
+func show_pause_menu() -> void:
+	var ui = get_tree().current_scene.get_node("UI")
+	if ui == null:
+		return
+	var pause_menu = pause_menu_scene.instantiate()
+	ui.add_child(pause_menu)
+	get_tree().paused = true
+	pause_menu.show_stats(get_run_stats())
+
+func _input(event) -> void:
+	if player != null and event.is_action_pressed("ui_cancel") and not get_tree().paused:
+		show_pause_menu()
