@@ -21,7 +21,7 @@ func _build_floor() -> void:
 	
 	for x in range(int(-map_width/2), int(map_width/2)):
 		for y in range(int(-map_height/2), int(map_height/2)):
-			tm.set_cell(Vector2i(x, y), 0)
+			tm.set_cell(Vector2i(x, y), 0, Vector2i.ZERO)
 
 func _build_walls() -> void:
 	var tm = $TileMap/TileMapLayer2_wall
@@ -29,10 +29,10 @@ func _build_walls() -> void:
 	
 	for x in range(int(-map_width/2) - border_thickness, int(map_width/2) + border_thickness):
 		for off in [-border_thickness, map_height/2]:
-			tm.set_cell(Vector2i(x, -map_height/2 + off), 1)
+			tm.set_cell(Vector2i(x, -map_height/2 + off), 1, Vector2i.ZERO)
 	for y in range(int(-map_height/2) - border_thickness, int(map_height/2) + border_thickness):
 		for off in [-border_thickness, map_width/2]:
-			tm.set_cell(Vector2i(-map_width/2 + off, y), 1)
+			tm.set_cell(Vector2i(-map_width/2 + off, y), 1, Vector2i.ZERO)
 			
 func _scatter_obstacles() -> void:
 	var parent = $Obstacles
