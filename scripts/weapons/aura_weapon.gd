@@ -12,7 +12,7 @@ class_name AuraWeapon
 @onready var _timer: Timer = Timer.new()
 
 var _shape = CircleShape2D
-var level: int = 1 
+var level: int = 1 : set = set_level
 var damage
 var range
  

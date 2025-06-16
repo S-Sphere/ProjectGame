@@ -110,10 +110,11 @@
 
 ## 10/06/2025 - 17/06/2025
 **Done:**
-1. Correção de bugs
-2. Alterações na lógica do jogo
-3. Novo upgrade
-4.  
+1. Refaturação e alterações no código
+2. Correção de bugs
+3. Alterações na lógica do jogo
+4. Novo upgrade
+5. Nova Arma
 
 
 ## Overall TODO list

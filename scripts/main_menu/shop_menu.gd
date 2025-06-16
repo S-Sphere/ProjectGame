@@ -40,10 +40,10 @@ func _on_coins_changed(current_coins) -> void:
 	var defense_lvl = upgrades.get("defense", 0)
 	var magnet_lvl = upgrades.get("magnet", 0)
 	
-	health_btn.disabled = current_coins < UPGRADE_DATA["health"].cost or health_lvl >= MAX_LEVEL
-	speed_btn.disabled = current_coins < UPGRADE_DATA["speed"].cost or speed_lvl >= MAX_LEVEL
-	defense_btn.disabled = current_coins < UPGRADE_DATA["defense"].cost or defense_lvl >= MAX_LEVEL
-	magnet_btn.disabled = current_coins < UPGRADE_DATA["magnet"].cost or magnet_lvl >= MAX_LEVEL
+	health_btn.disabled = current_coins < _next_cost("health", health_lvl) or health_lvl >= MAX_LEVEL
+	speed_btn.disabled = current_coins < _next_cost("speed", speed_lvl) or speed_lvl >= MAX_LEVEL
+	defense_btn.disabled = current_coins < _next_cost("defense", defense_lvl) or defense_lvl >= MAX_LEVEL
+	magnet_btn.disabled = current_coins < _next_cost("magnet", magnet_lvl) or magnet_lvl >= MAX_LEVEL
 	
 func _on_health_pressed():
 	_purchase_and_apply("health")
@@ -62,7 +62,7 @@ func _purchase_and_apply(stat):
 	var lvl = upgrades.get(stat, 0)
 	if lvl >= MAX_LEVEL:
 		return
-	var cost = UPGRADE_DATA[stat].cost
+	var cost = _next_cost(stat, lvl)
 	if GameManager.coins < cost:
 		return
 	GameManager.gain_coins(-cost)
@@ -106,7 +106,10 @@ func _update_button_texts() -> void:
 	var d_lvl = upgrades.get("defense", 0)
 	var m_lvl = upgrades.get("magnet", 0)
 	
-	health_btn.text = "Health Lv %d (Cost %d)" % [h_lvl, UPGRADE_DATA["health"].cost]
-	speed_btn.text = "Speed Lv %d (Cost %d)" % [s_lvl, UPGRADE_DATA["speed"].cost]
-	defense_btn.text = "Defense Lv %d (Cost %d)" % [d_lvl, UPGRADE_DATA["defense"].cost]
-	magnet_btn.text = "Magnet Lv %d (Cost %d)" % [m_lvl, UPGRADE_DATA["magnet"].cost]
+	health_btn.text = "Health Lv %d (Cost %d)" % [h_lvl, _next_cost("health", h_lvl)]
+	speed_btn.text = "Speed Lv %d (Cost %d)" % [s_lvl, _next_cost("speed", s_lvl)]
+	defense_btn.text = "Defense Lv %d (Cost %d)" % [d_lvl, _next_cost("defense", d_lvl)]
+	magnet_btn.text = "Magnet Lv %d (Cost %d)" % [m_lvl, _next_cost("magnet", m_lvl)]
+
+func _next_cost(stat, lvl) -> int:
+	return UPGRADE_DATA[stat].cost * (lvl + 1)

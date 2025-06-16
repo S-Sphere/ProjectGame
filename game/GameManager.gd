@@ -174,7 +174,7 @@ func gain_coins(amount) -> void:
 	else:
 		coins += amount
 		emit_signal("coins_changed", coins)
-		SaveManager.data["coins"]
+		SaveManager.data["coins"] = coins
 		SaveManager.save_json()
 
 func reset_run_coins() -> void:
