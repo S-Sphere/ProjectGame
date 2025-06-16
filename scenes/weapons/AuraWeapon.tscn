@@ -6,11 +6,6 @@
 
 [node name="AuraWeapon" type="Area2D"]
 script = ExtResource("1_uvhwc")
-base_radius = null
-radius_per_level = null
-base_damage = null
-damage_per_level = null
-tick_rate = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uvhwc")

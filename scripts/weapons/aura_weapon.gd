@@ -6,14 +6,19 @@ class_name AuraWeapon
 @export var base_damage = 5
 @export var damage_per_level = 5
 @export var tick_rate = 0.5
+@export var attack_origin: Vector2 = Vector2.ZERO
 
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var _timer: Timer = Timer.new()
 
+var _shape = CircleShape2D
 var level: int = 1 
+var damage
+var range
  
 func _ready() -> void:
 	add_to_group("origin_weapon")
+	_shape = collision_shape_2d.shape as CircleShape2D
 	add_child(_timer)
 	_timer.wait_time = tick_rate
 	_timer.one_shot = false
@@ -33,17 +38,14 @@ func update_stats() -> void:
 	var r = base_radius + radius_per_level * (level - 1)
 	damage = base_damage + damage_per_level * (level - 1)
 	range = r
-	_shape.radius = r
-	update()
+	if _shape:
+		_shape.radius = r
+	queue_redraw()
 	
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, _shape.radius, Color(1,0,0,0.4))
 	
 func _on_tick() -> void:
-	for body in _area.get_overlapping_bodies():
+	for body in get_overlapping_bodies():
 		if body.is_in_group("enemy") and body.has_method("take_damage"):
 			body.take_damage(damage)
-	
-	
-	
-	

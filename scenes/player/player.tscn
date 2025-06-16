@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bc7v7fcdwivjl" path="res://scripts/player/player.gd" id="1_670gd"]
 [ext_resource type="Texture2D" uid="uid://bs2br5wmhbtcv" path="res://assets/sprites/player/catmask-sheet.png" id="1_a1igl"]
-[ext_resource type="Resource" uid="uid://jwj3x21p56vo" path="res://data/upgrades/firebolt_weapon.tres" id="2_b4qws"]
+[ext_resource type="Resource" uid="uid://cyvovggwqjkwf" path="res://data/upgrades/aura_weapon.tres" id="2_lvxji"]
 [ext_resource type="PackedScene" uid="uid://d27dhvn7oyjk3" path="res://scenes/ui/HealthBar.tscn" id="4_nfrdk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ugh1f"]
@@ -13,7 +13,7 @@ height = 38.0
 collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_670gd")
-starting_upgrade = ExtResource("2_b4qws")
+starting_upgrade = ExtResource("2_lvxji")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3.8147e-06, 3.8147e-06)
