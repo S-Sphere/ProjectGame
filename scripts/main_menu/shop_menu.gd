@@ -6,6 +6,13 @@ const HEALTH_INCR = 100
 const SPEED_INCR = 10
 const DEFENSE_INCR = 2
 const MAGNET_INCR = 50
+const MAX_LEVEL = 10
+const UPGRADE_DATA = {
+	"health"  : {"cost" : 10, "incr" : 100},
+	"speed"   : {"cost" : 10, "incr" : 10},
+	"defense" : {"cost" : 10, "incr" : 2},
+	"magnet"  : {"cost" : 10, "incr" : 20},
+} 
 
 @onready var speed_btn = $GridContainer/Speed
 @onready var defense_btn = $GridContainer/Defense
@@ -22,14 +29,21 @@ func _ready() -> void:
 	close_btn.pressed.connect(_on_close_pressed)
 	
 	GameManager.connect("coins_changed", Callable(self, "_on_coins_changed"))
+	_update_button_texts()
 	_on_coins_changed(GameManager.coins)
 
 func _on_coins_changed(current_coins) -> void:
 	coins_label.text = "Coins: %d" % current_coins
-	health_btn.disabled = current_coins < COST
-	speed_btn.disabled = current_coins < COST
-	defense_btn.disabled = current_coins < COST
-	magnet_btn.disabled = current_coins < COST
+	var upgrades = SaveManager.data.get("upgrades", {})
+	var health_lvl = upgrades.get("health", 0)
+	var speed_lvl = upgrades.get("speed", 0)
+	var defense_lvl = upgrades.get("defense", 0)
+	var magnet_lvl = upgrades.get("magnet", 0)
+	
+	health_btn.disabled = current_coins < UPGRADE_DATA["health"].cost or health_lvl >= MAX_LEVEL
+	speed_btn.disabled = current_coins < UPGRADE_DATA["speed"].cost or speed_lvl >= MAX_LEVEL
+	defense_btn.disabled = current_coins < UPGRADE_DATA["defense"].cost or defense_lvl >= MAX_LEVEL
+	magnet_btn.disabled = current_coins < UPGRADE_DATA["magnet"].cost or magnet_lvl >= MAX_LEVEL
 	
 func _on_health_pressed():
 	_purchase_and_apply("health")
@@ -44,34 +58,55 @@ func _on_magnet_pressed() -> void:
 	_purchase_and_apply("magnet")
 
 func _purchase_and_apply(stat):
-	if GameManager.coins < COST:
+	var upgrades = SaveManager.data.get("upgrades", {})
+	var lvl = upgrades.get(stat, 0)
+	if lvl >= MAX_LEVEL:
 		return
-	GameManager.gain_coins(-COST)
+	var cost = UPGRADE_DATA[stat].cost
+	if GameManager.coins < cost:
+		return
+	GameManager.gain_coins(-cost)
 	
+	lvl += 1
+	upgrades[stat] = lvl
 	var stats = SaveManager.data.get("player_stats", {})
 	match stat:
 		"health":
 			if GameManager.player != null:
-				GameManager.player.max_health += HEALTH_INCR
+				GameManager.player.max_health += UPGRADE_DATA["health"].incr
 				GameManager.player.health = GameManager.player.max_health
-			stats["health"] = stats.get("health", 0) + HEALTH_INCR
+			stats["health"] = stats.get("health", 0) + UPGRADE_DATA["health"].incr
 		"speed":
 			if GameManager.player != null:
-				GameManager.player.speed += SPEED_INCR
-			stats["speed"] = stats.get("speed", 0) + SPEED_INCR
+				GameManager.player.movement_speed += UPGRADE_DATA["speed"].incr
+			stats["speed"] = stats.get("speed", 0) + UPGRADE_DATA["speed"].incr
 		"defense":
 			if GameManager.player != null:
-				GameManager.player.defense += DEFENSE_INCR
-			stats["defense"] = stats.get("defense", 0) + DEFENSE_INCR
+				GameManager.player.defense += UPGRADE_DATA["defense"].incr
+			stats["defense"] = stats.get("defense", 0) + UPGRADE_DATA["defense"].incr
 		"magnet":
 			if GameManager.player != null:
-				GameManager.player.magnet_range += MAGNET_INCR
-			stats["magnet"] = stats.get("magnet", 0) + MAGNET_INCR
+				GameManager.player.magnet_range += UPGRADE_DATA["magnet"].incr
+			stats["magnet"] = stats.get("magnet", 0) + UPGRADE_DATA["magnet"].incr
 		_:
 			push_warning("Unknown purchase type: %s" % stat)
 	
 	SaveManager.data["player_stats"] = stats
+	SaveManager.data["upgrades"] = upgrades
 	SaveManager.save_json()
+	_update_button_texts()
 	
 func _on_close_pressed():
 	queue_free()
+
+func _update_button_texts() -> void:
+	var upgrades = SaveManager.data.get("upgrades", {})
+	var h_lvl = upgrades.get("health", 0)
+	var s_lvl = upgrades.get("speed", 0)
+	var d_lvl = upgrades.get("defense", 0)
+	var m_lvl = upgrades.get("magnet", 0)
+	
+	health_btn.text = "Health Lv %d (Cost %d)" % [h_lvl, UPGRADE_DATA["health"].cost]
+	speed_btn.text = "Speed Lv %d (Cost %d)" % [s_lvl, UPGRADE_DATA["speed"].cost]
+	defense_btn.text = "Defense Lv %d (Cost %d)" % [d_lvl, UPGRADE_DATA["defense"].cost]
+	magnet_btn.text = "Magnet Lv %d (Cost %d)" % [m_lvl, UPGRADE_DATA["magnet"].cost]

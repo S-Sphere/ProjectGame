@@ -24,7 +24,7 @@ SaveManager="*res://game/SaveManager.gd"
 
 window/size/viewport_width=1260
 window/size/viewport_height=600
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [editor]
 

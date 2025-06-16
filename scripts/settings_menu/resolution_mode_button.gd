@@ -20,7 +20,10 @@ func add_resolution_items() -> void:
 		option_button.add_item(resolution_size)
 
 func current_resolution() -> void:
-	pass
+	var current_size = DisplayServer.window_get_size()
+	var index = RESOLUTION_DICT.values().find(current_size)
+	if index != -1:
+		option_button.select(index)
 
 func centre_window() -> void:
 	var centre_screen = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2
@@ -28,13 +31,6 @@ func centre_window() -> void:
 	get_window().set_position(centre_screen - window_size/2)
 
 func on_resolution_selected(index : int) -> void:
-	match index:
-		0: # 1152 x 648
-			DisplayServer.window_set_size(RESOLUTION_DICT.values()[index])
-			centre_window()
-		1: # 1280 x 720
-			DisplayServer.window_set_size(RESOLUTION_DICT.values()[index])
-			centre_window()
-		2: # 1920 x 1080
-			DisplayServer.window_set_size(RESOLUTION_DICT.values()[index])
-			centre_window()
+	var resolution = RESOLUTION_DICT.values()[index]
+	DisplayServer.window_set_size(resolution)
+	centre_window()
