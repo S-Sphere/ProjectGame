@@ -20,7 +20,8 @@ signal kills_changed(current_kills)
 	preload("res://data/upgrades/magnet_upgrade.tres"),
 	preload("res://data/upgrades/radial_weapon.tres"),
 	preload("res://data/upgrades/firebolt_weapon.tres"),
-	preload("res://data/upgrades/lightning_weapon.tres")
+	preload("res://data/upgrades/lightning_weapon.tres"),
+	preload("res://data/upgrades/aura_weapon.tres")
 ]
 # Variables =============================================
 var xp = 0

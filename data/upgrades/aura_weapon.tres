@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://cyvovggwqjkwf"]
+
+[ext_resource type="Script" uid="uid://btkowvvw312h2" path="res://scripts/upgrades/upgrade.gd" id="1_duekk"]
+
+[resource]
+script = ExtResource("1_duekk")
+name = "Aura"
+description = "Damages enemies around the player"
+stat = "weapon"
+values = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+max_level = 5
+metadata/_custom_type_script = "uid://btkowvvw312h2"
