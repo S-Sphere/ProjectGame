@@ -37,8 +37,13 @@ func _ready() -> void:
 	_warning_timer = Timer.new()
 	_warning_timer.wait_time = warning_time
 	_warning_timer.one_shot = true
-	add_child(_charge_timer)
+	add_child(_warning_timer)
 	_warning_timer.timeout.connect(_end_charge)
+	
+	_charge_timer = Timer.new()
+	_charge_timer.one_shot = true
+	add_child(_charge_timer)
+	_charge_timer.timeout.connect(_end_charge)
 
 func _physics_process(delta):
 	match state:
@@ -51,7 +56,7 @@ func _physics_process(delta):
 
 func _chase_player(_delta) -> void:
 	if player and is_instance_valid(player):
-		var direction = global_position.direction_to(player.global_direction)
+		var direction = global_position.direction_to(player.global_position)
 		velocity = direction * movement_speed
 		move_and_slide()
 
