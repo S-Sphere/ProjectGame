@@ -26,6 +26,7 @@ var _charge_dir = Vector2.ZERO
 var _charge_target = Vector2.ZERO
 
 func _ready() -> void:
+	add_to_group("enemy")
 	max_health = 200
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
