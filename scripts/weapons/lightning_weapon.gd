@@ -7,6 +7,7 @@ class_name LightningWeapon
 @export var radius 		 	: float = 500.0
 @export var lightning_scene : PackedScene
 @export var attack_origin	: Vector2
+var level = 1
 var _timer: Timer
 
 func _ready() -> void:

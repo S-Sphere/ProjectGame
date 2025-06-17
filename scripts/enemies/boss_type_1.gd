@@ -17,7 +17,9 @@ var state = State.CHASE
 var _cooldown_timer: Timer
 var _warning_timer: Timer
 var _charge_timer: Timer
+@onready var _col_shape = $CollisionShape2D
 
+var _player_col_shape 
 var player
 var _charge_dir = Vector2.ZERO
 var _charge_target = Vector2.ZERO
@@ -26,6 +28,8 @@ func _ready() -> void:
 	max_health = 200
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
+	if player and player.has_node("CollisionShape2D"):
+		_player_col_shape = player.get_node("CollisionShape2D")
 	
 	_cooldown_timer = Timer.new()
 	_cooldown_timer.wait_time = time_between_charges
@@ -38,7 +42,7 @@ func _ready() -> void:
 	_warning_timer.wait_time = warning_time
 	_warning_timer.one_shot = true
 	add_child(_warning_timer)
-	_warning_timer.timeout.connect(_end_charge)
+	_warning_timer.timeout.connect(_start_charge)
 	
 	_charge_timer = Timer.new()
 	_charge_timer.one_shot = true
@@ -70,6 +74,7 @@ func _on_cooldown_timeout() -> void:
 
 func _start_charge() -> void:
 	state = State.CHARGE
+	queue_redraw()
 	var dist = global_position.distance_to(_charge_target)
 	if dist <= 0:
 		dist = 1

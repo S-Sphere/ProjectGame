@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://bburjcda3wha4" path="res://scripts/enemies/boss_type_1.gd" id="1_fhom7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhom7"]
-size = Vector2(80, 183)
+size = Vector2(53, 183)
 
 [node name="BossType1" type="CharacterBody2D"]
+position = Vector2(-67, -101)
 script = ExtResource("1_fhom7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,5 +17,5 @@ texture = ExtResource("1_6cktl")
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(67, 101)
+position = Vector2(60.5, 101)
 shape = SubResource("RectangleShape2D_fhom7")
