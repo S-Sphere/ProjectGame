@@ -6,8 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhom7"]
 size = Vector2(53, 183)
 
-[node name="BossType1" type="CharacterBody2D"]
-position = Vector2(-67, -101)
+[node name="BossType1" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(-61, -101)
+collision_layer = 4
+collision_mask = 6
 script = ExtResource("1_fhom7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
