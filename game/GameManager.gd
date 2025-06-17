@@ -23,7 +23,7 @@ signal kills_changed(current_kills)
 	preload("res://data/upgrades/lightning_weapon.tres"),
 	preload("res://data/upgrades/aura_weapon.tres")
 ]
-@export var time_limit_sec = 10 # 15 minutes
+@export var time_limit_sec = 120 # 15 minutes -> 900
 # Variables =============================================
 var xp = 0
 var level = 1
@@ -125,7 +125,14 @@ func show_upgrade_selection() -> void:
 		return
 	
 	var upgrade_ui = upgrade_scene.instantiate()
-	get_tree().current_scene.get_node("UI").add_child(upgrade_ui)
+	var scene = get_tree().current_scene
+	if scene == null:
+		return
+	var ui = scene.get_node_or_null("UI")
+	if ui == null:
+		return
+	
+	ui.add_child(upgrade_ui)
 	get_tree().paused = true
 	upgrade_ui.popup(choices)
 	upgrade_ui.upgrade_chosen.connect(Callable(self, "_on_upgrade_chosen"))
@@ -202,7 +209,10 @@ func incr_kills(amount = 1) -> void:
 	emit_signal("kills_changed, kills")
 
 func end_run() -> void:
-	var ui = get_tree().current_scene.get_node("UI")
+	var scene = get_tree().current_scene
+	if scene == null:
+		return
+	var ui = scene.get_node_or_null("UI")
 	if ui == null:
 		return
 	
@@ -217,7 +227,10 @@ func end_run() -> void:
 	end_screen.show_stats(stats)
 
 func show_pause_menu() -> void:
-	var ui = get_tree().current_scene.get_node("UI")
+	var scene = get_tree().current_scene
+	if scene == null:
+		return
+	var ui = scene.get_node_or_null("UI")
 	if ui == null:
 		return
 	var pause_menu = pause_menu_scene.instantiate()
