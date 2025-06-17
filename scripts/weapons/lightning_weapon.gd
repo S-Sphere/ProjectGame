@@ -43,4 +43,6 @@ func _fire_strike() -> void:
 	var bolt = lightning_scene.instantiate()
 	# PASS THE NODE REFERENCE so the bolt can read it
 	bolt.target = target
+	if GameManager.player != null:
+		bolt.damage += GameManager.player.dmg
 	get_tree().current_scene.add_child(bolt)

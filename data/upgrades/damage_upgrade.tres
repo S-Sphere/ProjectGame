@@ -6,6 +6,6 @@
 script = ExtResource("1_ku6x8")
 name = "Damage"
 description = "+ 10 dmg"
-stat = ""
+stat = "damage"
 values = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0])
 max_level = 10

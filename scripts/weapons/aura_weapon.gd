@@ -37,6 +37,8 @@ func set_level(value) -> void:
 func update_stats() -> void:
 	var r = base_radius + radius_per_level * (level - 1)
 	damage = base_damage + damage_per_level * (level - 1)
+	if GameManager.player != null:
+		damage += GameManager.player.dmg
 	range = r
 	if _shape:
 		_shape.radius = r

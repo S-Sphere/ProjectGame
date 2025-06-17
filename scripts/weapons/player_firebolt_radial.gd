@@ -27,4 +27,8 @@ func fire() -> void:
 		p.is_homing = false
 		p.direction  = dir
 		p.global_position = attack_origin
+		if GameManager.player != null:
+			p.dmg = damage + GameManager.player.dmg
+		else:
+			p.dmg = damage
 		get_tree().current_scene.add_child(p)

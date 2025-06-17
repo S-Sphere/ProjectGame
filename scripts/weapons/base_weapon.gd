@@ -57,6 +57,8 @@ func _spawn_projectile_toward(enemy, is_double_shot, increase_damage):
 	proj.is_homing = true
 	proj.global_position = attack_origin
 	proj.target = enemy
+	if GameManager.player != null:
+		proj.dmg += GameManager.player.dmg
 	
 	if increase_damage:
 		proj.dmg = int(proj.dmg * 1.5)

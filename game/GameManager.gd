@@ -59,13 +59,13 @@ func get_run_stats():
 				name = upg.name
 				break
 		upgrade_texts.append("%s Lv %d" % [name, lvl])
-		return {
-			"coins": run_coins,
-			"level": level,
-			"kills": kills,
-			"time": int((Time.get_ticks_msec() - start_time) / 1000.0),
-			"upgrades": upgrade_texts
-		}
+	return {
+		"coins": run_coins,
+		"level": level,
+		"kills": kills,
+		"time": int((Time.get_ticks_msec() - start_time) / 1000.0),
+		"upgrades": upgrade_texts
+	}
 # track upgrades
 var upgrade_levels = {}
 

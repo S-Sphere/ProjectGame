@@ -12,7 +12,8 @@ func _ready() -> void:
 	if not target or not is_instance_valid(target):
 		queue_free()
 		return
-
+	if GameManager.player != null:
+		damage += GameManager.player.dmg
 	# start well above the target
 	global_position = target.global_position + Vector2(0, -spawn_height)
 
