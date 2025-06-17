@@ -23,6 +23,7 @@ signal kills_changed(current_kills)
 	preload("res://data/upgrades/lightning_weapon.tres"),
 	preload("res://data/upgrades/aura_weapon.tres")
 ]
+@export var time_limit_sec = 10 # 15 minutes
 # Variables =============================================
 var xp = 0
 var level = 1
@@ -33,6 +34,7 @@ var run_coins = 0
 # run stats
 var kills = 0
 var start_time = 0
+
 func get_run_time() -> int:
 	return int((Time.get_ticks_msec() - start_time) / 1000.0)
 
@@ -71,6 +73,11 @@ func _ready() -> void:
 	SaveManager.load_json()
 	coins = int(SaveManager.data.get("coins", 0))
 	emit_signal("coins_changed", coins)
+	set_process(true)
+
+func _process(delta) -> void:
+	if player != null and get_run_time() >= time_limit_sec:
+		end_run()
 
 func register_player(player) -> void:
 	self.player = player
