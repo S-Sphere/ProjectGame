@@ -77,15 +77,20 @@ func _build_walls() -> void:
 		for x in range(int(-radius - border_thickness), int(radius + border_thickness)):
 			for y in range(int(-radius - border_thickness), int(radius + border_thickness)):
 				var dist = Vector2(x + 0.5, y + 0.5).length()
-				if dist > radius and dist <= radius + border_thickness:
+				if dist >= radius and dist < radius + border_thickness:
 					tm.set_cell(Vector2i(x, y), 1, Vector2i.ZERO)
 	else:
-		for x in range(int(-map_width/2) - border_thickness, int(map_width/2) + border_thickness):
-			for off in [-border_thickness, map_height/2]:
-				tm.set_cell(Vector2i(x, -map_height/2 + off), 1, Vector2i.ZERO)
-		for y in range(int(-map_height/2) - border_thickness, int(map_height/2) + border_thickness):
-			for off in [-border_thickness, map_width/2]:
-				tm.set_cell(Vector2i(-map_width/2 + off, y), 1, Vector2i.ZERO)
+		var x_min = int(-map_width / 2)
+		var x_max = int(map_width / 2) - 1
+		var y_min = int(-map_height / 2)
+		var y_max = int(map_height / 2) - 1
+		for i in range(1, border_thickness + 1):
+			for x in range(x_min - i, x_max + i + 1):
+				tm.set_cell(Vector2i(x, y_min - i), 1, Vector2i.ZERO)
+				tm.set_cell(Vector2i(x, y_max + i), 1, Vector2i.ZERO)
+			for y in range(y_min - i, y_max + i + 1):
+				tm.set_cell(Vector2i(x_min - i, y), 1, Vector2i.ZERO)
+				tm.set_cell(Vector2i(x_max + i, y), 1, Vector2i.ZERO)
 
 func _scatter_obstacles() -> void:
 	"""
