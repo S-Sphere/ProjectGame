@@ -129,4 +129,43 @@ func _scatter_obstacles() -> void:
 		parent.add_child(obs)
 		placed += 1
 		
+func _tile_in_bounds(tile) -> bool:
+	if tile.x < int(-map_width/2) + border_thickness or tile.x > int(map_width/2) - border_thickness:
+		return false
+	if tile.y < int(-map_height/2) + border_thickness or tile.y > int(map_height/2) - border_thickness:
+		return false
+	if shape == MapShape.CIRCLE:
+		var radius = min(map_width, map_height) / 2.0 - border_thickness
+		if Vector2(tile.x + 0.5, tile.y + 0.5).length() > radius:
+			return false
+	return true
+
+func clamp_position_to_map(pos) -> Vector2:
+	var tm = $TileMap/TileMapLayer_floor
+	var map_pos = tm.local_to_map(to_local(pos))
+	if not _tile_in_bounds(map_pos):
+		var x_min = int(-map_width / 2) + border_thickness
+		var x_max = int(map_width / 2) - border_thickness
+		var y_min = int(-map_height / 2) + border_thickness
+		var y_max = int(map_height / 2) - border_thickness
 		
+		map_pos.x = clamp(map_pos.x, x_min, x_max)
+		map_pos.y = clamp(map_pos.x, y_min, y_max)
+		
+		if shape == MapShape.CIRCLE:
+			var radius = min(map_width, map_height) / 2.0 - border_thickness
+			var vec = Vector2(map_pos.x + 0.5, map_pos.y + 0.5)
+			if vec.length() > radius:
+				vec = vec.normalized() * radius
+				map_pos = Vector2i(int(floor(vec.x)), int(floor(vec.y)))
+	return tm.map_to_local(map_pos) + tm.tile_set.tile_size * 0.5
+
+func get_random_spawn_position():
+	var tm = $TileMap/TileMapLayer_floor
+	var tile_size = tm.tile_set.tile_size
+	while true:
+		var x = rng.randi_range(int(-map_width/2) + border_thickness, int(map_width/2) - border_thickness)
+		var y = rng.randi_range(int(-map_height/2) + border_thickness, int(map_height/2) - border_thickness)
+		var tile = Vector2i(x, y)
+		if _tile_in_bounds(tile):
+			return tm.map_to_local(tile) + tile_size * 0.5

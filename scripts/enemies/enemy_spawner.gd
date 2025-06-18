@@ -3,7 +3,7 @@ extends Node2D
 @export var spawns: Array[SpawnInfo] = []
 
 @onready var player = get_tree().get_first_node_in_group("player")
-
+@onready var map_generator = get_parent().get_node("MapGenerator")
 var time = 0
 
 
@@ -51,4 +51,5 @@ func get_random_position():
 	
 	var x_spawn = randf_range(spawn_pos1.x, spawn_pos2.x)
 	var y_spawn = randf_range(spawn_pos1.y, spawn_pos2.y)
-	return Vector2(x_spawn, y_spawn)
+	var pos = Vector2(x_spawn, y_spawn)
+	return map_generator.clamp_position_to_map(pos)
