@@ -26,8 +26,6 @@ sources/1 = SubResource("TileSetAtlasSource_sasw2")
 
 [node name="MapGenerator" type="Node2D"]
 script = ExtResource("1_m7lcy")
-map_width = 450
-map_height = 450
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_kb4gc")

@@ -115,18 +115,19 @@
 3. Alterações na lógica do jogo
 4. Novo upgrade
 5. Nova Arma
+6. Boss feito (não funciona ainda como quero)
 
 
 ## Overall TODO list
 **Code or Godot stuff:**
-1. Implement at least 1 boss and one more enemy type (one that steals player gold)
-2. Add kills, gold, and the upgrades the player currently has on the run to the screen
-3. Add at least one more upgrade and fix/change the existing ones
-4. Either fix or remove resolution settings
-5. Add music settings
+1. Implement one more enemy type (one that steals player gold)
+2. Add kills, gold, and the upgrades the player currently has on the run to the screen 	---------> kinda done with end/pause screen
+3. Add at least one more upgrade and fix/change the existing ones			---------> done, just here as a reminder to recheck again 
+4. Either fix or remove resolution settings						---------> also already kinda done
+5. Add music settings									---------> doing if i manage to find a good background music for the game
 
 **Sprites and animation stuff:**
 1. Replace all player/enemy sprites with final versions and make the animations
 2. Get the environment sprites
-3. Get sounds for player attacks, hits, and maybe background music
+3. Get sounds for player attacks, hits, and maybe background music			---------> yep. at least background music
 4. Make things (scenes/UI) actually look nice
