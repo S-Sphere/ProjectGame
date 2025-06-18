@@ -17,6 +17,7 @@ func _ready() -> void:
 	_select_shape()
 	_build_floor()
 	_build_walls()
+	_create_wall_colliders()
 	_scatter_obstacles()
 
 func _select_shape() -> void:
@@ -91,6 +92,27 @@ func _build_walls() -> void:
 			for y in range(y_min - i, y_max + i + 1):
 				tm.set_cell(Vector2i(x_min - i, y), 1, Vector2i.ZERO)
 				tm.set_cell(Vector2i(x_max + i, y), 1, Vector2i.ZERO)
+
+func _create_wall_colliders() -> void:
+	var parent = get_node_or_null("WallColliders")
+	if parent == null:
+		push_warning("WallColliders node missing")
+		return
+	for child in parent.get_children():
+		child.queue_free()
+	var tm = $TileMap/TileMapLayer2_wall
+	var tile_size = tm.tile_set.tile_size
+	for cell in tm.get_used_cells():
+		var body = StaticBody2D.new()
+		body.collision_layer = 16
+		body.collision_mask = 5
+		var shape = RectangleShape2D.new()
+		shape.size = tile_size
+		var collider = CollisionShape2D.new()
+		collider.shape = shape
+		body.position = tm.map_to_local(cell) + tile_size * 0.5
+		body.add_child(collider)
+		parent.add_child(body)
 
 func _scatter_obstacles() -> void:
 	"""
