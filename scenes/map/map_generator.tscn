@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://croy1dus2x7ll"]
+[gd_scene load_steps=6 format=3 uid="uid://croy1dus2x7ll"]
 
 [ext_resource type="Script" uid="uid://bc1k23nt23etc" path="res://scripts/map/map_generator.gd" id="1_m7lcy"]
-[ext_resource type="Texture2D" uid="uid://eu1ycu7elrdw" path="res://assets/sprites/background/Wall.png" id="2_cpxty"]
 [ext_resource type="Texture2D" uid="uid://c8fy1fgj3eel8" path="res://assets/sprites/background/Tile.png" id="2_ggx46"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47037"]
@@ -14,7 +13,6 @@ texture = ExtResource("2_ggx46")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sasw2"]
 resource_name = "wall"
-texture = ExtResource("2_cpxty")
 0:0/0 = 0
 1:1/0 = 0
 1:0/0 = 0
@@ -40,3 +38,5 @@ tile_set = SubResource("TileSet_kb4gc")
 tile_set = SubResource("TileSet_kb4gc")
 
 [node name="Obstacles" type="Node2D" parent="."]
+
+[node name="WallColliders" type="Node2D" parent="."]
