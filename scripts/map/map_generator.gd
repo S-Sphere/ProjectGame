@@ -9,6 +9,7 @@ enum MapShape {SQUARE, CIRCLE, VERTICAL_CORRIDOR, HORIZONTAL_CORRIDOR}
 var shape : MapShape
 @export var obstacle_scenes = []
 @export var obstacle_count = 50
+var obstacle_tiles = []
 
 var rng := RandomNumberGenerator.new()
 
@@ -140,6 +141,9 @@ func _scatter_obstacles() -> void:
 		attempts += 1
 		var x = rng.randi_range(int(-map_width/2) + border_thickness, int(map_width/2) - border_thickness)
 		var y = rng.randi_range(int(-map_height/2) + border_thickness, int(map_height/2) - border_thickness)
+		var tile = Vector2i(x, y)
+		if obstacle_tiles.has(tile):
+			continue
 		if shape == MapShape.CIRCLE:
 			var radius = min(map_width, map_height) / 2.0 - border_thickness
 			if Vector2(x + 0.5, y + 0.5).length() > radius:
@@ -161,6 +165,14 @@ func _tile_in_bounds(tile) -> bool:
 		if Vector2(tile.x + 0.5, tile.y + 0.5).length() > radius:
 			return false
 	return true
+
+func is_tile_free(tile) -> bool:
+	return not obstacle_tiles.has(tile)
+
+func is_position_free(pos) -> bool:
+	var tm = $TileMap/TileMapLayer_floor
+	var tile = tm.local_to_map(to_local(pos))
+	return is_tile_free(tile)
 
 func clamp_position_to_map(pos) -> Vector2:
 	var tm = $TileMap/TileMapLayer_floor
@@ -189,5 +201,5 @@ func get_random_spawn_position():
 		var x = rng.randi_range(int(-map_width/2) + border_thickness, int(map_width/2) - border_thickness)
 		var y = rng.randi_range(int(-map_height/2) + border_thickness, int(map_height/2) - border_thickness)
 		var tile = Vector2i(x, y)
-		if _tile_in_bounds(tile):
+		if _tile_in_bounds(tile) and not obstacle_tiles.has(tile):
 			return tm.map_to_local(tile) + tile_size * 0.5

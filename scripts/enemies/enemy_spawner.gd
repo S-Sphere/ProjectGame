@@ -49,7 +49,12 @@ func get_random_position():
 			spawn_pos1 = top_right
 			spawn_pos2 = bottom_right
 	
-	var x_spawn = randf_range(spawn_pos1.x, spawn_pos2.x)
-	var y_spawn = randf_range(spawn_pos1.y, spawn_pos2.y)
-	var pos = Vector2(x_spawn, y_spawn)
-	return map_generator.clamp_position_to_map(pos)
+	var attempt = 0
+	while attempt < 10:
+		var x_spawn = randf_range(spawn_pos1.x, spawn_pos2.x)
+		var y_spawn = randf_range(spawn_pos1.y, spawn_pos2.y)
+		var pos = Vector2(x_spawn, y_spawn)
+		if map_generator.is_position_free(pos):
+			return pos
+		attempt += 1
+	return map_generator.get_random_spawn_position()
