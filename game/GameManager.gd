@@ -34,6 +34,8 @@ var run_coins = 0
 # run stats
 var kills = 0
 var start_time = 0
+var pending_level_ups = 0
+var upgrade_menu_open = false
 
 func get_run_time() -> int:
 	return int((Time.get_ticks_msec() - start_time) / 1000.0)
@@ -101,15 +103,14 @@ func heal_player(amount) -> void:
 func gain_experience(amount) -> void:
 	xp += amount
 	emit_signal("xp_changed", xp, xp_to_next_level) #for the bar
-	if xp >= xp_to_next_level:
-		level_up()
-	
-func level_up() -> void:
-	level += 1
-	xp -= xp_to_next_level
-	xp_to_next_level = int(xp_to_next_level) * 1.2
-	emit_signal("xp_changed", xp, xp_to_next_level) #for the bar
-	show_upgrade_selection() # to shwo updates
+	while xp >= xp_to_next_level:
+		level += 1
+		xp -= xp_to_next_level
+		xp_to_next_level = int(xp_to_next_level) * 1.2
+		pending_level_ups += 1
+		emit_signal("xp_changed", xp, xp_to_next_level) #for the bar
+	if not upgrade_menu_open and pending_level_ups > 0:
+		show_upgrade_selection()
 	
 func show_upgrade_selection() -> void:
 	var choices = []
@@ -132,6 +133,7 @@ func show_upgrade_selection() -> void:
 	if ui == null:
 		return
 	
+	upgrade_menu_open = true
 	ui.add_child(upgrade_ui)
 	get_tree().paused = true
 	upgrade_ui.popup(choices)
@@ -148,7 +150,10 @@ func _on_upgrade_chosen(chosen) -> void:
 	upgrade_levels[key] = lvl
 	print("   → New level for", chosen.name, "=", lvl)
 	_apply_upgrade(chosen, lvl)
+	pending_level_ups = max(pending_level_ups - 1, 0)
+	upgrade_menu_open = false
 	get_tree().paused = false
+	call_deferred("_show_next_queued_upgrade")
 
 func _apply_upgrade(upgrade, lvl) -> void:
 	print("⚙️ Applying upgrade:", upgrade.name, "level", lvl)
@@ -180,6 +185,10 @@ func _apply_upgrade(upgrade, lvl) -> void:
 			push_warning("Unknown upgrade type: %s" % upgrade.stat)
 	get_tree().paused = false
 
+func _show_next_queued_upgrade() -> void:
+	if pending_level_ups > 0:
+		show_upgrade_selection()
+
 # coin methods -> persistent -> possibly going to a separate file
 func gain_coins(amount) -> void:
 	if player != null and amount > 0:
@@ -202,6 +211,8 @@ func start_run() -> void:
 	xp = 0
 	level = 0
 	xp_to_next_level = 100
+	pending_level_ups = 0
+	upgrade_menu_open = false
 	emit_signal("xp_changed", xp, xp_to_next_level)
 
 func incr_kills(amount = 1) -> void:
