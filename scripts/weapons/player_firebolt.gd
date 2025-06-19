@@ -1,8 +1,8 @@
 #player_firebolt.gd
 extends Weapon
 
-@export var speed: float = 400.0
-@export var dmg: int = 10
+@export var speed: float = 300.0
+@export var dmg: int = 7
 @export var is_homing: bool = true
 @export var max_lifetime = 2.0
 

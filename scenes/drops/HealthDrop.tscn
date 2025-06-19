@@ -10,7 +10,7 @@ height = 8.0
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_607xg")
 pickup_type = "health"
-value = 10
+value = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.189999, -1.27)

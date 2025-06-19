@@ -1,8 +1,8 @@
 # LightningStrike.gd
 extends Node2D    # No longer Area2D unless you want AOE
 
-@export var damage:       int   = 25
-@export var fall_duration: float = 0.3
+@export var damage:       int   = 15
+@export var fall_duration: float = 0.4
 @export var spawn_height: float = 800.0
 
 var target: Node  # assigned by the weapon

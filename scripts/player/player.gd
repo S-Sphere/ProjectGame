@@ -7,7 +7,7 @@ extends BaseCharacter
 # for the initial weapon
 @export var starting_upgrade: Upgrade
 
-@export var movement_speed = 100.0
+@export var movement_speed = 80.0
 @export var magnet_range = 0.0
 @export var magnet_speed = 150.0
 var weapon_manager

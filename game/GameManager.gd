@@ -23,7 +23,7 @@ signal kills_changed(current_kills)
 	preload("res://data/upgrades/lightning_weapon.tres"),
 	preload("res://data/upgrades/aura_weapon.tres")
 ]
-@export var time_limit_sec = 120 # 15 minutes -> 900
+@export var time_limit_sec = 300 # 15 minutes -> 900
 # Variables =============================================
 var xp = 0
 var level = 1

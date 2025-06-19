@@ -1,7 +1,7 @@
 extends Node2D
 
 class_name Weapon
-@export var cooldown = 1.0
+@export var cooldown = 1.2
 @export var projectile_scene: PackedScene
 @export var attack_origin: Vector2
 @export var range = 500.0

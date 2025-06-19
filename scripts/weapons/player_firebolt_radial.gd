@@ -4,8 +4,8 @@ class_name RadialWeapon
 
 @export var number_projectiles_per_level: int = 2
 @export var max_projectiles = 8
-@export var speed: float = 400.0
-@export var dmg: int = 10
+@export var speed: float = 300.0
+@export var dmg: int = 7
 #@export var is_homing: bool = false
 #var target: Node = null
 #var direction: Vector2 = Vector2.ZERO

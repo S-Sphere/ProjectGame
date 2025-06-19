@@ -6,6 +6,17 @@
 process_mode = 2
 script = ExtResource("1_4ttpn")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_right = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.219608, 0.219608, 0.219608, 1)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0

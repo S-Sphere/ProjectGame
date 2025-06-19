@@ -7,7 +7,7 @@ extends BaseEnemy
 var shoot_timer
 
 func _ready() -> void:
-	max_health = 30
+	max_health = 60
 	health = max_health
 	
 	shoot_timer = Timer.new()

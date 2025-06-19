@@ -28,7 +28,7 @@ var _charge_target = Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("enemy")
-	max_health = 200
+	max_health = 350
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
 	if player and player.has_node("CollisionShape2D"):

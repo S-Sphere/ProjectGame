@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 class_name BaseCharacter
 
-@export var max_health = 1000
+@export var max_health = 200
 var health = max_health
-@export var dmg = 10
-@export var defense = 5
+@export var dmg = 5
+@export var defense = 2
 
 func take_damage(amount) -> void:
 	var final_amount = max(1, amount - defense)

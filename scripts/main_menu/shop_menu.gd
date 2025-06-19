@@ -3,21 +3,24 @@ extends Control
 # VALUES =======================================================================
 const COST = 1
 const HEALTH_INCR = 100
-const SPEED_INCR = 10
+const SPEED_INCR = 5
 const DEFENSE_INCR = 2
-const MAGNET_INCR = 50
+const MAGNET_INCR = 10
+const DAMAGE_INCR = 3
 const MAX_LEVEL = 10
 const UPGRADE_DATA = {
-	"health"  : {"cost" : 10, "incr" : 100},
-	"speed"   : {"cost" : 10, "incr" : 10},
-	"defense" : {"cost" : 10, "incr" : 2},
-	"magnet"  : {"cost" : 10, "incr" : 20},
+	"health"  : {"cost" : 10, "incr" : HEALTH_INCR},
+	"speed"   : {"cost" : 10, "incr" : SPEED_INCR},
+	"defense" : {"cost" : 10, "incr" : DEFENSE_INCR},
+	"magnet"  : {"cost" : 10, "incr" : MAGNET_INCR},
+	"damage"  : {"cost" : 10, "incr" : DAMAGE_INCR}
 } 
 
 @onready var speed_btn = $GridContainer/Speed
 @onready var defense_btn = $GridContainer/Defense
 @onready var health_btn = $GridContainer/Health
 @onready var magnet_btn = $GridContainer/Magnet
+@onready var damage_btn = $GridContainer/Damage
 @onready var close_btn = $Close
 @onready var coins_label = $VBoxContainer/CoinsLabel
 
@@ -26,6 +29,7 @@ func _ready() -> void:
 	speed_btn.pressed.connect(_on_speed_pressed)
 	defense_btn.pressed.connect(_on_defense_pressed)
 	magnet_btn.pressed.connect(_on_magnet_pressed)
+	damage_btn.pressed.connect(_on_damage_pressed)
 	close_btn.pressed.connect(_on_close_pressed)
 	
 	GameManager.connect("coins_changed", Callable(self, "_on_coins_changed"))
@@ -39,11 +43,13 @@ func _on_coins_changed(current_coins) -> void:
 	var speed_lvl = upgrades.get("speed", 0)
 	var defense_lvl = upgrades.get("defense", 0)
 	var magnet_lvl = upgrades.get("magnet", 0)
+	var damage_lvl = upgrades.get("damage", 0)
 	
 	health_btn.disabled = current_coins < _next_cost("health", health_lvl) or health_lvl >= MAX_LEVEL
 	speed_btn.disabled = current_coins < _next_cost("speed", speed_lvl) or speed_lvl >= MAX_LEVEL
 	defense_btn.disabled = current_coins < _next_cost("defense", defense_lvl) or defense_lvl >= MAX_LEVEL
 	magnet_btn.disabled = current_coins < _next_cost("magnet", magnet_lvl) or magnet_lvl >= MAX_LEVEL
+	damage_btn.disabled = current_coins < _next_cost("damage", damage_lvl) or damage_lvl >= MAX_LEVEL
 	
 func _on_health_pressed():
 	_purchase_and_apply("health")
@@ -56,6 +62,9 @@ func _on_defense_pressed():
 
 func _on_magnet_pressed() -> void:
 	_purchase_and_apply("magnet")
+
+func _on_damage_pressed() -> void:
+	_purchase_and_apply("damage")
 
 func _purchase_and_apply(stat):
 	var upgrades = SaveManager.data.get("upgrades", {})
@@ -88,6 +97,10 @@ func _purchase_and_apply(stat):
 			if GameManager.player != null:
 				GameManager.player.magnet_range += UPGRADE_DATA["magnet"].incr
 			stats["magnet"] = stats.get("magnet", 0) + UPGRADE_DATA["magnet"].incr
+		"damage":
+			if GameManager.player != null:
+				GameManager.player.dmg += UPGRADE_DATA["damage"].incr
+			stats["damage"] = stats.get("damage", 0) + UPGRADE_DATA["damage"].incr
 		_:
 			push_warning("Unknown purchase type: %s" % stat)
 	
@@ -105,11 +118,13 @@ func _update_button_texts() -> void:
 	var s_lvl = upgrades.get("speed", 0)
 	var d_lvl = upgrades.get("defense", 0)
 	var m_lvl = upgrades.get("magnet", 0)
+	var dmg_lvl = upgrades.get("damage", 0)
 	
 	health_btn.text = "Health Lv %d (Cost %d)" % [h_lvl, _next_cost("health", h_lvl)]
 	speed_btn.text = "Speed Lv %d (Cost %d)" % [s_lvl, _next_cost("speed", s_lvl)]
 	defense_btn.text = "Defense Lv %d (Cost %d)" % [d_lvl, _next_cost("defense", d_lvl)]
 	magnet_btn.text = "Magnet Lv %d (Cost %d)" % [m_lvl, _next_cost("magnet", m_lvl)]
+	damage_btn.text = "Damage Lv %d (Cost %d)" % [dmg_lvl, _next_cost("damage", dmg_lvl)]
 
 func _next_cost(stat, lvl) -> int:
 	return UPGRADE_DATA[stat].cost * (lvl + 1)

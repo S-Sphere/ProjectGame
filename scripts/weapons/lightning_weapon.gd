@@ -2,9 +2,9 @@
 extends Node2D
 class_name LightningWeapon
 
-@export var min_interval 	: float = 1.0
-@export var max_interval 	: float = 3.0
-@export var radius 		 	: float = 500.0
+@export var min_interval 	: float = 1.5
+@export var max_interval 	: float = 4.0
+@export var radius 		 	: float = 400.0
 @export var lightning_scene : PackedScene
 @export var attack_origin	: Vector2
 var level = 1

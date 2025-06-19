@@ -2,13 +2,13 @@ extends BaseEnemy
 
 @export var cooldown = 2.0
 var shoot_timer
-@export var projectile_speed = 400.0
+@export var projectile_speed = 350.0
 @export var projectile_scene = preload("res://scenes/weapons/enemy_firebolt.tscn")
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready() -> void:
-	max_health = 30
+	max_health = 60
 	health = max_health
 	
 	shoot_timer = Timer.new()

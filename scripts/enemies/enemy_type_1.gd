@@ -13,7 +13,7 @@ var state = State.CHASE
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready() -> void:
-	max_health = 30
+	max_health = 60
 	health = max_health
 	
 func _physics_process(delta):
