@@ -8,7 +8,7 @@ var map_height
 enum MapShape {SQUARE, CIRCLE, VERTICAL_CORRIDOR, HORIZONTAL_CORRIDOR}
 var shape : MapShape
 @export var obstacle_scenes = []
-@export var obstacle_count = 50
+@export var obstacle_count = 10
 var obstacle_tiles = []
 
 var rng := RandomNumberGenerator.new()
@@ -146,7 +146,7 @@ func _scatter_obstacles() -> void:
 		for nx in range(tile.x - 1, tile.x + 2):
 			for ny in range(tile.y - 1, tile.y + 2):
 				var n = Vector2i(nx, ny)
-				if obstacle_tiles.has(n):
+				if not _tile_in_bounds(n) or obstacle_tiles.has(n):
 					occupied = true
 					break
 			if occupied:
@@ -165,7 +165,7 @@ func _scatter_obstacles() -> void:
 		for nx in range(tile.x - 1, tile.x + 2):
 			for ny in range(tile.y - 1, tile.y + 2):
 				var n = Vector2i(nx, ny)
-				if obstacle_tiles.has(n):
+				if _tile_in_bounds(n) and not obstacle_tiles.has(n):
 					obstacle_tiles.append(n)
 		placed += 1
 		
@@ -181,7 +181,7 @@ func _tile_in_bounds(tile) -> bool:
 	return true
 
 func is_tile_free(tile) -> bool:
-	return not obstacle_tiles.has(tile)
+	return _tile_in_bounds(tile) and not obstacle_tiles.has(tile)
 
 func is_position_free(pos) -> bool:
 	var tm = $TileMap/TileMapLayer_floor
@@ -198,7 +198,7 @@ func clamp_position_to_map(pos) -> Vector2:
 		var y_max = int(map_height / 2) - border_thickness
 		
 		map_pos.x = clamp(map_pos.x, x_min, x_max)
-		map_pos.y = clamp(map_pos.x, y_min, y_max)
+		map_pos.y = clamp(map_pos.y, y_min, y_max)
 		
 		if shape == MapShape.CIRCLE:
 			var radius = min(map_width, map_height) / 2.0 - border_thickness

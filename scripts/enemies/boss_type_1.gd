@@ -13,6 +13,7 @@ enum State {
 @export var time_between_charges = 5.0
 @export var charge_width = 10.0
 @export var attack_range = 20.0
+@export var charge_damage_mult := 3.0
 
 var state = State.CHASE
 var _cooldown_timer: Timer
@@ -20,7 +21,7 @@ var _warning_timer: Timer
 var _charge_timer: Timer
 @onready var _col_shape = $CollisionShape2D
 
-var _player_col_shape 
+var _player_col_shape
 var player
 var _charge_dir = Vector2.ZERO
 var _charge_target = Vector2.ZERO
@@ -91,8 +92,8 @@ func _charge_move(delta) -> void:
 	velocity = _charge_dir * charge_speed
 	move_and_slide()
 	if player and is_instance_valid(player):
-		if global_position.distance_to(player.global_position) <= 50:
-			player.take_damage(dmg)
+		if global_position.distance_to(player.global_position) <= _contact_threshold():
+			player.take_damage(int(dmg * charge_damage_mult))
 
 func _end_charge() -> void:
 	state = State.CHASE
@@ -107,7 +108,25 @@ func _draw() -> void:
 		var pts = [start - normal, start + normal, end + normal, end - normal]
 		draw_polygon(pts, [Color(1, 0, 0.4)])
 
-func _check_contact_damage() -> void:
+func _shape_radius(shape):
+	if shape is RectangleShape2D:
+		return max(shape.extents.x, shape.extents.y)
+	elif shape is CapsuleShape2D:
+		return max(shape.radius, shape.height / 2.0)
+	elif shape is CircleShape2D:
+		return shape.radius
+	return 0.0
+
+func _contact_threshold():
+	var r1 = 0.0
+	if _col_shape and _col_shape.shape:
+		r1 = _shape_radius(_col_shape.shape)
+	var r2 = 0.0
+	if _player_col_shape and _player_col_shape.shape:
+		r2 = _shape_radius(_player_col_shape.shape)
+	return attack_range + r1 + r2
+
+func _check_contact_damage(mult = 1.0) -> void:
 	if player and is_instance_valid(player):
-		if global_position.distance_to(player.global_position) <= attack_range:
-			player.take_damage(dmg)
+		if global_position.distance_to(player.global_position) <= _contact_threshold():
+			player.take_damage(int(dmg * mult))
