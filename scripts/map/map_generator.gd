@@ -142,7 +142,16 @@ func _scatter_obstacles() -> void:
 		var x = rng.randi_range(int(-map_width/2) + border_thickness, int(map_width/2) - border_thickness)
 		var y = rng.randi_range(int(-map_height/2) + border_thickness, int(map_height/2) - border_thickness)
 		var tile = Vector2i(x, y)
-		if obstacle_tiles.has(tile):
+		var occupied = false
+		for nx in range(tile.x - 1, tile.x + 2):
+			for ny in range(tile.y - 1, tile.y + 2):
+				var n = Vector2i(nx, ny)
+				if obstacle_tiles.has(n):
+					occupied = true
+					break
+			if occupied:
+				break
+		if occupied:
 			continue
 		if shape == MapShape.CIRCLE:
 			var radius = min(map_width, map_height) / 2.0 - border_thickness
@@ -153,6 +162,11 @@ func _scatter_obstacles() -> void:
 		var world_pos = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
 		obs.position = world_pos
 		parent.add_child(obs)
+		for nx in range(tile.x - 1, tile.x + 2):
+			for ny in range(tile.y - 1, tile.y + 2):
+				var n = Vector2i(nx, ny)
+				if obstacle_tiles.has(n):
+					obstacle_tiles.append(n)
 		placed += 1
 		
 func _tile_in_bounds(tile) -> bool:
