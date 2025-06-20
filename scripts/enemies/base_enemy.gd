@@ -15,6 +15,12 @@ var health: int = max_health
 
 func take_damage(amount: int) -> void:
 	health -= amount
+	if GameManager.damage_number_scene:
+		var dmg_num = GameManager.damage_number_scene.instantiate()
+		dmg_num.global_position = global_position
+		if dmg_num.has_method("setup"):
+			dmg_num.setup(amount)
+		get_tree().current_scene.call_deferred("add_child", dmg_num)
 	if health <= 0:
 		die()
 

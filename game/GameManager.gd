@@ -12,6 +12,7 @@ signal kills_changed(current_kills)
 @export var upgrade_scene: PackedScene = preload("res://scenes/ui/upgrade_seletion.tscn")
 @export var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
 @export var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
+@export var damage_number_scene: PackedScene = preload("res://scenes/ui/DamageNumber.tscn")
 
 @export var all_upgrades: Array[Resource] = [
 	preload("res://data/upgrades/health_upgrade.tres"),
@@ -34,11 +35,12 @@ var run_coins = 0
 # run stats
 var kills = 0
 var start_time = 0
+var run_time_sec = 0.0
 var pending_level_ups = 0
 var upgrade_menu_open = false
 
 func get_run_time() -> int:
-	return int((Time.get_ticks_msec() - start_time) / 1000.0)
+	return int(run_time_sec)
 
 func format_time(secs) -> String:
 	if secs < 60:
@@ -65,7 +67,7 @@ func get_run_stats():
 		"coins": run_coins,
 		"level": level,
 		"kills": kills,
-		"time": int((Time.get_ticks_msec() - start_time) / 1000.0),
+		"time": int(run_time_sec),
 		"upgrades": upgrade_texts
 	}
 # track upgrades
@@ -78,8 +80,10 @@ func _ready() -> void:
 	set_process(true)
 
 func _process(delta) -> void:
-	if player != null and get_run_time() >= time_limit_sec:
-		end_run()
+	if player != null:
+		run_time_sec += delta
+		if run_time_sec >= time_limit_sec:
+			end_run()
 
 func register_player(player) -> void:
 	self.player = player
@@ -208,6 +212,7 @@ func start_run() -> void:
 	reset_run_coins()
 	kills = 0
 	start_time = Time.get_ticks_msec()
+	run_time_sec = 0.0
 	xp = 0
 	level = 0
 	xp_to_next_level = 100

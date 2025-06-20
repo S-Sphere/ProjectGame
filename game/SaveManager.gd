@@ -11,13 +11,13 @@ func _ready() -> void:
 	load_json()
 
 func save_json() -> void:
-	var file = FileAccess.open("res://data//savegame.json", FileAccess.WRITE)
+	var file = FileAccess.open("user://savegame.json", FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(data))
 		file.close()
 
 func load_json() -> void:
-	var file = FileAccess.open("res://data//savegame.json", FileAccess.READ)
+	var file = FileAccess.open("user://savegame.json", FileAccess.READ)
 	if file:
 		var text = file.get_as_text()
 		file.close()

@@ -123,8 +123,7 @@
 1. Implement one more enemy type (one that steals player gold)
 2. Add kills, gold, and the upgrades the player currently has on the run to the screen 	---------> kinda done with end/pause screen
 3. Add at least one more upgrade and fix/change the existing ones			---------> done, just here as a reminder to recheck again 
-4. Either fix or remove resolution settings						---------> also already kinda done
-5. Add music settings									---------> doing if i manage to find a good background music for the game
+4. Add music settings									---------> doing if i manage to find a good background music for the game
 
 **Sprites and animation stuff:**
 1. Replace all player/enemy sprites with final versions and make the animations

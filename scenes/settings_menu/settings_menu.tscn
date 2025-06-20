@@ -42,10 +42,3 @@ vertical_alignment = 1
 [node name="Settings_Tab_Container" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_hfsua")]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Exit_Button" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Exit"

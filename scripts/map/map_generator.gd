@@ -34,9 +34,11 @@ func _select_shape() -> void:
 	
 	match shape:
 		MapShape.VERTICAL_CORRIDOR:
-			map_width = max(3, map_size / 3)
+			map_width = max(3, map_size / 2)
+			map_height = int(map_size * 1.5)
 		MapShape.HORIZONTAL_CORRIDOR:
 			map_height = max(3, map_size / 3)
+			map_width = int(map_size * 1.5)
 
 
 func _build_floor() -> void:
