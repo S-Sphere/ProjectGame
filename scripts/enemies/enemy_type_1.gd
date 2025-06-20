@@ -7,10 +7,15 @@ enum State {
 }
 
 @export var movement_speed = 50.0
-@export var attack_range = 0.0
+@export var attack_range = 10.0
+
+@export var attack_anim = "attack"
+@export var move_anim = "run"
+@export var attack_duration = 0.4
 
 var _player_col_shape
 var state = State.CHASE
+var attack_timer = 0.0
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var _col_shape = $CollisionShape2D
@@ -34,21 +39,29 @@ func _physics_process(delta):
 
 func chase_player(_delta) -> void:
 	if player and is_instance_valid(player):
+		if sprite:
+			sprite.play(move_anim)
 		var direction = global_position.direction_to(player.global_position)
 		velocity = direction * movement_speed
 		move_and_slide()
-		sprite.play("run")
-		sprite.flip_h = direction.x < 0
+		
 		if global_position.distance_to(player.global_position) <= _contact_threshold():
 			state = State.ATTACK
+			attack_timer = 0.0
 	else:
 		state = State.IDLE
 	
-func attack_player(_delta) -> void:
-	if player and is_instance_valid(player):
-		apply_contact_damage(player, dmg)
-	sprite.play("attack")
-	state = State.CHASE
+func attack_player(delta) -> void:
+	if attack_timer <= 0.0:
+		if player and is_instance_valid(player):
+			apply_contact_damage(player, dmg)
+		if sprite:
+			sprite.play(attack_anim)
+		attack_timer = attack_duration
+	else:
+		attack_timer -= delta
+		if attack_timer <= 0.0:
+			state = State.CHASE
 
 func idle(_delta) -> void:
 	velocity = Vector2.ZERO
@@ -80,5 +93,4 @@ func die() -> void:
 	if sprite.sprite_frames and sprite.sprite_frames.has_animation("death"):
 		sprite.play("death")
 		sprite.animation_finished.connect(queue_free)
-	else:
-		queue_free()
+	queue_free()

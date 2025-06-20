@@ -56,6 +56,7 @@ theme_override_font_sizes/font_size = 26
 text = "Start Game"
 
 [node name="Shop_Button" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(120, 44)
 layout_mode = 2
 text = "SHOP"
 

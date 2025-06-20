@@ -159,7 +159,7 @@ script = ExtResource("2_3w448")
 
 [node name="Sprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_k027u")
-animation = &"death"
+animation = &"run"
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(1, -1)
