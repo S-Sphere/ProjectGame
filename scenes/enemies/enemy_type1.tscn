@@ -131,6 +131,11 @@ _data = {
 
 [node name="Enemy_Type1" groups=["enemy"] instance=ExtResource("1_ojysm")]
 script = ExtResource("2_3w448")
+movement_speed = 50.0
+attack_range = 0.0
+attack_anim = "attack"
+move_anim = "run"
+attack_duration = 0.5
 
 [node name="Sprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_k027u")

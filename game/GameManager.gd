@@ -231,7 +231,7 @@ func start_run() -> void:
 
 func incr_kills(amount = 1) -> void:
 	kills += amount
-	emit_signal("kills_changed, kills")
+	emit_signal("kills_changed", kills)
 
 func end_run() -> void:
 	var scene = get_tree().current_scene
