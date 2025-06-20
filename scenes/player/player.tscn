@@ -44,7 +44,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0owmy")
 }, {
-"duration": 1.0,
+"duration": 1.01,
 "texture": SubResource("AtlasTexture_qek5x")
 }, {
 "duration": 1.0,
@@ -56,7 +56,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ugh1f"]
-radius = 8.0
+radius = 9.0
 height = 38.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
@@ -71,10 +71,11 @@ position = Vector2(3.8147e-06, 3.8147e-06)
 scale = Vector2(1.78571, 1.57813)
 sprite_frames = SubResource("SpriteFrames_h17s1")
 animation = &"run"
-frame_progress = 0.191497
+frame = 3
+frame_progress = 0.240837
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_ugh1f")
 
 [node name="Camera2D" type="Camera2D" parent="."]
