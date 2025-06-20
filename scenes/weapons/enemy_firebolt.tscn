@@ -73,7 +73,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_d1nev")
 }],
 "loop": true,
-"name": &"exposion",
+"name": &"explosion",
 "speed": 10.0
 }, {
 "frames": [{
@@ -103,11 +103,11 @@ collision_layer = 8
 script = ExtResource("1_e3j3k")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1.5, 0)
-scale = Vector2(1.06, 1)
+position = Vector2(-0.499999, 0)
+scale = Vector2(0.98, 1)
 sprite_frames = SubResource("SpriteFrames_s06tb")
-animation = &"exposion"
-frame_progress = 0.224938
+animation = &"explosion"
+frame_progress = 0.598116
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6, 1)
