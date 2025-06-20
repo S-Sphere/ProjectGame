@@ -7,7 +7,7 @@ enum State {
 }
 
 @export var movement_speed = 50.0
-@export var attack_range = 20.0
+@export var attack_range = 0.0
 
 var _player_col_shape
 var state = State.CHASE

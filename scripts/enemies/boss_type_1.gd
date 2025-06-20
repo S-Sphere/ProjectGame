@@ -12,7 +12,7 @@ enum State {
 @export var warning_time = 0.8
 @export var time_between_charges = 5.0
 @export var charge_width = 10.0
-@export var attack_range = 20.0
+@export var attack_range = 0.0
 @export var charge_damage_mult := 3.0
 
 var state = State.CHASE

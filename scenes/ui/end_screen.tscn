@@ -7,12 +7,15 @@ process_mode = 2
 script = ExtResource("1_4ttpn")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -125.0
-offset_right = 121.0
+anchors_preset = -1
+anchor_left = 0.401
+anchor_top = 0.078
+anchor_right = 0.597
+anchor_bottom = 0.932
+offset_left = -0.26004
+offset_top = 0.200001
+offset_right = -0.220032
+offset_bottom = -0.200012
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.219608, 0.219608, 0.219608, 1)
@@ -64,6 +67,8 @@ alignment = 1
 [node name="RetryButton" type="Button" parent="VBoxContainer/Buttons"]
 layout_mode = 2
 text = "Retry"
+icon_alignment = 1
+vertical_icon_alignment = 0
 
 [node name="MenuButton" type="Button" parent="VBoxContainer/Buttons"]
 layout_mode = 2

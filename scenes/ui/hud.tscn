@@ -1,24 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://d6xnnjiq4aap"]
+[gd_scene load_steps=7 format=3 uid="uid://d6xnnjiq4aap"]
 
-[ext_resource type="Texture2D" uid="uid://de28p7hwsivh0" path="res://assets/sprites/misc/ValueBar_128x16.png" id="1_8qguk"]
 [ext_resource type="Script" uid="uid://dkd2yi0eck8m3" path="res://scripts/misc/xp_bar.gd" id="1_aonmh"]
 [ext_resource type="Texture2D" uid="uid://d2jgstfnywjm1" path="res://assets/sprites/misc/ValueBlue_120x8.png" id="2_136eg"]
 [ext_resource type="Script" uid="uid://byikfacgb1qtq" path="res://scripts/misc/coin_label.gd" id="2_hqnrr"]
 [ext_resource type="Script" uid="uid://ct1kxfy1ncsl3" path="res://scripts/misc/timer_label.gd" id="3_bo48s"]
 
+[sub_resource type="Gradient" id="Gradient_8qguk"]
+offsets = PackedFloat32Array(0.530201)
+colors = PackedColorArray(0.65098, 0.65098, 0.65098, 0.580392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_136eg"]
+gradient = SubResource("Gradient_8qguk")
+width = 1270
+height = 40
+fill_from = Vector2(0, 0.149061)
+
 [node name="Hud" type="CanvasLayer"]
+offset = Vector2(0, 10)
+transform = Transform2D(1, 0, 0, 1, 0, 10)
 
 [node name="XPBar" type="TextureProgressBar" parent="."]
-anchors_preset = 10
+custom_minimum_size = Vector2(10, 40)
+anchors_preset = -1
+anchor_top = 0.01
 anchor_right = 1.0
-offset_left = 1.0
-offset_right = 21.0
-offset_bottom = 50.0
+anchor_bottom = 0.067
+offset_top = -6.0
+offset_right = 10.0
+offset_bottom = -0.200001
 grow_horizontal = 2
 value = 50.0
-texture_under = ExtResource("1_8qguk")
+texture_under = SubResource("GradientTexture2D_136eg")
 texture_progress = ExtResource("2_136eg")
 script = ExtResource("1_aonmh")
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="XPBar"]
 layout_mode = 1
