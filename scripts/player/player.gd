@@ -40,7 +40,6 @@ func movement():
 		sprite.flip_h = x_mov < 0
 	else:
 		sprite.stop()
-	
 	move_and_slide()
 
 func _magnet_pull(delta) -> void:

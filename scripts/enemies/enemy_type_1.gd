@@ -14,6 +14,7 @@ var state = State.CHASE
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var _col_shape = $CollisionShape2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 
 func _ready() -> void:
 	max_health = 60
@@ -36,7 +37,8 @@ func chase_player(_delta) -> void:
 		var direction = global_position.direction_to(player.global_position)
 		velocity = direction * movement_speed
 		move_and_slide()
-		
+		sprite.play("run")
+		sprite.flip_h = direction.x < 0
 		if global_position.distance_to(player.global_position) <= _contact_threshold():
 			state = State.ATTACK
 	else:
@@ -45,10 +47,12 @@ func chase_player(_delta) -> void:
 func attack_player(_delta) -> void:
 	if player and is_instance_valid(player):
 		apply_contact_damage(player, dmg)
+	sprite.play("attack")
 	state = State.CHASE
 
 func idle(_delta) -> void:
 	velocity = Vector2.ZERO
+	sprite.play("idle")
 	if player and is_instance_valid(player):
 		state = State.IDLE
 
@@ -69,3 +73,12 @@ func _contact_threshold():
 	if _player_col_shape and _player_col_shape.shape:
 		r2 = _shape_radius(_player_col_shape.shape)
 	return attack_range + r1 + r2
+
+func die() -> void:
+	drop_loot()
+	GameManager.incr_kills()
+	if sprite.sprite_frames and sprite.sprite_frames.has_animation("death"):
+		sprite.play("death")
+		sprite.animation_finished.connect(queue_free)
+	else:
+		queue_free()
