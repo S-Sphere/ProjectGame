@@ -10,7 +10,7 @@ var direction: Vector2 = Vector2.ZERO
 var _age = 0.0
 var _exploding = false
 
-@onready var _sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
+@onready var _sprite: AnimatedSprite2D = get_node_or_null("Sprite2D")
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
