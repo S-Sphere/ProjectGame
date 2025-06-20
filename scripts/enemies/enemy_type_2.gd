@@ -1,6 +1,6 @@
 extends BaseEnemy
 
-@export var cooldown = 2.0
+@export var cooldown = 4.0
 var shoot_timer
 @export var projectile_speed = 350.0
 @export var projectile_scene = preload("res://scenes/weapons/enemy_firebolt.tscn")

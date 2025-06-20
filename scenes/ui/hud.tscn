@@ -1,39 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://d6xnnjiq4aap"]
+[gd_scene load_steps=6 format=3 uid="uid://d6xnnjiq4aap"]
 
+[ext_resource type="Texture2D" uid="uid://de28p7hwsivh0" path="res://assets/sprites/misc/ValueBar_128x16.png" id="1_8qguk"]
 [ext_resource type="Script" uid="uid://dkd2yi0eck8m3" path="res://scripts/misc/xp_bar.gd" id="1_aonmh"]
+[ext_resource type="Texture2D" uid="uid://d2jgstfnywjm1" path="res://assets/sprites/misc/ValueBlue_120x8.png" id="2_136eg"]
 [ext_resource type="Script" uid="uid://byikfacgb1qtq" path="res://scripts/misc/coin_label.gd" id="2_hqnrr"]
 [ext_resource type="Script" uid="uid://ct1kxfy1ncsl3" path="res://scripts/misc/timer_label.gd" id="3_bo48s"]
-
-[sub_resource type="Gradient" id="Gradient_dgoq6"]
-offsets = PackedFloat32Array(0, 0.00492611, 0.0147783, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.226601, 0.226601, 0.226601, 1, 0.536726, 0.536726, 0.536726, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0n5ap"]
-gradient = SubResource("Gradient_dgoq6")
-width = 1280
-height = 50
-repeat = 1
-
-[sub_resource type="Gradient" id="Gradient_0is75"]
-offsets = PackedFloat32Array(0, 0.00985222, 0.0197044, 0.955665, 0.990148, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.916329, 0.916329, 0.916329, 1, 0.979904, 0.625121, 0.874727, 1, 0.976471, 0, 0, 1, 0.827586, 0.827586, 0.827586, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lss7j"]
-gradient = SubResource("Gradient_0is75")
-width = 1280
-height = 50
 
 [node name="Hud" type="CanvasLayer"]
 
 [node name="XPBar" type="TextureProgressBar" parent="."]
-custom_minimum_size = Vector2(10, 50)
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 1.0
+offset_left = 1.0
+offset_right = 21.0
+offset_bottom = 50.0
 grow_horizontal = 2
 value = 50.0
-texture_under = SubResource("GradientTexture2D_0n5ap")
-texture_progress = SubResource("GradientTexture2D_lss7j")
+texture_under = ExtResource("1_8qguk")
+texture_progress = ExtResource("2_136eg")
 script = ExtResource("1_aonmh")
 
 [node name="MarginContainer" type="MarginContainer" parent="XPBar"]

@@ -6,7 +6,7 @@ class_name BaseEnemy
 @export var health_drop_scene = preload("res://scenes/drops/HealthDrop.tscn")
 
 @export var max_health = 50
-@export var contact_tick_rate = 0.5
+@export var contact_tick_rate = 0.2
 var _contact_cooldown = 0.0
 var health: int = max_health
 @export var dmg: int = 10

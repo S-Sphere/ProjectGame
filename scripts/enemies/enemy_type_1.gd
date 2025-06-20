@@ -22,6 +22,7 @@ func _ready() -> void:
 		_player_col_shape = player.get_node("CollisionShape2D")
 	
 func _physics_process(delta):
+	update_contact_cooldown(delta)
 	match state:
 		State.CHASE:
 			chase_player(delta)
@@ -53,7 +54,7 @@ func idle(_delta) -> void:
 
 func _shape_radius(shape):
 	if shape is RectangleShape2D:
-		return max(shape.extends.x, shape.extends.y)
+		return max(shape.extents.x, shape.extents.y)
 	elif shape is CapsuleShape2D:
 		return max(shape.radius, shape.height / 2.0)
 	elif shape is CircleShape2D:
