@@ -86,11 +86,3 @@ func _contact_threshold():
 	if _player_col_shape and _player_col_shape.shape:
 		r2 = _shape_radius(_player_col_shape.shape)
 	return attack_range + r1 + r2
-
-func die() -> void:
-	drop_loot()
-	GameManager.incr_kills()
-	if sprite.sprite_frames and sprite.sprite_frames.has_animation("death"):
-		sprite.play("death")
-		sprite.animation_finished.connect(queue_free)
-		queue_free()

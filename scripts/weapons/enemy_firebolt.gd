@@ -10,12 +10,13 @@ var direction: Vector2 = Vector2.ZERO
 var _age = 0.0
 var _exploding = false
 
-@onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var _sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	connect("body_entered", Callable(self, "_on_body_entered"))
-	_sprite.play("moving")
+	if _sprite:
+		_sprite.play("move")
 
 func _physics_process(delta: float) -> void:
 	if _exploding:
@@ -49,6 +50,7 @@ func _explode() -> void:
 		return
 	_exploding = true
 	_collision.disabled = true
-	_sprite.play("explode")
-	await _sprite.animation_finished
+	if _sprite:
+		_sprite.play("explode")
+		await _sprite.animation_finished
 	queue_free()

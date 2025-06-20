@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://4223j3kpdu4l"]
+[gd_scene load_steps=31 format=3 uid="uid://4223j3kpdu4l"]
 
 [ext_resource type="PackedScene" uid="uid://db4ln5yev7qt" path="res://scenes/enemies/base_enemy.tscn" id="1_bum2l"]
 [ext_resource type="Script" uid="uid://cmhsnwumxx3te" path="res://scripts/enemies/enemy_type_3.gd" id="2_w0d7f"]
 [ext_resource type="Texture2D" uid="uid://cja05ywuic18w" path="res://assets/sprites/enemies/E_Wizard_Attack.png" id="3_2qdke"]
+[ext_resource type="PackedScene" uid="uid://dt0ev3t6ry1mh" path="res://scenes/weapons/enemy_firebolt.tscn" id="3_64ufy"]
 [ext_resource type="Texture2D" uid="uid://c13wf6aw34jiu" path="res://assets/sprites/enemies/E_Wizard_Idle.png" id="5_epdib"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_742f2"]
@@ -185,6 +186,9 @@ height = 34.0
 
 [node name="Enemy_Type3" groups=["enemy"] instance=ExtResource("1_bum2l")]
 script = ExtResource("2_w0d7f")
+cooldown = 2
+projectile_scene = ExtResource("3_64ufy")
+number_projectiles = 10
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(1.5, 1.5)
