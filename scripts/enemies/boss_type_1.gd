@@ -93,7 +93,7 @@ func _charge_move(delta) -> void:
 	move_and_slide()
 	if player and is_instance_valid(player):
 		if global_position.distance_to(player.global_position) <= _contact_threshold():
-			player.take_damage(int(dmg * charge_damage_mult))
+			apply_contact_damage(player, int(dmg * charge_damage_mult))
 
 func _end_charge() -> void:
 	state = State.CHASE
@@ -129,4 +129,4 @@ func _contact_threshold():
 func _check_contact_damage(mult = 1.0) -> void:
 	if player and is_instance_valid(player):
 		if global_position.distance_to(player.global_position) <= _contact_threshold():
-			player.take_damage(int(dmg * mult))
+			apply_contact_damage(player, int(dmg * mult))

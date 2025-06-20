@@ -6,6 +6,8 @@ class_name BaseEnemy
 @export var health_drop_scene = preload("res://scenes/drops/HealthDrop.tscn")
 
 @export var max_health = 50
+@export var contact_tick_rate = 0.5
+var _contact_cooldown = 0.0
 var health: int = max_health
 @export var dmg: int = 10
 
@@ -17,8 +19,13 @@ func take_damage(amount: int) -> void:
 	health -= amount
 	if GameManager.damage_number_scene:
 		var dmg_num = GameManager.damage_number_scene.instantiate()
-		dmg_num.global_position = global_position
-		if dmg_num.has_method("setup"):
+		dmg_num.global_position = global_position + Vector2(randf_range(-10.0, 10.0), randf_range(-5.0, 5.0))
+		var label = null
+		if dmg_num.has_node("Label"):
+			label = dmg_num.get_node("Label")
+		if label and label.has_method("setup"):
+			label.setup(amount)
+		elif dmg_num.has_method("setup"):
 			dmg_num.setup(amount)
 		get_tree().current_scene.call_deferred("add_child", dmg_num)
 	if health <= 0:
@@ -42,3 +49,12 @@ func _spawn_drop(scene) -> void:
 	var drop = scene.instantiate()
 	drop.global_position = global_position
 	get_tree().current_scene.call_deferred("add_child", drop)
+
+func update_contact_cooldown(delta) -> void:
+	if _contact_cooldown > 0.0:
+		_contact_cooldown -= delta
+
+func apply_contact_damage(target, amount) -> void:
+	if _contact_cooldown <= 0.0 and target and target.has_method("take_damage"):
+		target.take_damage(amount)
+		_contact_cooldown = contact_tick_rate
