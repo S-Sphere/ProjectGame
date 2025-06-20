@@ -1,6 +1,6 @@
 extends BaseEnemy
 
-@export var cooldown = 4.0
+@export var cooldown = 3.0
 var shoot_timer
 @export var projectile_speed = 350.0
 @export var projectile_scene = preload("res://scenes/weapons/enemy_firebolt.tscn")
@@ -19,11 +19,10 @@ func _ready() -> void:
 		sprite.play(idle_anim)
 		
 	shoot_timer = Timer.new()
-	shoot_timer.wait_time = cooldown
-	shoot_timer.one_shot = false
+	shoot_timer.one_shot = true
 	add_child(shoot_timer)
-	shoot_timer.timeout.connect(shoot_at_player)
-	shoot_timer.start()
+	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	_start_shoot_timer()
 	
 	attack_anim_timer.one_shot = true
 	attack_anim_timer.wait_time = attack_anim_duration
@@ -47,3 +46,11 @@ func shoot_at_player() -> void:
 func _on_attack_anim_finished() -> void:
 	if sprite:
 		sprite.play(idle_anim)
+
+func _start_shoot_timer() -> void:
+	shoot_timer.wait_time = randf_range(cooldown * 0.5, cooldown * 1.5)
+	shoot_timer.start()
+
+func _on_shoot_timer_timeout() -> void:
+	shoot_at_player()
+	_start_shoot_timer()

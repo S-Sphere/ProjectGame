@@ -189,6 +189,9 @@ script = ExtResource("2_w0d7f")
 cooldown = 2
 projectile_scene = ExtResource("3_64ufy")
 number_projectiles = 10
+idle_anim = "idle"
+attack_anim = "attack"
+attack_anim_duration = 0.6
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(1.5, 1.5)

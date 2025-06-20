@@ -88,7 +88,7 @@ height = 44.0
 
 [node name="Enemy_Type2" groups=["enemy"] instance=ExtResource("1_nbuyj")]
 script = ExtResource("2_jqhml")
-cooldown = 4.0
+cooldown = 3.0
 projectile_speed = 350.0
 projectile_scene = ExtResource("3_7wd5w")
 idle_anim = "idle"
@@ -100,7 +100,7 @@ position = Vector2(-1.90735e-06, 1.90735e-06)
 scale = Vector2(0.523945, 0.531908)
 sprite_frames = SubResource("SpriteFrames_iir2d")
 animation = &"attack"
-frame_progress = 0.84769
+frame_progress = 0.796882
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(-4, 5)
