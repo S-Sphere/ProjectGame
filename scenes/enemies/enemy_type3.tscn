@@ -185,6 +185,7 @@ radius = 7.0
 height = 34.0
 
 [node name="Enemy_Type3" groups=["enemy"] instance=ExtResource("1_bum2l")]
+collision_mask = 7
 script = ExtResource("2_w0d7f")
 cooldown = 2.5
 projectile_scene = ExtResource("3_64ufy")
@@ -197,7 +198,7 @@ attack_anim_duration = 1.0
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_181cl")
 animation = &"attack"
-frame_progress = 0.124813
+frame_progress = 0.729368
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_jmlrw")

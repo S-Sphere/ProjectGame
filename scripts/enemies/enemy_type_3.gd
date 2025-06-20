@@ -34,6 +34,10 @@ func shoot_radial() -> void:
 	if sprite:
 		sprite.play(attack_anim)
 		attack_anim_timer.start()
+
+func _on_attack_anim_finished() -> void:
+	if sprite:
+		sprite.play(idle_anim)
 	
 	var angle_dif = TAU / number_projectiles # TAU -> 2*PI
 	for i in range(number_projectiles):
@@ -45,10 +49,7 @@ func shoot_radial() -> void:
 		projectile.global_position = global_position
 		projectile.direction = direction
 		get_tree().current_scene.add_child(projectile)
-
-func _on_attack_anim_finished() -> void:
-	if sprite:
-		sprite.play(idle_anim)
+	_start_shoot_timer()
 
 func _start_shoot_timer() -> void:
 	shoot_timer.wait_time = randf_range(cooldown * 0.5, cooldown * 3.5)

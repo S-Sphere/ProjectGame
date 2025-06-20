@@ -35,17 +35,19 @@ func shoot_at_player() -> void:
 		if sprite:
 			sprite.play(attack_anim)
 			attack_anim_timer.start()
-			
+
+func _on_attack_anim_finished() -> void:
+	if sprite:
+		sprite.play(idle_anim)
+	
+	if player and is_instance_valid(player):
 		var projectile = projectile_scene.instantiate()
 		projectile.is_homing = false
 		projectile.global_position = global_position
 		var shoot_dir = (player.global_position - global_position).normalized()
 		projectile.direction = shoot_dir
 		get_tree().current_scene.add_child(projectile)
-
-func _on_attack_anim_finished() -> void:
-	if sprite:
-		sprite.play(idle_anim)
+	_start_shoot_timer()
 
 func _start_shoot_timer() -> void:
 	shoot_timer.wait_time = randf_range(cooldown * 0.5, cooldown * 1.5)
@@ -53,4 +55,3 @@ func _start_shoot_timer() -> void:
 
 func _on_shoot_timer_timeout() -> void:
 	shoot_at_player()
-	_start_shoot_timer()
