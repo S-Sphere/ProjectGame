@@ -7,11 +7,11 @@ enum State {
 }
 
 @export var movement_speed = 50.0
-@export var attack_range = 10.0
+@export var attack_range = 0.0
 
 @export var attack_anim = "attack"
 @export var move_anim = "run"
-@export var attack_duration = 0.4
+@export var attack_duration = 0.5
 
 var _player_col_shape
 var state = State.CHASE
@@ -93,4 +93,4 @@ func die() -> void:
 	if sprite.sprite_frames and sprite.sprite_frames.has_animation("death"):
 		sprite.play("death")
 		sprite.animation_finished.connect(queue_free)
-	queue_free()
+		queue_free()

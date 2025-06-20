@@ -7,15 +7,18 @@ extends Control
 @onready var settings_menu = $settings_menu as SettingsMenu
 @onready var margin_container = $MarginContainer as MarginContainer
 @onready var shop_button = $MarginContainer/HBoxContainer2/VBoxContainer/Shop_Button as Button
+@onready var controls_button = $MarginContainer/HBoxContainer2/VBoxContainer/Controls_Button as Button
 @onready var sub_menu = $MarginContainer/HBoxContainer2/SubMenu
 
 # to start preloading a test scene
 @onready var start_level = preload("res://scenes/main/main.tscn") as PackedScene
 @onready var shop_scene = preload("res://scenes/main_menu/ShopMenu.tscn") as PackedScene
 @onready var setting_scene = preload("res://scenes/settings_menu/settings_menu.tscn") as PackedScene
+@onready var controls_scene = preload("res://scenes/main_menu/ControlsMenu.tscn") as PackedScene
 
 var shop_instance = null
 var settings_instance = null
+var controls_instance = null
 
 func _ready():
 	handle_signals()
@@ -35,7 +38,11 @@ func on_settings_pressed() -> void:
 	if shop_instance != null:
 		shop_instance.queue_free()
 		shop_instance = null
-		
+	
+	if controls_instance != null:
+		controls_instance.queue_free()
+		controls_instance = null
+
 	if settings_instance == null:
 		settings_instance = setting_scene.instantiate() as Control
 	
@@ -60,7 +67,11 @@ func on_shop_pressed() -> void:
 	if settings_instance != null:
 		settings_instance.queue_free()
 		settings_instance = null
-		
+	
+	if controls_instance != null:
+		controls_instance.queue_free()
+		controls_instance = null
+
 	if shop_instance == null:
 		shop_instance = shop_scene.instantiate() as Control
 		sub_menu.visible = true
@@ -69,11 +80,27 @@ func on_shop_pressed() -> void:
 		shop_instance.queue_free()
 		shop_instance = null
 		sub_menu.visible = false
+
+func on_controls_pressed() -> void:
+	if settings_instance != null:
+		settings_instance.queue_free()
+		settings_instance = null
 	
+	if shop_instance != null:
+		shop_instance.queue_free()
+		shop_instance = null
+	if controls_instance == null:
+		controls_instance = controls_scene.instantiate() as Control
+		sub_menu.visible = true
+		sub_menu.add_child(controls_instance)
+	else:
+		controls_instance.queue_free()
+		controls_instance = null
+		sub_menu.visible = false
 func handle_signals() -> void:
 	start_button.button_down.connect(on_start_pressed)
 	exit_button.button_down.connect(on_exit_pressed)
 	settings_button.button_down.connect(on_settings_pressed)
-	
+	controls_button.button_down.connect(on_controls_pressed)
 	#settings_menu.exit_settings_menu.connect(on_exit_settings_menu)
 	shop_button.button_down.connect(on_shop_pressed)

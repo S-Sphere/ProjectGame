@@ -12,7 +12,8 @@ signal kills_changed(current_kills)
 @export var upgrade_scene: PackedScene = preload("res://scenes/ui/upgrade_seletion.tscn")
 @export var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
 @export var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
-@export var damage_number_scene: PackedScene = preload("res://scenes/ui/DamageNumber.tscn")
+const DAMAGE_NUMBER_SCENE_PATH := "res://scenes/ui/DamageNumber.tscn"
+@export var damage_number_scene: PackedScene = preload(DAMAGE_NUMBER_SCENE_PATH)
 
 @export var all_upgrades: Array[Resource] = [
 	preload("res://data/upgrades/health_upgrade.tres"),
@@ -25,6 +26,7 @@ signal kills_changed(current_kills)
 	preload("res://data/upgrades/aura_weapon.tres")
 ]
 @export var time_limit_sec = 300 # 15 minutes -> 900
+
 # Variables =============================================
 var xp = 0
 var level = 1
@@ -38,7 +40,14 @@ var start_time = 0
 var run_time_sec = 0.0
 var pending_level_ups = 0
 var upgrade_menu_open = false
+var damage_numbers_enabled = true
 
+func set_damage_numbers_enabled(enabled) -> void:
+	damage_numbers_enabled = enabled
+	if enabled:
+		damage_number_scene = load(DAMAGE_NUMBER_SCENE_PATH)
+	else:
+		damage_number_scene = null
 func get_run_time() -> int:
 	return int(run_time_sec)
 

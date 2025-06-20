@@ -6,7 +6,7 @@ class_name BaseEnemy
 @export var health_drop_scene = preload("res://scenes/drops/HealthDrop.tscn")
 
 @export var max_health = 50
-@export var contact_tick_rate = 0.2
+@export var contact_tick_rate = 0.5
 var _contact_cooldown = 0.0
 var health: int = max_health
 @export var dmg: int = 10
@@ -14,6 +14,8 @@ var health: int = max_health
 @export_range(0.0, 1.0, 0.01) var xp_drop_rate = 0.70
 @export_range(0.0, 1.0, 0.01) var coin_drop_rate = 0.10
 @export_range(0.0, 1.0, 0.01) var health_drop_rate = 0.7
+
+@onready var _animation_player = ($AnimationPlayer if has_node("AnimationPlayer") else null)
 
 func take_damage(amount: int) -> void:
 	health -= amount
@@ -56,5 +58,7 @@ func update_contact_cooldown(delta) -> void:
 
 func apply_contact_damage(target, amount) -> void:
 	if _contact_cooldown <= 0.0 and target and target.has_method("take_damage"):
+		if _animation_player and _animation_player.has_animation("attack"):
+			_animation_player.play("attack")
 		target.take_damage(amount)
 		_contact_cooldown = contact_tick_rate

@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://cixe7rvhcq8ry"]
+
+[ext_resource type="Script" uid="uid://2ylm70c1ajop" path="res://scripts/settings_menu/damage_numbers_button.gd" id="1_38ojh"]
+
+[node name="Damage_Numbers_Button" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_38ojh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 504.0
+offset_bottom = 71.0
+scale = Vector2(0.997892, 0.96)
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Damage Numbers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
