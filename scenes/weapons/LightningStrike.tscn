@@ -41,18 +41,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xibjo")
 }],
-"loop": true,
+"loop": false,
 "name": &"strike",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1s56s"]
 radius = 12.0
 height = 24.0
 
-[node name="LightningStrike" type="Area2D"]
-collision_layer = 2
-collision_mask = 4
+[node name="LightningStrike" type="Node2D"]
 script = ExtResource("1_o8lv3")
 fall_duration = 0.5
 
@@ -60,7 +58,8 @@ fall_duration = 0.5
 scale = Vector2(0.375, 0.503906)
 sprite_frames = SubResource("SpriteFrames_cj11n")
 animation = &"strike"
-frame_progress = 0.257343
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 48)
