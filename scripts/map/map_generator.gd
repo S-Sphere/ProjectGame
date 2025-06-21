@@ -15,7 +15,7 @@ var rng := RandomNumberGenerator.new()
 
 # Water settings
 @export var water_scene: PackedScene
-@export var water_thickness = 1
+@export var water_size = 35
 @onready var _water_container = $Water
 
 func _ready() -> void:
@@ -24,8 +24,8 @@ func _ready() -> void:
 	_build_floor()
 	_build_walls()
 	_create_wall_colliders()
-	_scatter_obstacles()
 	_add_water()
+	_scatter_obstacles()
 
 func _select_shape() -> void:
 	var shapes = [
@@ -133,7 +133,7 @@ func _add_water() -> void:
 	if shape == MapShape.CIRCLE:
 		var radius = min(map_width, map_height) / 2.0
 		var inner = radius + border_thickness
-		var outer = inner + water_thickness
+		var outer = inner + water_size
 		
 		for x in range(int(-outer), int(outer)):
 			for y in range(int(-outer), int(outer)):
@@ -143,20 +143,26 @@ func _add_water() -> void:
 					sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
 					_water_container.add_child(sprite)
 	else:
-		var x_min = int(-map_width / 2) - border_thickness - water_thickness
-		var x_max = int(map_width / 2) + border_thickness + water_thickness - 1
-		var y_min = int(-map_height / 2) - border_thickness - water_thickness
-		var y_max = int(map_height / 2) + border_thickness + water_thickness - 1
-		for x in range(x_min, x_max + 1):
-			for y in [y_min, y_max]:
-				var sprite = water_scene.instantiate() as Node2D
-				sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
-				_water_container.add_child(sprite)
-		for y in range(y_min + 1, y_max):
-			for x in [x_min, x_max]:
-				var sprite = water_scene.instantiate() as Node2D
-				sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
-				_water_container.add_child(sprite)
+		var x_min = int(-map_width / 2) - border_thickness
+		var x_max = int(map_width / 2) + border_thickness - 1
+		var y_min = int(-map_height / 2) - border_thickness
+		var y_max = int(map_height / 2) + border_thickness - 1
+		for i in range(1, water_size + 1):
+			var ix_min = x_min - i
+			var ix_max = x_max + i
+			var iy_min = y_min - i
+			var iy_max = y_max + i
+			for x in range(ix_min, ix_max + 1):
+				for y in [iy_min, iy_max]:
+					var sprite = water_scene.instantiate() as Node2D
+					sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
+					_water_container.add_child(sprite)
+			for y in range(iy_min, iy_max + 1):
+				for x in [ix_min, ix_max]:
+					var sprite = water_scene.instantiate() as Node2D
+					sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
+					_water_container.add_child(sprite)
+				
 
 func _scatter_obstacles() -> void:
 	"""
