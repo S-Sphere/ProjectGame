@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4ir8pqn3b3cl"]
+[gd_scene load_steps=14 format=3 uid="uid://c4ir8pqn3b3cl"]
 
 [ext_resource type="Texture2D" uid="uid://ch8s4kl7sbocp" path="res://assets/sprites/background/shoals_deep_water_0.png" id="1_hvmxe"]
 [ext_resource type="Script" uid="uid://cvcy3xjv6n3ce" path="res://scripts/map/water_tile.gd" id="1_qnxb0"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://cjyus6p7vchnl" path="res://assets/sprites/background/shoals_deep_water_7.png" id="9_b58j1"]
 [ext_resource type="Texture2D" uid="uid://bvhkefckm5man" path="res://assets/sprites/background/shoals_deep_water_9.png" id="10_7gect"]
 [ext_resource type="Texture2D" uid="uid://bbq73bacmp7ef" path="res://assets/sprites/background/shoals_deep_water_10.png" id="11_lee50"]
-[ext_resource type="Texture2D" uid="uid://dorx06ck2lio3" path="res://assets/sprites/background/shoals_deep_water_11.png" id="12_mtsi6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68afo"]
 animations = [{
@@ -49,9 +48,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_lee50")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_mtsi6")
 }],
 "loop": true,
 "name": &"water",
@@ -64,4 +60,4 @@ script = ExtResource("1_qnxb0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_68afo")
 animation = &"water"
-frame_progress = 0.361881
+frame_progress = 0.0577458

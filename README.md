@@ -120,13 +120,9 @@
 
 ## Overall TODO list
 **Code or Godot stuff:**
-1. Implement one more enemy type (one that steals player gold)
-2. Add kills, gold, and the upgrades the player currently has on the run to the screen 	---------> kinda done with end/pause screen
-3. Add at least one more upgrade and fix/change the existing ones			---------> done, just here as a reminder to recheck again 
-4. Add music settings									---------> doing if i manage to find a good background music for the game
+1. Add at least one more upgrade and fix/change the existing ones			---------> done, just here as a reminder to recheck again 
+2. Add music settings									---------> doing if i manage to find a good background music for the game
 
 **Sprites and animation stuff:**
-1. Replace all player/enemy sprites with final versions and make the animations
-2. Get the environment sprites
-3. Get sounds for player attacks, hits, and maybe background music			---------> yep. at least background music
-4. Make things (scenes/UI) actually look nice
+1. Get sounds for player attacks, hits, and maybe background music			---------> yep. at least background music
+2. Make things (scenes/UI) actually look nice

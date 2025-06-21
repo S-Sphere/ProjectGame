@@ -106,9 +106,7 @@ script = ExtResource("1_e3j3k")
 position = Vector2(-0.499999, 0)
 scale = Vector2(0.98, 1)
 sprite_frames = SubResource("SpriteFrames_s06tb")
-animation = &"explode"
-frame = 6
-frame_progress = 1.0
+animation = &"move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6, 1)

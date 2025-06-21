@@ -130,6 +130,7 @@ func _add_water() -> void:
 		child.queue_free()
 	var tm = $TileMap/TileMapLayer_floor
 	var tile_size = tm.tile_set.tile_size
+	_water_container.z_index = -1
 	if shape == MapShape.CIRCLE:
 		var radius = min(map_width, map_height) / 2.0
 		var inner = radius + border_thickness
@@ -141,6 +142,7 @@ func _add_water() -> void:
 				if dist >= inner and dist < outer:
 					var sprite = water_scene.instantiate() as Node2D
 					sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
+					sprite.z_index = -1
 					_water_container.add_child(sprite)
 	else:
 		var x_min = int(-map_width / 2) - border_thickness
@@ -156,13 +158,15 @@ func _add_water() -> void:
 				for y in [iy_min, iy_max]:
 					var sprite = water_scene.instantiate() as Node2D
 					sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
+					sprite.z_index = -1
 					_water_container.add_child(sprite)
 			for y in range(iy_min, iy_max + 1):
 				for x in [ix_min, ix_max]:
 					var sprite = water_scene.instantiate() as Node2D
 					sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
+					sprite.z_index = -1
 					_water_container.add_child(sprite)
-				
+
 
 func _scatter_obstacles() -> void:
 	"""
