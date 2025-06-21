@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://croy1dus2x7ll"]
+[gd_scene load_steps=8 format=3 uid="uid://croy1dus2x7ll"]
 
 [ext_resource type="Script" uid="uid://bc1k23nt23etc" path="res://scripts/map/map_generator.gd" id="1_m7lcy"]
 [ext_resource type="Texture2D" uid="uid://dobn5mq0yb8dq" path="res://assets/sprites/background/mud_0.png" id="2_47037"]
 [ext_resource type="Texture2D" uid="uid://4xh30l3vsjiy" path="res://assets/sprites/background/lab-rock_1.png" id="3_47037"]
+[ext_resource type="PackedScene" uid="uid://c4ir8pqn3b3cl" path="res://scenes/map/WaterTile.tscn" id="4_sasw2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47037"]
 resource_name = "floor"
@@ -40,3 +41,5 @@ tile_set = SubResource("TileSet_kb4gc")
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="WallColliders" type="Node2D" parent="."]
+
+[node name="Water" parent="." instance=ExtResource("4_sasw2")]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=15 format=3 uid="uid://c4ir8pqn3b3cl"]
+
+[ext_resource type="Texture2D" uid="uid://ch8s4kl7sbocp" path="res://assets/sprites/background/shoals_deep_water_0.png" id="1_hvmxe"]
+[ext_resource type="Script" uid="uid://cvcy3xjv6n3ce" path="res://scripts/map/water_tile.gd" id="1_qnxb0"]
+[ext_resource type="Texture2D" uid="uid://odn0mommvnwi" path="res://assets/sprites/background/shoals_deep_water_1_new.png" id="2_qnxb0"]
+[ext_resource type="Texture2D" uid="uid://cefiwsia6prar" path="res://assets/sprites/background/shoals_deep_water_2_new.png" id="3_nm7v2"]
+[ext_resource type="Texture2D" uid="uid://bbc7uotkuiv3m" path="res://assets/sprites/background/shoals_deep_water_3_new.png" id="4_bjsyl"]
+[ext_resource type="Texture2D" uid="uid://dbpb4xrywvo8k" path="res://assets/sprites/background/shoals_deep_water_4_new.png" id="5_jegw0"]
+[ext_resource type="Texture2D" uid="uid://lk40wfcrig6h" path="res://assets/sprites/background/shoals_deep_water_5.png" id="6_lw7kb"]
+[ext_resource type="Texture2D" uid="uid://bdcy6c3kyuqio" path="res://assets/sprites/background/shoals_deep_water_6.png" id="7_yxm2u"]
+[ext_resource type="Texture2D" uid="uid://bof0r353dhvlj" path="res://assets/sprites/background/shoals_deep_water_8.png" id="8_mmg3n"]
+[ext_resource type="Texture2D" uid="uid://cjyus6p7vchnl" path="res://assets/sprites/background/shoals_deep_water_7.png" id="9_b58j1"]
+[ext_resource type="Texture2D" uid="uid://bvhkefckm5man" path="res://assets/sprites/background/shoals_deep_water_9.png" id="10_7gect"]
+[ext_resource type="Texture2D" uid="uid://bbq73bacmp7ef" path="res://assets/sprites/background/shoals_deep_water_10.png" id="11_lee50"]
+[ext_resource type="Texture2D" uid="uid://dorx06ck2lio3" path="res://assets/sprites/background/shoals_deep_water_11.png" id="12_mtsi6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68afo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hvmxe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qnxb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nm7v2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bjsyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jegw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lw7kb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yxm2u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mmg3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_b58j1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_7gect")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_lee50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mtsi6")
+}],
+"loop": true,
+"name": &"water",
+"speed": 5.0
+}]
+
+[node name="WaterTile" type="Node2D"]
+script = ExtResource("1_qnxb0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_68afo")
+animation = &"water"
+frame_progress = 0.361881

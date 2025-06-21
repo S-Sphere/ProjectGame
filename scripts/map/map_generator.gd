@@ -13,6 +13,11 @@ var obstacle_tiles = []
 
 var rng := RandomNumberGenerator.new()
 
+# Water settings
+@export var water_scene: PackedScene
+@export var water_thickness = 1
+@onready var _water_container = $Water
+
 func _ready() -> void:
 	rng.randomize()
 	_select_shape()
@@ -20,6 +25,7 @@ func _ready() -> void:
 	_build_walls()
 	_create_wall_colliders()
 	_scatter_obstacles()
+	_add_water()
 
 func _select_shape() -> void:
 	var shapes = [
@@ -117,6 +123,27 @@ func _create_wall_colliders() -> void:
 		body.add_child(collider)
 		parent.add_child(body)
 
+func _add_water() -> void:
+	if _water_container == null or water_scene == null:
+		return
+	for child in _water_container.get_children():
+		child.queue_free()
+	var tm = $TileMap/TileMapLayer_floor
+	var tile_size = tm.tile_set.tile_size
+	var x_min = int(-map_width / 2) - border_thickness - water_thickness
+	var x_max = int(map_width / 2) + border_thickness + water_thickness - 1
+	var y_min = int(-map_height / 2) - border_thickness - water_thickness
+	var y_max = int(map_height / 2) + border_thickness + water_thickness - 1
+	for x in range(x_min, x_max + 1):
+		for y in [y_min, y_max]:
+			var sprite = water_scene.instantiate() as Node2D
+			sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
+			_water_container.add_child(sprite)
+	for y in range(y_min + 1, y_max):
+		for x in [x_min, x_max]:
+			var sprite = water_scene.instantiate() as Node2D
+			sprite.position = tm.map_to_local(Vector2i(x, y)) + tile_size * 0.5
+			_water_container.add_child(sprite)
 func _scatter_obstacles() -> void:
 	"""
 	var parent = $Obstacles
