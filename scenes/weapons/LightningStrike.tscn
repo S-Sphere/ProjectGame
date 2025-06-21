@@ -55,12 +55,13 @@ script = ExtResource("1_o8lv3")
 fall_duration = 0.5
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.375, 0.503906)
+position = Vector2(11, 10.75)
+scale = Vector2(0.203125, 0.419922)
 sprite_frames = SubResource("SpriteFrames_cj11n")
 animation = &"strike"
 frame = 4
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 48)
+position = Vector2(10, 48)
 shape = SubResource("CapsuleShape2D_1s56s")

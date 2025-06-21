@@ -2,14 +2,15 @@
 extends Node2D    # No longer Area2D unless you want AOE
 
 @export var damage:       int   = 15
-@export var fall_duration: float = 1.0
-@export var spawn_height: float = 400.0
+@export var fall_duration: float = 0.1
+@export var spawn_height: float = 150.0
 
 
 var target: Node  # assigned by the weapon
 var _start_y := 0.0
 var _t := 0.0
 var _damage_applied = false
+
 
 @onready var _sprite = get_node_or_null("Sprite2D")
 
@@ -35,7 +36,7 @@ func _ready() -> void:
 
 func _on_frame_changed() -> void:
 	var last = _sprite.sprite_frames.get_frame_count("strike")
-	if _sprite.frame == last - 1:
+	if _sprite.frame == last:
 		_apply_damage()
 
 func _on_strike_landed() -> void:
@@ -49,6 +50,11 @@ func _process(delta) -> void:
 	if not target or not is_instance_valid(target):
 		queue_free()
 		return
+	_t += delta
+	var target_pos = target.global_position
+	var start_pos = Vector2(target_pos.x, target_pos.y - spawn_height)
+	var t = clamp(_t / fall_duration, 0.0, 1.0)
+	global_position = start_pos.lerp(target_pos, t)
 
 func _apply_damage() -> void:
 	if _damage_applied:
