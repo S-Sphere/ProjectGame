@@ -7,6 +7,12 @@ enum State {
 	IDLE
 } 
 
+enum ChargeAnimPhase { 
+	MOVE, 
+	ATTACK, 
+	POST 
+}
+
 @export var movement_speed = 30.0
 @export var charge_speed = 250.0
 @export var warning_time = 0.8
@@ -15,22 +21,36 @@ enum State {
 @export var attack_range = 0.0
 @export var charge_damage_mult := 3.0
 
+@export var move_anim := "move"
+@export var charge_anim := "attack_charge"
+
 var state = State.CHASE
 var _cooldown_timer: Timer
 var _warning_timer: Timer
 var _charge_timer: Timer
+
 @onready var _col_shape = $CollisionShape2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
+
+const CHARGE_ANIM_SPEED := 8.0
+const ATTACK_PHASE_DURATION := 0.3
 
 var _player_col_shape
 var player
 var _charge_dir = Vector2.ZERO
 var _charge_target = Vector2.ZERO
+var _charge_phase := ChargeAnimPhase.MOVE
+var _charge_anim_timer = 0.0
 
 func _ready() -> void:
 	add_to_group("enemy")
 	max_health = 2000
 	health = max_health
+	if sprite:
+		sprite.play(move_anim)
+	
 	player = get_tree().get_first_node_in_group("player")
+	
 	if player and player.has_node("CollisionShape2D"):
 		_player_col_shape = player.get_node("CollisionShape2D")
 	
@@ -55,13 +75,23 @@ func _ready() -> void:
 func _physics_process(delta):
 	match state:
 		State.CHASE:
+			if sprite:
+				sprite.play(move_anim)
 			_chase_player(delta)
 			_check_contact_damage()
 		State.WARNING:
+			if sprite:
+				sprite.stop()
+				sprite.animation = charge_anim
+				sprite.frame = 0
 			velocity = Vector2.ZERO
 		State.CHARGE:
+			if sprite:
+				sprite.play(charge_anim)
 			_charge_move(delta)
 		State.IDLE:
+			if sprite:
+				sprite.play(move_anim)
 			_check_contact_damage()
 
 func _chase_player(_delta) -> void:
@@ -73,6 +103,10 @@ func _chase_player(_delta) -> void:
 func _on_cooldown_timeout() -> void:
 	if player and is_instance_valid(player):
 		state = State.WARNING
+		if sprite:
+			sprite.stop()
+			sprite.animation = charge_anim
+			sprite.frame = 0
 		_charge_target = player.global_position
 		_charge_dir = global_position.direction_to(_charge_target)
 		_warning_timer.start()
@@ -80,6 +114,12 @@ func _on_cooldown_timeout() -> void:
 
 func _start_charge() -> void:
 	state = State.CHARGE
+	if sprite:
+		sprite.stop()
+		sprite.animation = charge_anim
+		sprite.frame = 0.0
+	_charge_phase = ChargeAnimPhase.MOVE
+	_charge_anim_timer = 0.0
 	queue_redraw()
 	var dist = global_position.distance_to(_charge_target)
 	if dist <= 0:
@@ -91,12 +131,39 @@ func _start_charge() -> void:
 func _charge_move(delta) -> void:
 	velocity = _charge_dir * charge_speed
 	move_and_slide()
+	_update_charge_animation(delta)
 	if player and is_instance_valid(player):
 		if global_position.distance_to(player.global_position) <= _contact_threshold():
-			apply_contact_damage(player, int(dmg * charge_damage_mult))
+			if _charge_phase == ChargeAnimPhase.MOVE:
+				apply_contact_damage(player, int(dmg * charge_damage_mult))
+				_charge_phase = ChargeAnimPhase.ATTACK
+				_charge_anim_timer = 0.0
+
+func _update_charge_animation(delta) -> void:
+	if sprite == null:
+		return
+	_charge_anim_timer += delta
+	var frames = []
+	match _charge_phase:
+		ChargeAnimPhase.MOVE:
+			frames = [0, 1]
+		ChargeAnimPhase.ATTACK:
+			frames = [2, 3]
+		ChargeAnimPhase.POST:
+			frames = [4, 5]
+	if frames.size() > 0:
+		var idx = int(_charge_anim_timer * CHARGE_ANIM_SPEED) % frames.size()
+		sprite.frame = frames[idx]
+	if _charge_phase == ChargeAnimPhase.ATTACK and _charge_anim_timer >= ATTACK_PHASE_DURATION:
+		_charge_phase = ChargeAnimPhase.POST
+		_charge_anim_timer = 0.0
 
 func _end_charge() -> void:
 	state = State.CHASE
+	if sprite:
+		sprite.play(move_anim)
+	_charge_phase = ChargeAnimPhase.MOVE
+	_charge_anim_timer = 0.0
 	queue_redraw()
 
 func _draw() -> void:
