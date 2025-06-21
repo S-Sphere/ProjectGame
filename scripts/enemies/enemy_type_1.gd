@@ -29,6 +29,7 @@ func _ready() -> void:
 	
 func _physics_process(delta):
 	update_contact_cooldown(delta)
+	velocity = Vector2.ZERO
 	match state:
 		State.CHASE:
 			chase_player(delta)
@@ -44,7 +45,6 @@ func chase_player(_delta) -> void:
 		var direction = global_position.direction_to(player.global_position)
 		velocity = direction * movement_speed
 		move_and_slide()
-		
 		if global_position.distance_to(player.global_position) <= _contact_threshold():
 			state = State.ATTACK
 			attack_timer = 0.0
@@ -52,6 +52,7 @@ func chase_player(_delta) -> void:
 		state = State.IDLE
 	
 func attack_player(delta) -> void:
+	velocity = Vector2.ZERO
 	if attack_timer <= 0.0:
 		if player and is_instance_valid(player):
 			apply_contact_damage(player, dmg)
