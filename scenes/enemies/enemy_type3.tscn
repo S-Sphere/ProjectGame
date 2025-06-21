@@ -185,7 +185,7 @@ radius = 7.0
 height = 34.0
 
 [node name="Enemy_Type3" groups=["enemy"] instance=ExtResource("1_bum2l")]
-collision_mask = 7
+collision_mask = 23
 script = ExtResource("2_w0d7f")
 cooldown = 2.5
 projectile_scene = ExtResource("3_64ufy")

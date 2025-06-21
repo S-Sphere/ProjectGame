@@ -12,6 +12,7 @@ var target: Node  # assigned by the weapon
 var _start_y := 0.0
 var _t := 0.0
 var _damage_applied = false
+var _sprite_offset := Vector2.ZERO
 
 @onready var _sprite = get_node_or_null("Sprite2D")
 
@@ -26,13 +27,15 @@ func _ready() -> void:
 		damage += GameManager.player.dmg
 	
 	var target_pos = target.global_position
-	_start_y = target_pos.y - spawn_height
-	global_position = Vector2(target_pos.x, _start_y)
 
 	if _sprite:
+		_sprite_offset = _sprite.position
 		_sprite.play(fall_animation)
 		_sprite.animation_finished.connect(_on_animation_finished)
-	print("  ↳ LightningStrike spawned above ", target)
+	
+	_start_y = target_pos.y - spawn_height
+	var start_pos = Vector2(target_pos.x, _start_y) - _sprite_offset
+	global_position = start_pos
 
 func _process(delta) -> void:
 	if not target or not is_instance_valid(target):
@@ -40,9 +43,10 @@ func _process(delta) -> void:
 		return
 	_t += delta
 	var target_pos = target.global_position
+	var center = target_pos - _sprite_offset
 	var start_pos = Vector2(target_pos.x, target_pos.y - spawn_height)
 	var t = clamp(_t / fall_duration, 0.0, 1.0)
-	global_position = start_pos.lerp(target_pos, t)
+	global_position = start_pos.lerp(center, t)
 
 func _apply_damage() -> void:
 	if _damage_applied:
