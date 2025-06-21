@@ -9,6 +9,7 @@ class_name LightningWeapon
 @export var attack_origin	: Vector2
 var level = 1
 var _timer: Timer
+var _area: Area2D
 
 func _ready() -> void:
 	randomize()
@@ -41,7 +42,7 @@ func _fire_strike() -> void:
 	var target = candidates[randi() % candidates.size()]
 	print("  • striking ", target, " at ", target.global_position)
 	var bolt = lightning_scene.instantiate()
-	# PASS THE NODE REFERENCE so the bolt can read it
+
 	bolt.target = target
 	if GameManager.player != null:
 		bolt.damage += GameManager.player.dmg

@@ -2,13 +2,13 @@ extends Node2D
 
 var map_width
 var map_height
-@export var map_size = 90
+@export var map_size = 100
 @export var border_thickness = 1
 
 enum MapShape {SQUARE, CIRCLE, VERTICAL_CORRIDOR, HORIZONTAL_CORRIDOR}
 var shape : MapShape
 @export var obstacle_scenes = []
-@export var obstacle_count = 10
+@export var obstacle_count = 15
 var obstacle_tiles = []
 
 var rng := RandomNumberGenerator.new()

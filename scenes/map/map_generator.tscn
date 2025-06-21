@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://croy1dus2x7ll"]
 
 [ext_resource type="Script" uid="uid://bc1k23nt23etc" path="res://scripts/map/map_generator.gd" id="1_m7lcy"]
-[ext_resource type="Texture2D" uid="uid://eu1ycu7elrdw" path="res://assets/sprites/background/Wall.png" id="2_cpxty"]
-[ext_resource type="Texture2D" uid="uid://c8fy1fgj3eel8" path="res://assets/sprites/background/Tile.png" id="2_ggx46"]
+[ext_resource type="Texture2D" uid="uid://dobn5mq0yb8dq" path="res://assets/sprites/background/mud_0.png" id="2_47037"]
+[ext_resource type="Texture2D" uid="uid://4xh30l3vsjiy" path="res://assets/sprites/background/lab-rock_1.png" id="3_47037"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_47037"]
 resource_name = "floor"
-texture = ExtResource("2_ggx46")
+texture = ExtResource("2_47037")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
@@ -14,7 +14,7 @@ texture = ExtResource("2_ggx46")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sasw2"]
 resource_name = "wall"
-texture = ExtResource("2_cpxty")
+texture = ExtResource("3_47037")
 0:0/0 = 0
 1:1/0 = 0
 1:0/0 = 0
