@@ -24,12 +24,12 @@ func _ready() -> void:
 	
 	var target_pos = target.global_position
 	_start_y = target_pos.y - spawn_height
-	global_position = target.global_position + Vector2(0, _start_y)
+	global_position = Vector2(target_pos.x, _start_y)
 
 	if _sprite:
 		_sprite.play("strike")
 		_sprite.frame_changed.connect(_on_frame_changed)
-		_sprite.frame_changed.connect(_on_animation_finished)
+		_sprite.animation_finished.connect(_on_animation_finished)
 
 	print("  ↳ LightningStrike spawned above ", target)
 

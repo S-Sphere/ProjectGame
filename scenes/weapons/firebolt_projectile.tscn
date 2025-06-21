@@ -64,7 +64,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5bdrq")
 }],
-"loop": true,
+"loop": false,
 "name": &"explode",
 "speed": 7.0
 }, {
@@ -99,7 +99,6 @@ range = 200.0
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dwi13")
 animation = &"explode"
-frame_progress = 0.623468
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 6)
