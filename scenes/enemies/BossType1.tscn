@@ -127,8 +127,7 @@ script = ExtResource("1_fhom7")
 position = Vector2(0, 1.19209e-07)
 scale = Vector2(2.49, 2.88)
 sprite_frames = SubResource("SpriteFrames_p6cxo")
-animation = &"attack_charge"
-frame_progress = 0.265098
+animation = &"move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-13, 8)

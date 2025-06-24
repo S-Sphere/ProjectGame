@@ -198,7 +198,6 @@ attack_anim_duration = 1.0
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_181cl")
 animation = &"idle"
-frame_progress = 0.474382
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_jmlrw")

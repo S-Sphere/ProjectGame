@@ -51,7 +51,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"water",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="WaterTile" type="Node2D"]
@@ -60,4 +60,4 @@ script = ExtResource("1_qnxb0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_68afo")
 animation = &"water"
-frame_progress = 0.0577458
+frame_progress = 0.541802
