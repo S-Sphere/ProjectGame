@@ -9,11 +9,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(450, 65)
 layout_mode = 0
-offset_right = 504.0
+offset_right = 453.0
 offset_bottom = 71.0
-scale = Vector2(0.997892, 0.96)
-theme_override_constants/separation = 50
+scale = Vector2(1, 0.962)
+theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -21,11 +22,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Base_label
 "
-horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-layout_mode = 2
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(250, 60)

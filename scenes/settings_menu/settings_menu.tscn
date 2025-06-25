@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcrkw3wujoybq"]
+[gd_scene load_steps=4 format=3 uid="uid://dcrkw3wujoybq"]
 
+[ext_resource type="Theme" uid="uid://b2aoldv3yg7kx" path="res://themes/main_menu_theme.tres" id="1_vlvk0"]
 [ext_resource type="Script" uid="uid://crrrr5g7b8rom" path="res://scripts/settings_menu/settings_menu.gd" id="1_yswx1"]
 [ext_resource type="PackedScene" uid="uid://btnt8pfkhms8c" path="res://scenes/settings_menu/settings_tab_container.tscn" id="2_hfsua"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_vlvk0")
 script = ExtResource("1_yswx1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -19,22 +21,20 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -466.0
-offset_top = -498.0
-offset_right = 534.0
-offset_bottom = 52.0
+offset_left = -360.0
+offset_top = -507.0
+offset_right = 462.0
+offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1.08, 1.08)
-theme_override_constants/margin_left = -30
+scale = Vector2(0.913, 1)
 theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 8
 theme_override_constants/separation = -50
 
 [node name="Settings_Tab_Container" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_hfsua")]

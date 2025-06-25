@@ -1,14 +1,14 @@
 extends CanvasLayer
 
-@onready var coins_label = $VBoxContainer/CoinsLabel
-@onready var level_label = $VBoxContainer/LevelLabel
-@onready var kills_label = $VBoxContainer/KillsLabel
-@onready var time_label = $VBoxContainer/TimeLabel
-@onready var upgrades_label = $VBoxContainer/UpgradesLabel
+@onready var coins_label = $ColorRect/VBoxContainer/CoinsLabel
+@onready var level_label = $ColorRect/VBoxContainer/LevelLabel
+@onready var kills_label = $ColorRect/VBoxContainer/KillsLabel
+@onready var time_label = $ColorRect/VBoxContainer/TimeLabel
+@onready var upgrades_label = $ColorRect/VBoxContainer/UpgradesLabel
 
-@onready var resume_button = $VBoxContainer/Buttons/ResumeButton
-@onready var retry_button = $VBoxContainer/Buttons/RetryButton
-@onready var menu_button = $VBoxContainer/Buttons/MenuButton
+@onready var resume_button = $ColorRect/VBoxContainer/Buttons/ResumeButton
+@onready var retry_button = $ColorRect/VBoxContainer/Buttons/RetryButton
+@onready var menu_button = $ColorRect/VBoxContainer/Buttons/MenuButton
 
 func _ready():
 	resume_button.pressed.connect(_on_resume_pressed)

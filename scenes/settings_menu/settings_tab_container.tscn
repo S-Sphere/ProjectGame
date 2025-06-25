@@ -23,14 +23,16 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = 50.0
-offset_right = -100.0
-offset_bottom = -100.0
+offset_left = 101.0
+offset_top = 34.0
+offset_right = -189.0
+offset_bottom = -126.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.12, 1)
 tab_alignment = 1
 current_tab = 0
+tabs_visible = false
 
 [node name="Graphics" type="TabBar" parent="TabContainer"]
 layout_mode = 2
@@ -38,9 +40,10 @@ metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_right = 0.975
 anchor_bottom = 1.0
+offset_right = -0.25
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
@@ -54,7 +57,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 90
 
 [node name="Window_Mode_Button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_iicmn")]
 layout_mode = 2
