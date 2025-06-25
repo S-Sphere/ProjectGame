@@ -2,11 +2,11 @@ extends Control
 
 # VALUES =======================================================================
 const COST = 1
-const HEALTH_INCR = 100
-const SPEED_INCR = 5
+const HEALTH_INCR = 150
+const SPEED_INCR = 4
 const DEFENSE_INCR = 2
-const MAGNET_INCR = 10
-const DAMAGE_INCR = 3
+const MAGNET_INCR = 15
+const DAMAGE_INCR = 5
 const MAX_LEVEL = 10
 const UPGRADE_DATA = {
 	"health"  : {"cost" : 10, "incr" : HEALTH_INCR},

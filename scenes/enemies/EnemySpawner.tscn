@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bp8y43w4mbjnj"]
+[gd_scene load_steps=16 format=3 uid="uid://bp8y43w4mbjnj"]
 
 [ext_resource type="Script" uid="uid://cwbqy7gl0t2no" path="res://scripts/enemies/enemy_spawner.gd" id="1_mi0k2"]
 [ext_resource type="Script" uid="uid://d4j43umuicbkr" path="res://scripts/enemies/spawn_info.gd" id="2_ox70e"]
@@ -10,69 +10,102 @@
 [sub_resource type="Resource" id="Resource_lftwn"]
 script = ExtResource("2_ox70e")
 time_start = 0
-time_end = 1
+time_end = 130
 enemy = ExtResource("3_s56fr")
-enemy_number = 5
-enemy_spawn_delay = 0
-override_health = -1
-override_dmg = -1
+enemy_number = 9
+enemy_spawn_delay = 15
+override_health = 60
+override_dmg = 10
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_flkym"]
 script = ExtResource("2_ox70e")
-time_start = 0
-time_end = 130
+time_start = 130
+time_end = 300
 enemy = ExtResource("3_s56fr")
-enemy_number = 7
-enemy_spawn_delay = 10
-override_health = -1
-override_dmg = -1
+enemy_number = 12
+enemy_spawn_delay = 8
+override_health = 80
+override_dmg = 12
 
 [sub_resource type="Resource" id="Resource_h8747"]
 script = ExtResource("2_ox70e")
-time_start = 100
-time_end = 140
-enemy = ExtResource("4_15juf")
-enemy_number = 2
-enemy_spawn_delay = 10
-override_health = -1
-override_dmg = -1
+time_start = 300
+time_end = 600
+enemy = ExtResource("3_s56fr")
+enemy_number = 14
+enemy_spawn_delay = 8
+override_health = 100
+override_dmg = 14
 
 [sub_resource type="Resource" id="Resource_buald"]
 script = ExtResource("2_ox70e")
-time_start = 180
+time_start = 100
 time_end = 300
-enemy = ExtResource("5_1yyn2")
-enemy_number = 1
-enemy_spawn_delay = 5
-override_health = -1
-override_dmg = -1
+enemy = ExtResource("4_15juf")
+enemy_number = 3
+enemy_spawn_delay = 15
+override_health = 100
+override_dmg = 15
 
 [sub_resource type="Resource" id="Resource_wh4ie"]
 script = ExtResource("2_ox70e")
-time_start = 150
-time_end = 300
-enemy = ExtResource("3_s56fr")
-enemy_number = 7
-enemy_spawn_delay = 5
-override_health = -1
-override_dmg = -1
+time_start = 300
+time_end = 600
+enemy = ExtResource("4_15juf")
+enemy_number = 5
+enemy_spawn_delay = 12
+override_health = 100
+override_dmg = 15
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_qdoyk"]
+script = ExtResource("2_ox70e")
+time_start = 180
+time_end = 400
+enemy = ExtResource("5_1yyn2")
+enemy_number = 4
+enemy_spawn_delay = 25
+override_health = 100
+override_dmg = 10
+metadata/_custom_type_script = "uid://d4j43umuicbkr"
+
+[sub_resource type="Resource" id="Resource_pdmpw"]
+script = ExtResource("2_ox70e")
+time_start = 400
+time_end = 600
+enemy = ExtResource("5_1yyn2")
+enemy_number = 6
+enemy_spawn_delay = 20
+override_health = 100
+override_dmg = 12
+metadata/_custom_type_script = "uid://d4j43umuicbkr"
+
+[sub_resource type="Resource" id="Resource_ddf2j"]
 script = ExtResource("2_ox70e")
 time_start = 240
 time_end = 240
 enemy = ExtResource("6_wh4ie")
 enemy_number = 1
 enemy_spawn_delay = 0
-override_health = -1
-override_dmg = -1
+override_health = 3000
+override_dmg = 24
+metadata/_custom_type_script = "uid://d4j43umuicbkr"
+
+[sub_resource type="Resource" id="Resource_ev30x"]
+script = ExtResource("2_ox70e")
+time_start = 480
+time_end = 480
+enemy = ExtResource("6_wh4ie")
+enemy_number = 1
+enemy_spawn_delay = 0
+override_health = 4000
+override_dmg = 100
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource("1_mi0k2")
-spawns = Array[ExtResource("2_ox70e")]([SubResource("Resource_lftwn"), SubResource("Resource_flkym"), SubResource("Resource_h8747"), SubResource("Resource_buald"), SubResource("Resource_wh4ie"), SubResource("Resource_qdoyk")])
+spawns = Array[ExtResource("2_ox70e")]([SubResource("Resource_lftwn"), SubResource("Resource_flkym"), SubResource("Resource_h8747"), SubResource("Resource_buald"), SubResource("Resource_wh4ie"), SubResource("Resource_qdoyk"), SubResource("Resource_pdmpw"), SubResource("Resource_ddf2j"), SubResource("Resource_ev30x")])
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

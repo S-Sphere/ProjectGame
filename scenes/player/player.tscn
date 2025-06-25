@@ -65,7 +65,9 @@ collision_mask = 24
 motion_mode = 1
 script = ExtResource("1_670gd")
 starting_upgrade = ExtResource("2_lvxji")
-movement_speed = 90.0
+movement_speed = 75.0
+magnet_range = 100.0
+dmg = 7
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3.8147e-06, 3.8147e-06)

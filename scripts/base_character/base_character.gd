@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name BaseCharacter
 
-@export var max_health = 200
+@export var max_health = 250
 var health = max_health
 @export var dmg = 5
 @export var defense = 2

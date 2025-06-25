@@ -17,6 +17,7 @@ func _ready():
 func show_stats(data: Dictionary) -> void:
 	var won = data.get("won", false)
 	result_label.text = "You Won!" if won else "You Died"
+	result_label.self_modulate = Color(0, 1, 0) if won else Color(1, 0, 0)
 	coins_label.text = "Coins: %d" % data.get("coins", 0)
 	level_label.text = "Level Reached: %d" % data.get("level", 1)
 	kills_label.text = "Kills: %d" % data.get("kills", 0)
