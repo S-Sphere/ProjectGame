@@ -32,7 +32,6 @@ func _ready() -> void:
 			var scale_x = base_radius * 2 / tex_size.x
 			var scale_y = base_radius * 2 / tex_size.y
 			sprite.scale = Vector2(scale_x, scale_y)
-		sprite.z_index = -1
 	update_stats()
 	
 func _process(_delta) -> void:
@@ -53,8 +52,8 @@ func update_stats() -> void:
 	if sprite and sprite.texture:
 		var tex_size = sprite.texture.get_size()
 		if tex_size.x > 0 and tex_size.y > 0:
-			var scale_x = base_radius * 2 / tex_size.x
-			var scale_y = base_radius * 2 / tex_size.y
+			var scale_x = r * 2 / tex_size.x
+			var scale_y = r * 2 / tex_size.y
 			sprite.scale = Vector2(scale_x, scale_y)
 
 func _on_tick() -> void:
