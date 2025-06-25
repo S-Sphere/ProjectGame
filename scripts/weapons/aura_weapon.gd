@@ -9,6 +9,7 @@ class_name AuraWeapon
 @export var attack_origin: Vector2 = Vector2.ZERO
 
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
 @onready var _timer: Timer = Timer.new()
 
 var _shape = CircleShape2D
@@ -25,6 +26,12 @@ func _ready() -> void:
 	_timer.timeout.connect(_on_tick)
 	_timer.start()
 	
+	if sprite and sprite.texture:
+		var tex_size = sprite.texture.get_size()
+		if tex_size.x > 0 and tex_size.y > 0:
+			var scale_x = base_radius * 2 / tex_size.x
+			var scale_y = base_radius * 2 / tex_size.y
+			sprite.scale = Vector2(scale_x, scale_y)
 	update_stats()
 	
 func _process(_delta) -> void:
@@ -42,6 +49,13 @@ func update_stats() -> void:
 	range = r
 	if _shape:
 		_shape.radius = r
+	if sprite and sprite.texture:
+		var tex_size = sprite.texture.get_size()
+		if tex_size.x > 0 and tex_size.y > 0:
+			var scale_x = base_radius * 2 / tex_size.x
+			var scale_y = base_radius * 2 / tex_size.y
+			sprite.scale = Vector2(scale_x, scale_y)
+		
 	queue_redraw()
 	
 func _draw() -> void:

@@ -20,6 +20,7 @@ const DAMAGE_NUMBER_SCENE_PATH := "res://scenes/ui/DamageNumber.tscn"
 	preload("res://data/upgrades/damage_upgrade.tres"),
 	preload("res://data/upgrades/speed_upgrade.tres"),
 	preload("res://data/upgrades/magnet_upgrade.tres"),
+	preload("res://data/upgrades/defense_upgrade.tres"),
 	preload("res://data/upgrades/radial_weapon.tres"),
 	preload("res://data/upgrades/firebolt_weapon.tres"),
 	preload("res://data/upgrades/lightning_weapon.tres"),
@@ -186,6 +187,8 @@ func _apply_upgrade(upgrade, lvl) -> void:
 			player.dmg += amount
 		"speed":
 			player.movement_speed *= (1.0 + amount)
+		"defense":
+			player.defense += amount
 		"magnet":
 			player.magnet_range += amount
 		"fire_rate":

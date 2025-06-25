@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_duekk")
 name = "Aura"
-description = "Damages enemies around the player"
+description = "Damages nearby enemies"
 stat = "weapon"
 values = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0])
 weapon_scene = ExtResource("2_6is3i")

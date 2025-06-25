@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_t0lei")
 name = "Magnet"
-description = "Increase Pickup"
+description = "Extends Pickup range"
 stat = "magnet"
 values = Array[float]([50.0, 50.0, 50.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 max_level = 10

@@ -21,8 +21,7 @@ const UPGRADE_DATA = {
 @onready var health_btn = $GridContainer/Health
 @onready var magnet_btn = $GridContainer/Magnet
 @onready var damage_btn = $GridContainer/Damage
-@onready var close_btn = $Close
-@onready var coins_label = $VBoxContainer/CoinsLabel
+@onready var coins_label = $GridContainer/CoinsLabel
 
 func _ready() -> void:
 	health_btn.pressed.connect(_on_health_pressed)
@@ -30,7 +29,6 @@ func _ready() -> void:
 	defense_btn.pressed.connect(_on_defense_pressed)
 	magnet_btn.pressed.connect(_on_magnet_pressed)
 	damage_btn.pressed.connect(_on_damage_pressed)
-	close_btn.pressed.connect(_on_close_pressed)
 	
 	GameManager.connect("coins_changed", Callable(self, "_on_coins_changed"))
 	_update_button_texts()
@@ -108,9 +106,7 @@ func _purchase_and_apply(stat):
 	SaveManager.data["upgrades"] = upgrades
 	SaveManager.save_json()
 	_update_button_texts()
-	
-func _on_close_pressed():
-	queue_free()
+
 
 func _update_button_texts() -> void:
 	var upgrades = SaveManager.data.get("upgrades", {})

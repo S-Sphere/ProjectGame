@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_oo2j3")
 name = "Lightning Strike"
-description = "new weapon"
+description = "Summons bols of lightning"
 stat = "weapon"
 values = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 weapon_scene = ExtResource("2_qs6xt")

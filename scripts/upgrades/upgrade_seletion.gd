@@ -28,14 +28,13 @@ func popup(upgrades) -> void:
 		var up = _choices[i]
 		var btn = _buttons[i]
 		btn.text = up.name
+		if up.description != "":
+			btn.text += "\n" + up.description
 		if up.icon:
 			btn.icon = up.icon
 		else:
 			btn.icon = null
-		if up.description != "":
-			btn.tooltip_text  = up.description
-		else:
-			btn.tooltip_text  = null
+		btn.tooltip_text = ""
 	for j in range(_choices.size(), option_count):
 		_buttons[j].visible = false
 	visible = true

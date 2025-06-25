@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_nq7nf")
 name = "Firebolt"
-description = "weapon"
+description = "Fires projectile at enemies"
 stat = "weapon"
 values = Array[float]([6.0, 6.0, 6.0, 6.0, 6.0])
 weapon_scene = ExtResource("2_lt00f")
