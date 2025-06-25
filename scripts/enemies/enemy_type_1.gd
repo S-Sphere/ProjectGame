@@ -23,7 +23,8 @@ var attack_timer = 0.0
 
 func _ready() -> void:
 	super._ready()
-	max_health = 60
+	if max_health == BaseEnemy.DEFAULT_MAX_HEALTH:
+		max_health = 60
 	health = max_health
 	if player and player.has_node("CollisionShape2D"):
 		_player_col_shape = player.get_node("CollisionShape2D")

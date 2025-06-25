@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d6xnnjiq4aap"]
+[gd_scene load_steps=8 format=3 uid="uid://d6xnnjiq4aap"]
 
 [ext_resource type="Script" uid="uid://dkd2yi0eck8m3" path="res://scripts/misc/xp_bar.gd" id="1_aonmh"]
 [ext_resource type="Texture2D" uid="uid://d2jgstfnywjm1" path="res://assets/sprites/misc/ValueBlue_120x8.png" id="2_136eg"]
 [ext_resource type="Script" uid="uid://byikfacgb1qtq" path="res://scripts/misc/coin_label.gd" id="2_hqnrr"]
+[ext_resource type="FontFile" uid="uid://ceo66reig25kj" path="res://assets/VT323-Regular.ttf" id="3_136eg"]
 [ext_resource type="Script" uid="uid://ct1kxfy1ncsl3" path="res://scripts/misc/timer_label.gd" id="3_bo48s"]
 
 [sub_resource type="Gradient" id="Gradient_8qguk"]
@@ -47,6 +48,8 @@ theme_override_constants/margin_right = 10
 [node name="LevelLabel" type="Label" parent="XPBar/MarginContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_136eg")
+theme_override_font_sizes/font_size = 25
 text = "
 "
 horizontal_alignment = 2
@@ -60,6 +63,8 @@ offset_left = 6.0
 offset_top = 53.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_136eg")
+theme_override_font_sizes/font_size = 25
 text = "Coins"
 script = ExtResource("2_hqnrr")
 
@@ -70,5 +75,7 @@ anchor_bottom = 1.0
 offset_top = 86.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_136eg")
+theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 script = ExtResource("3_bo48s")

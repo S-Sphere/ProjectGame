@@ -61,9 +61,11 @@ theme_override_constants/separation = 90
 
 [node name="Window_Mode_Button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_iicmn")]
 layout_mode = 2
+theme = null
 
 [node name="Resolution_Mode_Button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_1psg6")]
 layout_mode = 2
+theme = null
 
 [node name="Damage_Numbers_Button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_epxoi")]
 layout_mode = 2

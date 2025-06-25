@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var level_label = $ColorRect/VBoxContainer/LevelLabel
 @onready var kills_label = $ColorRect/VBoxContainer/KillsLabel
 @onready var time_label = $ColorRect/VBoxContainer/TimeLabel
+@onready var result_label = $ColorRect/VBoxContainer/ResultLabel
 @onready var upgrades_label = $ColorRect/VBoxContainer/UpgradesLabel
 @onready var retry_button = $ColorRect/VBoxContainer/Buttons/RetryButton
 @onready var menu_button = $ColorRect/VBoxContainer/Buttons/MenuButton
@@ -14,6 +15,8 @@ func _ready():
 
 
 func show_stats(data: Dictionary) -> void:
+	var won = data.get("won", false)
+	result_label.text = "You Won!" if won else "You Died"
 	coins_label.text = "Coins: %d" % data.get("coins", 0)
 	level_label.text = "Level Reached: %d" % data.get("level", 1)
 	kills_label.text = "Kills: %d" % data.get("kills", 0)

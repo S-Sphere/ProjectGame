@@ -45,7 +45,8 @@ var _charge_anim_timer = 0.0
 func _ready() -> void:
 	#add_to_group("enemy")
 	super._ready()
-	max_health = 2000
+	if max_health == BaseEnemy.DEFAULT_MAX_HEALTH:
+		max_health = 3000
 	health = max_health
 	if sprite:
 		sprite.play(move_anim)

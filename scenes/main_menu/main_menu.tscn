@@ -53,35 +53,36 @@ alignment = 1
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 26
-text = "Start Game"
+theme_override_font_sizes/font_size = 25
+text = "START GAME"
 
 [node name="Shop_Button" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
 text = "SHOP"
 
 [node name="Settings_Button" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 26
-text = "Settings"
+theme_override_font_sizes/font_size = 25
+text = "SETTINGS"
 
 [node name="Controls_Button" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 26
-text = "Controls"
+theme_override_font_sizes/font_size = 25
+text = "CONTROLS"
 
 [node name="Exit_Button" type="Button" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 26
-text = "Exit "
+theme_override_font_sizes/font_size = 25
+text = "EXIT"
 
 [node name="SubMenu" type="Control" parent="MarginContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(500, 340)

@@ -8,7 +8,7 @@ var map_height
 enum MapShape {SQUARE, CIRCLE, VERTICAL_CORRIDOR, HORIZONTAL_CORRIDOR}
 var shape : MapShape
 @export var obstacle_scenes = []
-@export var obstacle_count = 15
+@export var obstacle_count = 20
 var obstacle_tiles = []
 
 var rng := RandomNumberGenerator.new()

@@ -54,5 +54,6 @@ func _on_enemy_defeated(xp_amount) -> void:
 	GameManager.gain_experience(xp_amount)
 
 func die() -> void:
+	GameManager.run_won = false
 	GameManager.end_run()
 	super.die()

@@ -22,6 +22,7 @@ const UPGRADE_DATA = {
 @onready var magnet_btn = $GridContainer/Magnet
 @onready var damage_btn = $GridContainer/Damage
 @onready var coins_label = $GridContainer/CoinsLabel
+@onready var sell_all_btn = $GridContainer/Sell
 
 func _ready() -> void:
 	health_btn.pressed.connect(_on_health_pressed)
@@ -29,6 +30,7 @@ func _ready() -> void:
 	defense_btn.pressed.connect(_on_defense_pressed)
 	magnet_btn.pressed.connect(_on_magnet_pressed)
 	damage_btn.pressed.connect(_on_damage_pressed)
+	sell_all_btn.pressed.connect(_on_sell_all_pressed)
 	
 	GameManager.connect("coins_changed", Callable(self, "_on_coins_changed"))
 	_update_button_texts()
@@ -48,6 +50,7 @@ func _on_coins_changed(current_coins) -> void:
 	defense_btn.disabled = current_coins < _next_cost("defense", defense_lvl) or defense_lvl >= MAX_LEVEL
 	magnet_btn.disabled = current_coins < _next_cost("magnet", magnet_lvl) or magnet_lvl >= MAX_LEVEL
 	damage_btn.disabled = current_coins < _next_cost("damage", damage_lvl) or damage_lvl >= MAX_LEVEL
+	sell_all_btn.disabled = upgrades.is_empty()
 	
 func _on_health_pressed():
 	_purchase_and_apply("health")
@@ -63,6 +66,18 @@ func _on_magnet_pressed() -> void:
 
 func _on_damage_pressed() -> void:
 	_purchase_and_apply("damage")
+
+func _on_sell_all_pressed() -> void:
+	var upgrades = SaveManager.data.get("upgrades", {})
+	if upgrades.is_empty():
+		return
+	var refund = _calculate_refund(upgrades)
+	GameManager.gain_coins(refund)
+	SaveManager.data["upgrades"] = {}
+	SaveManager.data["player_stats"] = {}
+	SaveManager.save_json()
+	_update_button_texts()
+	_on_coins_changed(GameManager.coins)
 
 func _purchase_and_apply(stat):
 	var upgrades = SaveManager.data.get("upgrades", {})
@@ -124,3 +139,13 @@ func _update_button_texts() -> void:
 
 func _next_cost(stat, lvl) -> int:
 	return UPGRADE_DATA[stat].cost * (lvl + 1)
+
+func _calculate_refund(upgrades):
+	var total = 0
+	for stat in upgrades.keys():
+		if not UPGRADE_DATA.has(stat):
+			continue
+		var lvl = int(upgrades[stat])
+		var base_cost = UPGRADE_DATA[stat].cost
+		total += base_cost * lvl * (lvl + 1) / 2
+	return total

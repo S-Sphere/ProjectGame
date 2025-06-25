@@ -5,11 +5,13 @@ class_name BaseEnemy
 @export var coin_drop_scene = preload("res://scenes/drops/CoinDrop.tscn")
 @export var health_drop_scene = preload("res://scenes/drops/HealthDrop.tscn")
 
-@export var max_health = 50
+const DEFAULT_MAX_HEALTH = 50
+const DEFAULT_DMG = 10
+@export var max_health = DEFAULT_MAX_HEALTH
 @export var contact_tick_rate = 0.5
 var _contact_cooldown = 0.0
 var health: int = max_health
-@export var dmg: int = 10
+@export var dmg = DEFAULT_DMG
 
 @export_range(0.0, 1.0, 0.01) var xp_drop_rate = 0.70
 @export_range(0.0, 1.0, 0.01) var coin_drop_rate = 0.10

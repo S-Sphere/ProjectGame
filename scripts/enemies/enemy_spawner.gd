@@ -23,6 +23,13 @@ func _on_timer_timeout():
 				var counter = 0
 				while counter < i.enemy_number:
 					var enemy_spawn = new_enemy.instantiate()
+					if i.override_health >= 0:
+						enemy_spawn.max_health = i.override_health
+						enemy_spawn.health = i.override_health
+					else:
+						enemy_spawn.health = enemy_spawn.max_health
+					if i.override_dmg >= 0:
+						enemy_spawn.dmg = i.override_dmg
 					enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
 					counter += 1

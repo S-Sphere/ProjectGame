@@ -14,6 +14,8 @@ time_end = 1
 enemy = ExtResource("3_s56fr")
 enemy_number = 5
 enemy_spawn_delay = 0
+override_health = -1
+override_dmg = -1
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_flkym"]
@@ -23,6 +25,8 @@ time_end = 130
 enemy = ExtResource("3_s56fr")
 enemy_number = 7
 enemy_spawn_delay = 10
+override_health = -1
+override_dmg = -1
 
 [sub_resource type="Resource" id="Resource_h8747"]
 script = ExtResource("2_ox70e")
@@ -31,6 +35,8 @@ time_end = 140
 enemy = ExtResource("4_15juf")
 enemy_number = 2
 enemy_spawn_delay = 10
+override_health = -1
+override_dmg = -1
 
 [sub_resource type="Resource" id="Resource_buald"]
 script = ExtResource("2_ox70e")
@@ -39,6 +45,8 @@ time_end = 300
 enemy = ExtResource("5_1yyn2")
 enemy_number = 1
 enemy_spawn_delay = 5
+override_health = -1
+override_dmg = -1
 
 [sub_resource type="Resource" id="Resource_wh4ie"]
 script = ExtResource("2_ox70e")
@@ -47,6 +55,8 @@ time_end = 300
 enemy = ExtResource("3_s56fr")
 enemy_number = 7
 enemy_spawn_delay = 5
+override_health = -1
+override_dmg = -1
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_qdoyk"]
@@ -56,6 +66,8 @@ time_end = 240
 enemy = ExtResource("6_wh4ie")
 enemy_number = 1
 enemy_spawn_delay = 0
+override_health = -1
+override_dmg = -1
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [node name="EnemySpawner" type="Node2D"]

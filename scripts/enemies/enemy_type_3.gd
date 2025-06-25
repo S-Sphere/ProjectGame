@@ -14,7 +14,8 @@ var shoot_timer
 
 func _ready() -> void:
 	super._ready()
-	max_health = 60
+	if max_health == BaseEnemy.DEFAULT_MAX_HEALTH:
+		max_health = 60
 	health = max_health
 	
 	if sprite:

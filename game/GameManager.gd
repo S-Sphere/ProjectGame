@@ -43,6 +43,7 @@ var pending_level_ups = 0
 var upgrade_menu_open = false
 var damage_numbers_enabled = true
 var enemies = []
+var run_won = false
 
 func set_damage_numbers_enabled(enabled) -> void:
 	damage_numbers_enabled = enabled
@@ -79,7 +80,8 @@ func get_run_stats():
 		"level": level,
 		"kills": kills,
 		"time": int(run_time_sec),
-		"upgrades": upgrade_texts
+		"upgrades": upgrade_texts,
+		"won" : run_won
 	}
 # track upgrades
 var upgrade_levels = {}
@@ -94,6 +96,7 @@ func _process(delta) -> void:
 	if player != null:
 		run_time_sec += delta
 		if run_time_sec >= time_limit_sec:
+			run_won = true
 			end_run()
 
 func register_enemy(enemy) -> void:
@@ -233,6 +236,7 @@ func start_run() -> void:
 	kills = 0
 	start_time = Time.get_ticks_msec()
 	run_time_sec = 0.0
+	run_won = false
 	xp = 0
 	level = 0
 	xp_to_next_level = 100

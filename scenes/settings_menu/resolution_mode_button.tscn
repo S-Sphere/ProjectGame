@@ -12,5 +12,9 @@ scale = Vector2(1, 1)
 theme = ExtResource("3_lc858")
 
 [node name="Label" parent="HBoxContainer" index="0"]
+theme_override_font_sizes/font_size = 25
 text = "Resolution
 "
+
+[node name="OptionButton" parent="HBoxContainer" index="1"]
+theme_override_font_sizes/font_size = 25
