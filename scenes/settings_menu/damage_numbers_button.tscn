@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cixe7rvhcq8ry"]
+[gd_scene load_steps=3 format=3 uid="uid://cixe7rvhcq8ry"]
 
 [ext_resource type="Script" uid="uid://2ylm70c1ajop" path="res://scripts/settings_menu/damage_numbers_button.gd" id="1_38ojh"]
+[ext_resource type="Theme" uid="uid://b2aoldv3yg7kx" path="res://themes/main_menu_theme.tres" id="2_3phb4"]
 
 [node name="Damage_Numbers_Button" type="Control"]
 layout_mode = 3
@@ -16,6 +17,7 @@ layout_mode = 0
 offset_right = 504.0
 offset_bottom = 71.0
 scale = Vector2(0.997892, 0.96)
+theme = ExtResource("2_3phb4")
 theme_override_constants/separation = 50
 
 [node name="Label" type="Label" parent="HBoxContainer"]

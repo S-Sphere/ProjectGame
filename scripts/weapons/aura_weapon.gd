@@ -32,6 +32,7 @@ func _ready() -> void:
 			var scale_x = base_radius * 2 / tex_size.x
 			var scale_y = base_radius * 2 / tex_size.y
 			sprite.scale = Vector2(scale_x, scale_y)
+		sprite.z_index = -1
 	update_stats()
 	
 func _process(_delta) -> void:
@@ -55,12 +56,7 @@ func update_stats() -> void:
 			var scale_x = base_radius * 2 / tex_size.x
 			var scale_y = base_radius * 2 / tex_size.y
 			sprite.scale = Vector2(scale_x, scale_y)
-		
-	queue_redraw()
-	
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, _shape.radius, Color(1,0,0,0.4))
-	
+
 func _on_tick() -> void:
 	for body in get_overlapping_bodies():
 		if body.is_in_group("enemy") and body.has_method("take_damage"):
