@@ -4,7 +4,7 @@ class_name AuraWeapon
 @export var base_radius = 40.0
 @export var radius_per_level = 10.0
 @export var base_damage = 3
-@export var damage_per_level = 5
+@export var damage_per_level = 2
 @export var tick_rate = 0.75
 @export var attack_origin: Vector2 = Vector2.ZERO
 

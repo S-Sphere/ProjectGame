@@ -13,9 +13,9 @@ time_start = 0
 time_end = 130
 enemy = ExtResource("3_s56fr")
 enemy_number = 9
-enemy_spawn_delay = 15
+enemy_spawn_delay = 10
 override_health = 60
-override_dmg = 10
+override_dmg = 25
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_flkym"]
@@ -24,9 +24,9 @@ time_start = 130
 time_end = 300
 enemy = ExtResource("3_s56fr")
 enemy_number = 12
-enemy_spawn_delay = 8
+enemy_spawn_delay = 6
 override_health = 80
-override_dmg = 12
+override_dmg = 27
 
 [sub_resource type="Resource" id="Resource_h8747"]
 script = ExtResource("2_ox70e")
@@ -36,7 +36,7 @@ enemy = ExtResource("3_s56fr")
 enemy_number = 14
 enemy_spawn_delay = 8
 override_health = 100
-override_dmg = 14
+override_dmg = 30
 
 [sub_resource type="Resource" id="Resource_buald"]
 script = ExtResource("2_ox70e")
@@ -44,9 +44,9 @@ time_start = 100
 time_end = 300
 enemy = ExtResource("4_15juf")
 enemy_number = 3
-enemy_spawn_delay = 15
+enemy_spawn_delay = 13
 override_health = 100
-override_dmg = 15
+override_dmg = 30
 
 [sub_resource type="Resource" id="Resource_wh4ie"]
 script = ExtResource("2_ox70e")
@@ -54,9 +54,9 @@ time_start = 300
 time_end = 600
 enemy = ExtResource("4_15juf")
 enemy_number = 5
-enemy_spawn_delay = 12
-override_health = 100
-override_dmg = 15
+enemy_spawn_delay = 11
+override_health = 120
+override_dmg = 25
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_qdoyk"]
@@ -67,7 +67,7 @@ enemy = ExtResource("5_1yyn2")
 enemy_number = 4
 enemy_spawn_delay = 25
 override_health = 100
-override_dmg = 10
+override_dmg = 50
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_pdmpw"]
@@ -78,7 +78,7 @@ enemy = ExtResource("5_1yyn2")
 enemy_number = 6
 enemy_spawn_delay = 20
 override_health = 100
-override_dmg = 12
+override_dmg = 50
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_ddf2j"]
@@ -89,7 +89,7 @@ enemy = ExtResource("6_wh4ie")
 enemy_number = 1
 enemy_spawn_delay = 0
 override_health = 3000
-override_dmg = 24
+override_dmg = 60
 metadata/_custom_type_script = "uid://d4j43umuicbkr"
 
 [sub_resource type="Resource" id="Resource_ev30x"]

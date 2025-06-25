@@ -66,7 +66,6 @@ motion_mode = 1
 script = ExtResource("1_670gd")
 starting_upgrade = ExtResource("2_lvxji")
 movement_speed = 75.0
-magnet_range = 100.0
 dmg = 7
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

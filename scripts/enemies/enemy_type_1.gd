@@ -20,6 +20,7 @@ var attack_timer = 0.0
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var _col_shape = $CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
+@onready var map_generator: Node = get_tree().current_scene.get_node_or_null("MapGenerator")
 
 func _ready() -> void:
 	super._ready()
@@ -39,6 +40,8 @@ func _physics_process(delta):
 			attack_player(delta)
 		State.IDLE:
 			idle(delta)
+	if _is_out_of_map():
+		queue_free()
 
 func chase_player(_delta) -> void:
 	if player and is_instance_valid(player):
@@ -71,6 +74,17 @@ func idle(_delta) -> void:
 	sprite.play("idle")
 	if player and is_instance_valid(player):
 		state = State.IDLE
+
+func _is_out_of_map() -> bool:
+	if map_generator == null:
+		return false
+	var tm = map_generator.get_node_or_null("TileMap/TileMapLayer_floor")
+	if tm == null:
+		return false
+	var tile = tm.local_to_map(map_generator.to_local(global_position))
+	if map_generator.has_method("_tile_in_bounds"):
+		return not map_generator._tile_in_bounds(tile)
+	return false
 
 func _shape_radius(shape):
 	if shape is RectangleShape2D:

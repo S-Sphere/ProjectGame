@@ -7,5 +7,5 @@ script = ExtResource("1_jt3e2")
 name = "Speed"
 description = "Increases movement speed"
 stat = "speed"
-values = Array[float]([2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0])
+values = Array[float]([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
 max_level = 10

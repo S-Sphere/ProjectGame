@@ -14,8 +14,8 @@ var health: int = max_health
 @export var dmg = DEFAULT_DMG
 
 @export_range(0.0, 1.0, 0.01) var xp_drop_rate = 0.70
-@export_range(0.0, 1.0, 0.01) var coin_drop_rate = 0.10
-@export_range(0.0, 1.0, 0.01) var health_drop_rate = 0.7
+@export_range(0.0, 1.0, 0.01) var coin_drop_rate = 0.20
+@export_range(0.0, 1.0, 0.01) var health_drop_rate = 0.1
 
 @onready var _animation_player = ($AnimationPlayer if has_node("AnimationPlayer") else null)
 

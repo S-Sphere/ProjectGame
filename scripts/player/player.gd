@@ -6,7 +6,7 @@ extends BaseCharacter
 #var firebolt_weapon_scene = preload("res://scenes/weapons/firebolt_weapon.tscn")
 # for the initial weapon
 @export var starting_upgrade: Upgrade
-@export var movement_speed = 80.0
+@export var movement_speed = 65.0
 @export var magnet_range = 0.0
 @export var magnet_speed = 150.0
 var weapon_manager

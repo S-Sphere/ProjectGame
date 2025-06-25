@@ -189,7 +189,7 @@ func _apply_upgrade(upgrade, lvl) -> void:
 		"damage":
 			player.dmg += amount
 		"speed":
-			player.movement_speed *= (1.0 + amount)
+			player.movement_speed += amount
 		"defense":
 			player.defense += amount
 		"magnet":
@@ -263,6 +263,9 @@ func end_run() -> void:
 	SaveManager.data["coins"] = coins
 	SaveManager.save_json()
 	enemies.clear()
+	var timer = scene.get_node_or_null("Hud/Timer Label")
+	if timer:
+		timer.visible = false
 	var end_screen = end_screen_scene.instantiate()
 	ui.add_child(end_screen)
 	get_tree().paused = true
@@ -275,6 +278,9 @@ func show_pause_menu() -> void:
 	var ui = scene.get_node_or_null("UI")
 	if ui == null:
 		return
+	var timer = scene.get_node_or_null("Hud/Timer Label")
+	if timer:
+		timer.visible = false
 	var pause_menu = pause_menu_scene.instantiate()
 	ui.add_child(pause_menu)
 	get_tree().paused = true

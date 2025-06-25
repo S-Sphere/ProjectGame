@@ -1,5 +1,8 @@
 extends Node
 
+const SAVE_FILE := "savegame.json"
+var save_path: String = OS.get_executable_path().get_base_dir().path_join(SAVE_FILE)
+
 var data: Dictionary = {
 	"coins"			: 0,
 	"upgrades"		: {},
@@ -11,13 +14,13 @@ func _ready() -> void:
 	load_json()
 
 func save_json() -> void:
-	var file = FileAccess.open("user://savegame.json", FileAccess.WRITE)
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(data))
 		file.close()
 
 func load_json() -> void:
-	var file = FileAccess.open("user://savegame.json", FileAccess.READ)
+	var file = FileAccess.open("save_path", FileAccess.READ)
 	if file:
 		var text = file.get_as_text()
 		file.close()
