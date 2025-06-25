@@ -12,6 +12,7 @@ var shoot_timer
 @onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready() -> void:
+	super._ready()
 	max_health = 60
 	health = max_health
 	

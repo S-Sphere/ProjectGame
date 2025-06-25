@@ -43,7 +43,8 @@ var _charge_phase := ChargeAnimPhase.MOVE
 var _charge_anim_timer = 0.0
 
 func _ready() -> void:
-	add_to_group("enemy")
+	#add_to_group("enemy")
+	super._ready()
 	max_health = 2000
 	health = max_health
 	if sprite:

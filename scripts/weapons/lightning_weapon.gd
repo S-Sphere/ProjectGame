@@ -31,8 +31,8 @@ func _on_timer_timeout() -> void:
 
 func _fire_strike() -> void:
 	var center = attack_origin
-	var candidates := []
-	for e in get_tree().get_nodes_in_group("enemy"):
+	var candidates = []
+	for e in GameManager.enemies:
 		if e.global_position.distance_to(center) <= radius:
 			candidates.append(e)
 	if candidates.is_empty():

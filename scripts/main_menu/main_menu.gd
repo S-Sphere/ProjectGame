@@ -15,13 +15,26 @@ class_name MainMenu
 @onready var shop_scene = preload("res://scenes/main_menu/ShopMenu.tscn") as PackedScene
 @onready var setting_scene = preload("res://scenes/settings_menu/settings_menu.tscn") as PackedScene
 @onready var controls_scene = preload("res://scenes/main_menu/ControlsMenu.tscn") as PackedScene
+@onready var map_scene = preload("res://scenes/map/map_generator.tscn")
+@onready var obstacle_scene = preload("res://scenes/map/Obstacle_1.tscn")
 
 var shop_instance = null
 var settings_instance = null
 var controls_instance = null
+var map_instance: Node2D
+var map_zoom: float = 0.65
+
 
 func _ready():
 	handle_signals()
+	
+	map_instance = map_scene.instantiate() as Node2D
+	map_instance.obstacle_scenes = [obstacle_scene]
+	map_instance.z_index = -1
+	add_child(map_instance)
+	move_child(map_instance, 0)
+	map_instance.position = get_viewport_rect().size * 0.5
+	map_instance.scale = Vector2.ONE * map_zoom
 	
 	sub_menu.visible = false
 	if settings_instance == null and settings_menu != null:

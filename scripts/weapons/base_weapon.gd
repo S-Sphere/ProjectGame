@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func fire() -> void:
 	var candidates = []
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in GameManager.enemies:
 		if attack_origin.distance_to(enemy.global_position) <= range:
 			candidates.append(enemy)
 	

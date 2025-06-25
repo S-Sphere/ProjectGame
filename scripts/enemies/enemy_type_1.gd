@@ -22,6 +22,7 @@ var attack_timer = 0.0
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
 func _ready() -> void:
+	super._ready()
 	max_health = 60
 	health = max_health
 	if player and player.has_node("CollisionShape2D"):

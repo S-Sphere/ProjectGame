@@ -24,8 +24,8 @@ func _ready() -> void:
 	_build_floor()
 	_build_walls()
 	_create_wall_colliders()
-	_add_water()
 	_scatter_obstacles()
+	_add_water()
 
 func _select_shape() -> void:
 	var shapes = [

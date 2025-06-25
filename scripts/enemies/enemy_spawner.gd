@@ -6,6 +6,9 @@ extends Node2D
 @onready var map_generator = get_parent().get_node("MapGenerator")
 var time = 0
 
+func _ready():
+	for spawn in spawns:
+		spawn.spawn_delay_counter = spawn.enemy_spawn_delay
 
 func _on_timer_timeout():
 	time += 1

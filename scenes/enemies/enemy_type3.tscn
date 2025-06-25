@@ -185,7 +185,6 @@ radius = 7.0
 height = 34.0
 
 [node name="Enemy_Type3" groups=["enemy"] instance=ExtResource("1_bum2l")]
-collision_mask = 23
 script = ExtResource("2_w0d7f")
 cooldown = 2.5
 projectile_scene = ExtResource("3_64ufy")
@@ -195,9 +194,10 @@ attack_anim = "attack"
 attack_anim_duration = 1.0
 
 [node name="Sprite2D" parent="." index="0"]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.22857, 1.08571)
 sprite_frames = SubResource("SpriteFrames_181cl")
 animation = &"idle"
 
 [node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-3, -1)
 shape = SubResource("CapsuleShape2D_jmlrw")

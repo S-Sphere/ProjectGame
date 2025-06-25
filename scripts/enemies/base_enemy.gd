@@ -17,6 +17,12 @@ var health: int = max_health
 
 @onready var _animation_player = ($AnimationPlayer if has_node("AnimationPlayer") else null)
 
+func _ready() -> void:
+	add_to_group("enemy")
+	GameManager.register_enemy(self)
+
+func _exit_tree() -> void:
+	GameManager.unregister_enemy(self)
 func take_damage(amount: int) -> void:
 	health -= amount
 	if GameManager.damage_number_scene:
@@ -36,6 +42,7 @@ func take_damage(amount: int) -> void:
 func die() -> void:
 	drop_loot()
 	GameManager.incr_kills()
+	GameManager.unregister_enemy(self)
 	queue_free()
 	
 func drop_loot() -> void:

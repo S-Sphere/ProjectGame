@@ -13,6 +13,7 @@ extends BaseEnemy
 var shoot_timer
 
 func _ready() -> void:
+	super._ready()
 	max_health = 60
 	health = max_health
 	

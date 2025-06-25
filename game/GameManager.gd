@@ -41,6 +41,7 @@ var run_time_sec = 0.0
 var pending_level_ups = 0
 var upgrade_menu_open = false
 var damage_numbers_enabled = true
+var enemies = []
 
 func set_damage_numbers_enabled(enabled) -> void:
 	damage_numbers_enabled = enabled
@@ -93,6 +94,13 @@ func _process(delta) -> void:
 		run_time_sec += delta
 		if run_time_sec >= time_limit_sec:
 			end_run()
+
+func register_enemy(enemy) -> void:
+	if enemy not in enemies:
+		enemies.append(enemy)
+
+func unregister_enemy(enemy) -> void:
+	enemies.erase(enemy)
 
 func register_player(player) -> void:
 	self.player = player
@@ -227,6 +235,7 @@ func start_run() -> void:
 	xp_to_next_level = 100
 	pending_level_ups = 0
 	upgrade_menu_open = false
+	enemies.clear()
 	emit_signal("xp_changed", xp, xp_to_next_level)
 
 func incr_kills(amount = 1) -> void:
@@ -246,6 +255,7 @@ func end_run() -> void:
 	emit_signal("coins_changed", coins)
 	SaveManager.data["coins"] = coins
 	SaveManager.save_json()
+	enemies.clear()
 	var end_screen = end_screen_scene.instantiate()
 	ui.add_child(end_screen)
 	get_tree().paused = true

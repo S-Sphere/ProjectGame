@@ -18,7 +18,6 @@ var _sprite_offset := Vector2.ZERO
 
 
 func _ready() -> void:
-	# if the target’s gone, bail out
 	if not target or not is_instance_valid(target):
 		queue_free()
 		return
