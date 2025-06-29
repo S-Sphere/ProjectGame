@@ -26,7 +26,7 @@ const DAMAGE_NUMBER_SCENE_PATH := "res://scenes/ui/DamageNumber.tscn"
 	preload("res://data/upgrades/lightning_weapon.tres"),
 	preload("res://data/upgrades/aura_weapon.tres")
 ]
-@export var time_limit_sec = 300 # 15 minutes -> 900
+@export var time_limit_sec = 600 # 15 minutes -> 900
 
 # Variables =============================================
 var xp = 0
@@ -249,6 +249,13 @@ func incr_kills(amount = 1) -> void:
 	kills += amount
 	emit_signal("kills_changed", kills)
 
+func set_timer_visible(visible: bool) -> void:
+	var scene = get_tree().current_scene
+	if scene == null:
+		return
+	var timer = scene.get_node_or_null("Hud/Timer Label")
+	if timer:
+		timer.visible = visible
 func end_run() -> void:
 	var scene = get_tree().current_scene
 	if scene == null:
@@ -264,8 +271,7 @@ func end_run() -> void:
 	SaveManager.save_json()
 	enemies.clear()
 	var timer = scene.get_node_or_null("Hud/Timer Label")
-	if timer:
-		timer.visible = false
+	set_timer_visible(false)
 	var end_screen = end_screen_scene.instantiate()
 	ui.add_child(end_screen)
 	get_tree().paused = true
@@ -278,9 +284,7 @@ func show_pause_menu() -> void:
 	var ui = scene.get_node_or_null("UI")
 	if ui == null:
 		return
-	var timer = scene.get_node_or_null("Hud/Timer Label")
-	if timer:
-		timer.visible = false
+	set_timer_visible(false)
 	var pause_menu = pause_menu_scene.instantiate()
 	ui.add_child(pause_menu)
 	get_tree().paused = true

@@ -1,15 +1,21 @@
-#upgrade_selection
+# Upgrade Selection -------------------------------------------------------------
+"""
+	Script for the upgrade selection menu
+"""
+# ------------------------------------------------------------------------------
 extends Control
 class_name UpgradeSelection
 
+# Signals ----------------------------------------------------------------------
 signal upgrade_chosen(upgrade_data)
-
-@export var option_count  = 3
+# Exports ----------------------------------------------------------------------
+@export var option_count = 3
+# Variables --------------------------------------------------------------------
 var _buttons = []
 var _choices = [] # the choices that show up this time
 var _all_upgrades = [] # all the choices for upgrades
 
-# Called when the node enters the scene tree for the first time.
+# Prepares the buttons
 func _ready():
 	_buttons = [
 		$HBoxContainer/Button,
@@ -20,6 +26,7 @@ func _ready():
 		btn.pressed.connect(Callable(self, "_on_button_pressed").bind(btn))
 	visible = false
 
+# Randomly chooses the option that will show up
 func popup(upgrades) -> void:
 	_all_upgrades = upgrades.duplicate()
 	_all_upgrades.shuffle()
@@ -38,15 +45,19 @@ func popup(upgrades) -> void:
 	for j in range(_choices.size(), option_count):
 		_buttons[j].visible = false
 	visible = true
+
+# Called when the player makes a choice
 func _on_button_pressed(btn: Button) -> void:
 	var idx = _buttons.find(btn)
 	var picked = _choices[idx]
 	emit_signal("upgrade_chosen", picked)
 	unpause_and_close()
-	
+
+# Closes the menu and goes back to the game
 func unpause_and_close() -> void:
 	get_tree().paused = false
 	queue_free()
 
+# What it says
 func show_menu() -> void:
 	visible = true

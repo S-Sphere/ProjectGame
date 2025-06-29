@@ -28,15 +28,18 @@ func show_stats(data) -> void:
 		upgrades_label.text = "Upgrades: None"
 
 func _on_resume_pressed() -> void:
+	GameManager.set_timer_visible(true)
 	get_tree().paused = false
 	queue_free()
 
 func _on_retry_pressed() -> void:
 	GameManager.reset_run_coins()
+	GameManager.set_timer_visible(true)
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
 
 func _on_menu_pressed() -> void:
 	GameManager.reset_run_coins()
+	GameManager.set_timer_visible(true)
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu/main_menu.tscn")

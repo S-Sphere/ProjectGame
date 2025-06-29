@@ -1,20 +1,22 @@
-# PlayerRadialFirebolt.gd
+# Player Radial Firebolt -------------------------------------------------------
+"""
+	Script responsible for the radial firebolt projectile attack
+"""
+# ------------------------------------------------------------------------------
 extends Weapon
 class_name RadialWeapon
 
+# Exports ----------------------------------------------------------------------
 @export var number_projectiles_per_level: int = 2
 @export var max_projectiles = 8
 @export var speed: float = 300.0
 @export var dmg: int = 7
-#@export var is_homing: bool = false
-#var target: Node = null
-#var direction: Vector2 = Vector2.ZERO
-#@export var projectile_scene = preload("res://scenes/weapons/firebolt_projectile.tscn")
 
-
+# Calls the base weapon "_ready"
 func _ready() -> void:
 	super._ready()
 
+# Makes multiple projectiles in a circle
 func fire() -> void:
 	var total = min(number_projectiles_per_level * level, max_projectiles)
 	var damage = dmg

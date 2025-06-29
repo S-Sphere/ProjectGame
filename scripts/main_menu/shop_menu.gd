@@ -1,3 +1,8 @@
+# Shop Menu --------------------------------------------------------------------
+"""
+	Allows the player to buy persistent upgrades
+"""
+# ------------------------------------------------------------------------------
 extends Control
 
 # VALUES =======================================================================
@@ -16,6 +21,7 @@ const UPGRADE_DATA = {
 	"damage"  : {"cost" : 10, "incr" : DAMAGE_INCR}
 } 
 
+# OnReady ----------------------------------------------------------------------
 @onready var speed_btn = $GridContainer/Speed
 @onready var defense_btn = $GridContainer/Defense
 @onready var health_btn = $GridContainer/Health
@@ -24,6 +30,7 @@ const UPGRADE_DATA = {
 @onready var coins_label = $GridContainer/CoinsLabel
 @onready var sell_all_btn = $GridContainer/Sell
 
+# Connects the buttons and readys the interface
 func _ready() -> void:
 	health_btn.pressed.connect(_on_health_pressed)
 	speed_btn.pressed.connect(_on_speed_pressed)
@@ -36,6 +43,7 @@ func _ready() -> void:
 	_update_button_texts()
 	_on_coins_changed(GameManager.coins)
 
+# Updates the text and the state of the buttons depending the number of coins
 func _on_coins_changed(current_coins) -> void:
 	coins_label.text = "Coins: %d" % current_coins
 	var upgrades = SaveManager.data.get("upgrades", {})
@@ -51,22 +59,28 @@ func _on_coins_changed(current_coins) -> void:
 	magnet_btn.disabled = current_coins < _next_cost("magnet", magnet_lvl) or magnet_lvl >= MAX_LEVEL
 	damage_btn.disabled = current_coins < _next_cost("damage", damage_lvl) or damage_lvl >= MAX_LEVEL
 	sell_all_btn.disabled = upgrades.is_empty()
-	
+
+# Buys Health Upgrade
 func _on_health_pressed():
 	_purchase_and_apply("health")
-	
+
+# Buys Speed Upgrade
 func _on_speed_pressed():
 	_purchase_and_apply("speed")
-	
+
+# Buys Defence Upgrade
 func _on_defense_pressed():
 	_purchase_and_apply("defense")
 
+# Buys Magnet Upgrade
 func _on_magnet_pressed() -> void:
 	_purchase_and_apply("magnet")
 
+# Buys Damage Upgrade
 func _on_damage_pressed() -> void:
 	_purchase_and_apply("damage")
 
+# Sells all upgrades and recovers the coins
 func _on_sell_all_pressed() -> void:
 	var upgrades = SaveManager.data.get("upgrades", {})
 	if upgrades.is_empty():
@@ -79,6 +93,7 @@ func _on_sell_all_pressed() -> void:
 	_update_button_texts()
 	_on_coins_changed(GameManager.coins)
 
+# Applys the upgrade, taking the coins needed and saves on file
 func _purchase_and_apply(stat):
 	var upgrades = SaveManager.data.get("upgrades", {})
 	var lvl = upgrades.get(stat, 0)
@@ -122,7 +137,7 @@ func _purchase_and_apply(stat):
 	SaveManager.save_json()
 	_update_button_texts()
 
-
+# Updates the text on the upgrades buttons: level and price
 func _update_button_texts() -> void:
 	var upgrades = SaveManager.data.get("upgrades", {})
 	var h_lvl = upgrades.get("health", 0)
@@ -137,9 +152,11 @@ func _update_button_texts() -> void:
 	magnet_btn.text = "Magnet Lv %d (Cost %d)" % [m_lvl, _next_cost("magnet", m_lvl)]
 	damage_btn.text = "Damage Lv %d (Cost %d)" % [dmg_lvl, _next_cost("damage", dmg_lvl)]
 
+# Calculates the price of the next update
 func _next_cost(stat, lvl) -> int:
 	return UPGRADE_DATA[stat].cost * (lvl + 1)
 
+# Calculates the refund
 func _calculate_refund(upgrades):
 	var total = 0
 	for stat in upgrades.keys():
