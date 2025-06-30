@@ -15,7 +15,6 @@ var current_weapon_index = 0
 func add_weapon(weapon) -> void:
 	weapons.append(weapon)
 	add_child(weapon)
-	print("🛠 WeaponManager added:", weapon, " parent is ", weapon.get_parent())
 	weapon.tree_exited.connect(Callable(self, "_on_weapon_removed").bind(weapon))
 
 # Removes the weapon from the array when it leaves the node tree

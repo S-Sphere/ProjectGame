@@ -61,7 +61,6 @@ func _apply_damage() -> void:
 	_damage_applied = true
 	if target and is_instance_valid(target) and target.has_method("take_damage"):
 		target.take_damage(damage)
-		print("  ↳ hit ", target, " for ", damage)
 
 # Handle switching from fall animation to explode
 func _on_animation_finished() -> void:

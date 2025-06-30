@@ -45,11 +45,9 @@ func _fire_strike() -> void:
 		if e.global_position.distance_to(center) <= radius:
 			candidates.append(e)
 	if candidates.is_empty():
-		print("  • no enemies within ", radius, "px of ", center)
 		return
 
 	var target = candidates[randi() % candidates.size()]
-	print("  • striking ", target, " at ", target.global_position)
 	var bolt = lightning_scene.instantiate()
 
 	bolt.target = target

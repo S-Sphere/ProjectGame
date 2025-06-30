@@ -180,7 +180,6 @@ func show_upgrade_selection() -> void:
 
 # Apply the upgrade that the player selected
 func _on_upgrade_chosen(chosen) -> void:
-	print("🎁 Upgrade chosen:", chosen.name)
 	var key = chosen.stat + (chosen.weapon_scene.resource_path if chosen.weapon_scene != null else "")
 	var lvl = upgrade_levels.get(key, 0)
 	if lvl >= chosen.max_level:
@@ -196,7 +195,6 @@ func _on_upgrade_chosen(chosen) -> void:
 
 # Apply stat modifications or add weapons based on the upgrade
 func _apply_upgrade(upgrade, lvl) -> void:
-	print("⚙️ Applying upgrade:", upgrade.name, "level", lvl)
 	var amount = upgrade.amount_for(lvl)
 	match upgrade.stat:
 		"health":
