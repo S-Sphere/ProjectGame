@@ -1,23 +1,29 @@
+# Map Generator ----------------------------------------------------------------
+"""
+	Constructs a map for each run
+"""
+# ------------------------------------------------------------------------------
 extends Node2D
 
-var map_width
-var map_height
+enum MapShape {SQUARE, CIRCLE, VERTICAL_CORRIDOR, HORIZONTAL_CORRIDOR}
+
+# Exports ----------------------------------------------------------------------
 @export var map_size = 100
 @export var border_thickness = 1
-
-enum MapShape {SQUARE, CIRCLE, VERTICAL_CORRIDOR, HORIZONTAL_CORRIDOR}
-var shape : MapShape
 @export var obstacle_scenes = []
 @export var obstacle_count = 20
-var obstacle_tiles = []
-
-var rng := RandomNumberGenerator.new()
-
-# Water settings
 @export var water_scene: PackedScene
 @export var water_size = 35
 @onready var _water_container = $Water
 
+# Variables --------------------------------------------------------------------
+var map_width
+var map_height
+var shape : MapShape
+var obstacle_tiles = []
+var rng := RandomNumberGenerator.new()
+
+# Entry point to generate the entire map
 func _ready() -> void:
 	rng.randomize()
 	_select_shape()
@@ -27,6 +33,7 @@ func _ready() -> void:
 	_scatter_obstacles()
 	_add_water()
 
+# Randomly chooses what overral shape the map will have
 func _select_shape() -> void:
 	var shapes = [
 		MapShape.SQUARE, 
@@ -46,16 +53,8 @@ func _select_shape() -> void:
 			map_height = max(3, map_size / 3)
 			map_width = int(map_size * 1.5)
 
-
+# Fills the floor tilemap within the selected bounds
 func _build_floor() -> void:
-	"""
-	var tm = $TileMap/TileMapLayer_floor
-	tm.clear()
-	
-	for x in range(int(-map_width/2), int(map_width/2)):
-		for y in range(int(-map_height/2), int(map_height/2)):
-			tm.set_cell(Vector2i(x, y), 0, Vector2i.ZERO)
-	"""
 	var tm = $TileMap/TileMapLayer_floor
 	tm.clear()
 	var radius = min(map_width, map_height) / 2
@@ -68,18 +67,8 @@ func _build_floor() -> void:
 			if place:
 				tm.set_cell(Vector2i(x, y), 0, Vector2i.ZERO)
 
+# Draws a border of wall tiles around the playable area
 func _build_walls() -> void:
-	"""
-	var tm = $TileMap/TileMapLayer2_wall
-	tm.clear()
-	
-	for x in range(int(-map_width/2) - border_thickness, int(map_width/2) + border_thickness):
-		for off in [-border_thickness, map_height/2]:
-			tm.set_cell(Vector2i(x, -map_height/2 + off), 1, Vector2i.ZERO)
-	for y in range(int(-map_height/2) - border_thickness, int(map_height/2) + border_thickness):
-		for off in [-border_thickness, map_width/2]:
-			tm.set_cell(Vector2i(-map_width/2 + off, y), 1, Vector2i.ZERO)
-	"""
 	var tm = $TileMap/TileMapLayer2_wall
 	tm.clear()
 	if shape == MapShape.CIRCLE:
@@ -102,6 +91,7 @@ func _build_walls() -> void:
 				tm.set_cell(Vector2i(x_min - i, y), 1, Vector2i.ZERO)
 				tm.set_cell(Vector2i(x_max + i, y), 1, Vector2i.ZERO)
 
+# Spawns physics bodies that match each wall tile
 func _create_wall_colliders() -> void:
 	var parent = get_node_or_null("WallColliders")
 	if parent == null:
@@ -123,6 +113,7 @@ func _create_wall_colliders() -> void:
 		body.add_child(collider)
 		parent.add_child(body)
 
+# Places water sprites around the outside of the map 
 func _add_water() -> void:
 	if _water_container == null or water_scene == null:
 		return
@@ -167,22 +158,8 @@ func _add_water() -> void:
 					sprite.z_index = -1
 					_water_container.add_child(sprite)
 
-
+# Randomly places obstacles while avoiding overlap
 func _scatter_obstacles() -> void:
-	"""
-	var parent = $Obstacles
-	if obstacle_scenes.is_empty():
-		return
-	for i in range(obstacle_count):
-		var x = rng.randi_range(-map_width/2 + border_thickness, map_width/2 - border_thickness)
-		var y = rng.randi_range(-map_height/2 + border_thickness, map_height/2 - border_thickness)
-		var scene = obstacle_scenes[rng.randi_range(0, obstacle_scenes.size() - 1)]
-		var obs = scene.instantiate() as Node2D
-		var tile_size = $TileMap/TileMapLayer_floor.tile_set.tile_size
-		var world_pos = $TileMap/TileMapLayer_floor.map_to_local(Vector2i(x,y)) + tile_size * 0.5
-		obs.position = world_pos
-		parent.add_child(obs)
-	"""
 	var parent = $Obstacles
 	if obstacle_scenes.is_empty():
 		return
@@ -221,7 +198,8 @@ func _scatter_obstacles() -> void:
 				if _tile_in_bounds(n) and not obstacle_tiles.has(n):
 					obstacle_tiles.append(n)
 		placed += 1
-		
+
+# Helper function fo check if a tile coordinate is within playable bounds
 func _tile_in_bounds(tile) -> bool:
 	if tile.x < int(-map_width/2) + border_thickness or tile.x > int(map_width/2) - border_thickness:
 		return false
@@ -233,14 +211,17 @@ func _tile_in_bounds(tile) -> bool:
 			return false
 	return true
 
+# Returns true if tile is within bounds and free of obstacles
 func is_tile_free(tile) -> bool:
 	return _tile_in_bounds(tile) and not obstacle_tiles.has(tile)
 
+# Convers a world position to tile coordinates and test for obstacles
 func is_position_free(pos) -> bool:
 	var tm = $TileMap/TileMapLayer_floor
 	var tile = tm.local_to_map(to_local(pos))
 	return is_tile_free(tile)
 
+# Keeps a world position within the map bounds, and return the clamped value
 func clamp_position_to_map(pos) -> Vector2:
 	var tm = $TileMap/TileMapLayer_floor
 	var map_pos = tm.local_to_map(to_local(pos))
@@ -261,6 +242,7 @@ func clamp_position_to_map(pos) -> Vector2:
 				map_pos = Vector2i(int(floor(vec.x)), int(floor(vec.y)))
 	return tm.map_to_local(map_pos) + tm.tile_set.tile_size * 0.5
 
+# Picks a random free tile and converts it to a world position
 func get_random_spawn_position():
 	var tm = $TileMap/TileMapLayer_floor
 	var tile_size = tm.tile_set.tile_size

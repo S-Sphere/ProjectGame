@@ -1,17 +1,23 @@
-#player.gd
+# Player -----------------------------------------------------------------------
+"""
+	Controls the main player character
+"""
+# ------------------------------------------------------------------------------
 extends BaseCharacter
-# I NEED TO CHANGE THIS:
-# REALLY!!!!! CREATE A GAME MANAGER AT SOME POINT -> done
 
-#var firebolt_weapon_scene = preload("res://scenes/weapons/firebolt_weapon.tscn")
-# for the initial weapon
+# Exports ----------------------------------------------------------------------
 @export var starting_upgrade: Upgrade
 @export var movement_speed = 65.0
 @export var magnet_range = 0.0
 @export var magnet_speed = 150.0
+
+# Variables --------------------------------------------------------------------
 var weapon_manager
 
+# OnReady ----------------------------------------------------------------------
 @onready var sprite: AnimatedSprite2D = $Sprite2D
+
+# Its called when the node enters the tree
 func _ready() -> void:
 	GameManager.register_player(self)
 	
@@ -21,15 +27,14 @@ func _ready() -> void:
 	GameManager.upgrade_levels.clear()
 	GameManager.upgrade_levels[starting_upgrade.stat + starting_upgrade.weapon_scene.resource_path] = 1
 	GameManager._apply_upgrade(starting_upgrade, 1)
-	#var projectile_weapon = firebolt_weapon_scene.instantiate()
-	#weapon_manager.add_weapon(projectile_weapon)
-	#projectile_weapon.attack_origin = global_position
-	
+
+# Updates movement and weapon positions every frame
 func _physics_process(_delta):
 	movement()
 	weapon_manager.update_origins(global_position)
 	_magnet_pull(_delta)
 
+# Basic WASD style movement
 func movement():
 	var x_mov = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up") # up is minus and down is plus
@@ -42,6 +47,7 @@ func movement():
 		sprite.stop()
 	move_and_slide()
 
+# Attracts nearby pickups toward the player
 func _magnet_pull(delta) -> void:
 	if magnet_range <= 0:
 		return
@@ -50,9 +56,12 @@ func _magnet_pull(delta) -> void:
 			continue
 		if global_position.distance_to(p.global_position) <= magnet_range:
 			p.global_position = p.global_position.move_toward(global_position, magnet_speed * delta)
+
+# Adds experience when a enemy dies
 func _on_enemy_defeated(xp_amount) -> void:
 	GameManager.gain_experience(xp_amount)
 
+# When the player dies, the current run ends
 func die() -> void:
 	GameManager.run_won = false
 	GameManager.end_run()

@@ -1,22 +1,28 @@
-# LightningStrike.gd
-extends Node2D    # No longer Area2D unless you want AOE
+# Lightning Strike -------------------------------------------------------
+"""
+	Falling bolt that damages a single target
+"""
+# ------------------------------------------------------------------------------
+extends Node2D    # Area2D -> AOE
 
+# Exports ----------------------------------------------------------------------
 @export var damage:       int   = 15
 @export var fall_duration: float = 0.1
 @export var spawn_height: float = 150.0
-
 @export var fall_animation = "fall"
 @export var explode_animation = "explode"
 
-var target: Node  # assigned by the weapon
+# Variables -------------------------------------------------------------------- 
+var target: Node 
 var _start_y := 0.0
 var _t := 0.0
 var _damage_applied = false
 var _sprite_offset := Vector2.ZERO
 
+# OnReady ----------------------------------------------------------------------
 @onready var _sprite = get_node_or_null("Sprite2D")
 
-
+# Initializes the strike and starts falling towards the target
 func _ready() -> void:
 	if not target or not is_instance_valid(target):
 		queue_free()
@@ -36,6 +42,7 @@ func _ready() -> void:
 	var start_pos = Vector2(target_pos.x, _start_y) - _sprite_offset
 	global_position = start_pos
 
+# Updates the bolt's position while falling
 func _process(delta) -> void:
 	if not target or not is_instance_valid(target):
 		queue_free()
@@ -47,6 +54,7 @@ func _process(delta) -> void:
 	var t = clamp(_t / fall_duration, 0.0, 1.0)
 	global_position = start_pos.lerp(center, t)
 
+# Apply's damage when the bolt lands
 func _apply_damage() -> void:
 	if _damage_applied:
 		return
@@ -55,6 +63,7 @@ func _apply_damage() -> void:
 		target.take_damage(damage)
 		print("  ↳ hit ", target, " for ", damage)
 
+# Handle switching from fall animation to explode
 func _on_animation_finished() -> void:
 	if not _sprite:
 		queue_free()

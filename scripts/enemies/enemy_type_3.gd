@@ -1,17 +1,26 @@
+# Enemy Type 3 -----------------------------------------------------------------
+"""
+	Enemy that fires a radial burst of projectiles
+"""
+# ------------------------------------------------------------------------------
 extends BaseEnemy
 
+# Export -----------------------------------------------------------------------
 @export var cooldown = 2.5
 @export var projectile_scene = preload("res://scenes/weapons/enemy_firebolt.tscn")
 @export var number_projectiles = 5
-
-@onready var sprite: AnimatedSprite2D = $Sprite2D
-@onready var attack_anim_timer: Timer = Timer.new()
 @export var idle_anim = "idle"
 @export var attack_anim = "attack"
 @export var attack_anim_duration := 1.0
 
+#OnReady -----------------------------------------------------------------------
+@onready var sprite: AnimatedSprite2D = $Sprite2D
+@onready var attack_anim_timer: Timer = Timer.new()
+
+# Variables --------------------------------------------------------------------
 var shoot_timer
 
+# Sets the initial Health and configures the timers
 func _ready() -> void:
 	super._ready()
 	if max_health == BaseEnemy.DEFAULT_MAX_HEALTH:
@@ -32,11 +41,13 @@ func _ready() -> void:
 	add_child(attack_anim_timer)
 	attack_anim_timer.timeout.connect(_on_attack_anim_finished)
 
+# Plays the attack animation and stats the timer
 func shoot_radial() -> void:
 	if sprite:
 		sprite.play(attack_anim)
 		attack_anim_timer.start()
 
+# Spawns projectiles around the enemy
 func _on_attack_anim_finished() -> void:
 	if sprite:
 		sprite.play(idle_anim)
@@ -53,10 +64,12 @@ func _on_attack_anim_finished() -> void:
 		get_tree().current_scene.add_child(projectile)
 	_start_shoot_timer()
 
+# Restarts the timer using a random interval
 func _start_shoot_timer() -> void:
 	shoot_timer.wait_time = randf_range(cooldown * 0.5, cooldown * 3.5)
 	shoot_timer.start()
 
+# Timer callback that triggers the radial attack
 func _on_shoot_timer_timeout() -> void:
 	shoot_radial()
 	_start_shoot_timer()

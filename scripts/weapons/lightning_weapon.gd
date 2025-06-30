@@ -1,16 +1,24 @@
-# LightningWeapon.gd
+# Lightning Weapon --------------------------------------------------------
+"""
+	Periodically targets enemies with the lightning strike
+"""
+# ------------------------------------------------------------------------------
 extends Node2D
 class_name LightningWeapon
 
+# Exports ----------------------------------------------------------------------
 @export var min_interval 	: float = 1.5
 @export var max_interval 	: float = 4.0
 @export var radius 		 	: float = 200.0
 @export var lightning_scene : PackedScene
 @export var attack_origin	: Vector2
+
+# Variables --------------------------------------------------------------------
 var level = 1
 var _timer: Timer
 var _area: Area2D
 
+# Creates the timer and join the weapon group
 func _ready() -> void:
 	randomize()
 	add_to_group("origin_weapon")
@@ -19,16 +27,17 @@ func _ready() -> void:
 	add_child(_timer)
 	_timer.timeout.connect(_on_timer_timeout)
 	_schedule_next_strike()
-	print("⚡️ LightningWeapon ready at ", attack_origin, " radius=", radius)
 
+# Picks a random delay until the next strike
 func _schedule_next_strike() -> void:
 	_timer.start(randf_range(min_interval, max_interval))
-	print("  • Next strike in ", _timer.wait_time, "s")
 
+# Fires a strike and queueu up the next one
 func _on_timer_timeout() -> void:
 	_fire_strike()
 	_schedule_next_strike()
 
+# Finds a random enemy within the range and strikes it
 func _fire_strike() -> void:
 	var center = attack_origin
 	var candidates = []

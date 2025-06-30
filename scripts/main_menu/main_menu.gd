@@ -1,6 +1,12 @@
+# Main Menu ----------------------------------------------------------------
+"""
+	Handles the title menu and the sub menus
+"""
+# ------------------------------------------------------------------------------
 extends Control
 class_name MainMenu
 
+# OnReady ----------------------------------------------------------------------
 @onready var start_button = $MarginContainer/HBoxContainer2/VBoxContainer/Start_Button as Button
 @onready var settings_button = $MarginContainer/HBoxContainer2/VBoxContainer/Settings_Button as Button
 @onready var exit_button = $MarginContainer/HBoxContainer2/VBoxContainer/Exit_Button as Button
@@ -10,7 +16,7 @@ class_name MainMenu
 @onready var controls_button = $MarginContainer/HBoxContainer2/VBoxContainer/Controls_Button as Button
 @onready var sub_menu = $MarginContainer/HBoxContainer2/SubMenu
 
-# to start preloading a test scene
+# Scenes -----------------------------------------------------------------------
 @onready var start_level = preload("res://scenes/main/main.tscn") as PackedScene
 @onready var shop_scene = preload("res://scenes/main_menu/ShopMenu.tscn") as PackedScene
 @onready var setting_scene = preload("res://scenes/settings_menu/settings_menu.tscn") as PackedScene
@@ -18,13 +24,14 @@ class_name MainMenu
 @onready var map_scene = preload("res://scenes/map/map_generator.tscn")
 @onready var obstacle_scene = preload("res://scenes/map/Obstacle_1.tscn")
 
+# Variables --------------------------------------------------------------------
 var shop_instance = null
 var settings_instance = null
 var controls_instance = null
 var map_instance: Node2D
 var map_zoom: float = 0.65
 
-
+# Initializes buttons and preview map
 func _ready():
 	handle_signals()
 	
@@ -41,12 +48,15 @@ func _ready():
 		settings_menu.visible = false
 		settings_menu.set_process(false)
 
+# Loads the level
 func on_start_pressed() -> void:
 	get_tree().change_scene_to_packed(start_level)
 
+# Closes the game window
 func on_exit_pressed() -> void:
 	get_tree().quit()
-	
+
+# Toggles the settings menu
 func on_settings_pressed() -> void:
 	if shop_instance != null:
 		shop_instance.queue_free()
@@ -69,13 +79,15 @@ func on_settings_pressed() -> void:
 		settings_instance.queue_free()
 		settings_instance = null
 		sub_menu.visible = false
-		
+
+# Called when the settings menu closes
 func on_exit_settings_menu() -> void:
 	if settings_instance != null:
 		settings_instance.queue_free()
 		settings_instance = null
 	sub_menu.visible = false
 
+# Toggle the shop menu
 func on_shop_pressed() -> void:
 	if settings_instance != null:
 		settings_instance.queue_free()
@@ -94,6 +106,7 @@ func on_shop_pressed() -> void:
 		shop_instance = null
 		sub_menu.visible = false
 
+# Toggles the controls menu
 func on_controls_pressed() -> void:
 	if settings_instance != null:
 		settings_instance.queue_free()
@@ -110,10 +123,11 @@ func on_controls_pressed() -> void:
 		controls_instance.queue_free()
 		controls_instance = null
 		sub_menu.visible = false
+
+# Wires up all the buttons signals
 func handle_signals() -> void:
 	start_button.button_down.connect(on_start_pressed)
 	exit_button.button_down.connect(on_exit_pressed)
 	settings_button.button_down.connect(on_settings_pressed)
 	controls_button.button_down.connect(on_controls_pressed)
-	#settings_menu.exit_settings_menu.connect(on_exit_settings_menu)
 	shop_button.button_down.connect(on_shop_pressed)

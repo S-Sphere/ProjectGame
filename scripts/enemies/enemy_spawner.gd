@@ -1,15 +1,26 @@
+# Enemy Spawner -----------------------------------------------------------------
+"""
+	Periodically Spawns enemies 
+"""
+# ------------------------------------------------------------------------------
 extends Node2D
 
+# Exports ----------------------------------------------------------------------
 @export var spawns: Array[SpawnInfo] = []
 
+# OnReady ----------------------------------------------------------------------
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var map_generator = get_parent().get_node("MapGenerator")
+
+# Variables --------------------------------------------------------------------
 var time = 0
 
+# Starts the delay counter
 func _ready():
 	for spawn in spawns:
 		spawn.spawn_delay_counter = spawn.enemy_spawn_delay
 
+# Wait until time and then spawn the configured number of enemies
 func _on_timer_timeout():
 	time += 1
 	var enemy_spaws = spawns
@@ -34,7 +45,7 @@ func _on_timer_timeout():
 					add_child(enemy_spawn)
 					counter += 1
 
-
+# Picks a random position
 func get_random_position():
 	var vpr = get_viewport_rect().size * randf_range(0.5, 1.0)
 	var top_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y - vpr.y/2)

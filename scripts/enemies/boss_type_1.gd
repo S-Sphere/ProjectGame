@@ -1,5 +1,11 @@
+# Boss Type 1 ------------------------------------------------------------------
+"""
+	Base class for the enemies
+"""
+# ------------------------------------------------------------------------------
 extends BaseEnemy
 
+# Variables --------------------------------------------------------------------
 enum State {
 	CHASE,
 	WARNING,
@@ -13,6 +19,22 @@ enum ChargeAnimPhase {
 	POST 
 }
 
+const CHARGE_ANIM_SPEED := 8.0
+const ATTACK_PHASE_DURATION := 0.3
+
+var _player_col_shape
+var player
+var _charge_dir = Vector2.ZERO
+var _charge_target = Vector2.ZERO
+var _charge_phase := ChargeAnimPhase.MOVE
+var _charge_anim_timer = 0.0
+
+var state = State.CHASE
+var _cooldown_timer: Timer
+var _warning_timer: Timer
+var _charge_timer: Timer
+
+# Exports ----------------------------------------------------------------------
 @export var movement_speed = 30.0
 @export var charge_speed = 250.0
 @export var warning_time = 0.8
@@ -24,24 +46,11 @@ enum ChargeAnimPhase {
 @export var move_anim := "move"
 @export var charge_anim := "attack_charge"
 
-var state = State.CHASE
-var _cooldown_timer: Timer
-var _warning_timer: Timer
-var _charge_timer: Timer
-
+# Onready ----------------------------------------------------------------------
 @onready var _col_shape = $CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 
-const CHARGE_ANIM_SPEED := 8.0
-const ATTACK_PHASE_DURATION := 0.3
-
-var _player_col_shape
-var player
-var _charge_dir = Vector2.ZERO
-var _charge_target = Vector2.ZERO
-var _charge_phase := ChargeAnimPhase.MOVE
-var _charge_anim_timer = 0.0
-
+# Initialise state and timers
 func _ready() -> void:
 	#add_to_group("enemy")
 	super._ready()
@@ -74,6 +83,7 @@ func _ready() -> void:
 	add_child(_charge_timer)
 	_charge_timer.timeout.connect(_end_charge)
 
+# Handle Behaviour based on current state
 func _physics_process(delta):
 	match state:
 		State.CHASE:
@@ -96,12 +106,14 @@ func _physics_process(delta):
 				sprite.play(move_anim)
 			_check_contact_damage()
 
+# Moves towards the player at a normal pace
 func _chase_player(_delta) -> void:
 	if player and is_instance_valid(player):
 		var direction = global_position.direction_to(player.global_position)
 		velocity = direction * movement_speed
 		move_and_slide()
 
+# Begin the charge warning phase
 func _on_cooldown_timeout() -> void:
 	if player and is_instance_valid(player):
 		state = State.WARNING
@@ -114,6 +126,7 @@ func _on_cooldown_timeout() -> void:
 		_warning_timer.start()
 		queue_redraw()
 
+# Switch to charging state and setup animation timing
 func _start_charge() -> void:
 	state = State.CHARGE
 	if sprite:
@@ -130,6 +143,7 @@ func _start_charge() -> void:
 	_charge_timer.wait_time = duration
 	_charge_timer.start()
 
+# Move rapidly towards the player
 func _charge_move(delta) -> void:
 	velocity = _charge_dir * charge_speed
 	move_and_slide()
@@ -141,6 +155,7 @@ func _charge_move(delta) -> void:
 				_charge_phase = ChargeAnimPhase.ATTACK
 				_charge_anim_timer = 0.0
 
+# Cycle through frames to create a simple charge animation
 func _update_charge_animation(delta) -> void:
 	if sprite == null:
 		return
@@ -160,6 +175,7 @@ func _update_charge_animation(delta) -> void:
 		_charge_phase = ChargeAnimPhase.POST
 		_charge_anim_timer = 0.0
 
+# Reset state after finishing a charge
 func _end_charge() -> void:
 	state = State.CHASE
 	if sprite:
@@ -168,6 +184,7 @@ func _end_charge() -> void:
 	_charge_anim_timer = 0.0
 	queue_redraw()
 
+# Visualise the charge path during the warning phase
 func _draw() -> void:
 	if state == State.WARNING:
 		var start = Vector2.ZERO
@@ -195,6 +212,7 @@ func _contact_threshold():
 		r2 = _shape_radius(_player_col_shape.shape)
 	return attack_range + r1 + r2
 
+# Apply contact damage when close enough to the player
 func _check_contact_damage(mult = 1.0) -> void:
 	if player and is_instance_valid(player):
 		if global_position.distance_to(player.global_position) <= _contact_threshold():

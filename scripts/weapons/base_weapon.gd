@@ -1,25 +1,32 @@
+# Base weapon ------------------------------------------------------------------
+"""
+	Base class for projectiles weapons
+"""
+# ------------------------------------------------------------------------------
 extends Node2D
-
 class_name Weapon
+
+# Exports ----------------------------------------------------------------------
 @export var cooldown = 1.2
 @export var projectile_scene: PackedScene
 @export var attack_origin: Vector2
 @export var range = 500.0
 
+# Variables --------------------------------------------------------------------
 var level = 1
-
 var _fire_timer
 
+# Adds weapon to the group so attack origin works
 func _ready() -> void:
-	add_to_group("origin_weapon") # para o attack_origin
+	add_to_group("origin_weapon")
 	_fire_timer = Timer.new()
 	_fire_timer.wait_time = cooldown
 	_fire_timer.one_shot = false
 	add_child(_fire_timer)
 	_fire_timer.timeout.connect(fire)
 	_fire_timer.start()
-	
 
+# Deals with the fire of the firebolt
 func fire() -> void:
 	var candidates = []
 	for enemy in GameManager.enemies:
@@ -45,13 +52,14 @@ func fire() -> void:
 	else:
 		var target_enemy = candidates[0]
 		_spawn_projectile_toward(target_enemy, false, false)
-	
+
+# Helper function for sorting enemies by distance
 func _sort_by_distance(a,b) -> int:
 	var da = attack_origin.distance_to(a.global_position)
 	var db = attack_origin.distance_to(b.global_position)
 	return da < db
-	
 
+# Creates and configures the projectile
 func _spawn_projectile_toward(enemy, is_double_shot, increase_damage):
 	var proj = projectile_scene.instantiate()
 	proj.is_homing = true
@@ -64,22 +72,3 @@ func _spawn_projectile_toward(enemy, is_double_shot, increase_damage):
 		proj.dmg = int(proj.dmg * 1.5)
 	
 	get_tree().current_scene.add_child(proj)
-	""" old code
-	var projectile = projectile_scene.instantiate()
-	projectile.is_homing = true
-	projectile.global_position = attack_origin
-	
-	var enemies = get_tree().get_nodes_in_group("enemy")
-	if enemies.size() > 0:
-		var closest_enemy = enemies[0]
-		var min_dist = attack_origin.distance_to(closest_enemy.global_position)
-		for enemy in enemies:
-			var dist = attack_origin.distance_to(enemy.global_position)
-			if dist < min_dist:
-				min_dist = dist
-				closest_enemy = enemy
-		projectile.target = closest_enemy
-	else:
-		return
-	get_tree().current_scene.add_child(projectile)
-	"""
